@@ -11,7 +11,7 @@
     "start": "gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
-    "clean": "gatsby cleannpx tailwindcss init -p"
+    "clean": "gatsby clean"
   },
   "dependencies": {
     "gatsby": "^3.0.1",
