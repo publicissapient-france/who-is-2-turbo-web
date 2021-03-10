@@ -12,7 +12,6 @@ jobs:
         uses: actions/checkout@master
       - name: Install Dependencies
         uses: actions/setup-node@v1
-        run: npm install
       - name: Build
         run: npm run build
       - name: Archive Production Artifact
