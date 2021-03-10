@@ -1,0 +1,12 @@
+# IDE
+.idea
+
+# Env
+.direnv
+
+# Dependencies
+node_modules
+
+# Build
+.cache
+public
