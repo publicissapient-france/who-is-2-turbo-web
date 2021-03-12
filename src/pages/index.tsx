@@ -38,7 +38,7 @@ const IndexPage = () => {
   };
 
   return (
-    <main className="pt-4 container">
+    <main className="p-4 container mx-auto md:max-w-screen-md">
       <Question {...game[position]} onAnswer={onAnswer}/>
     </main>
   );
