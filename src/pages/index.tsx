@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { useState } from 'react';
-import { Question } from '../components/Question/Question';
+import { useEffect, useState } from 'react';
+import { Question, QuestionType } from '../components/Question/Question';
 import { navigate } from 'gatsby';
 
-const game = [
+const gameFromService = [
   {
     picture: 'https://images.unsplash.com/photo-1463453091185-61582044d556?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2700&q=80',
     answers: ['Camron Duggan', 'August Handley', 'Nathan Blackmore', 'Taryn Perry']
@@ -28,18 +28,31 @@ const game = [
 
 const IndexPage = () => {
   const [position, setPosition] = useState(0);
+  const [game, setGame] = useState<QuestionType[]>([]);
 
-  const onAnswer = () => {
+  useEffect(() => {
+    // TODO get game from service
+    setGame(gameFromService);
+  }, []);
+
+  const onAnswer = (id: number) => {
+    setGame(game.map((question, index) => {
+      if (index === position) {
+        return { ...question, answerId: id };
+      }
+      return question;
+    }));
     if (position < game.length - 1) {
       setPosition(position + 1);
     } else {
-      navigate('/end');
+      // TODO get score from service using game
+      navigate(`/end?score=4&count=5`);
     }
   };
 
   return (
-    <main className="p-4 container mx-auto md:max-w-screen-md">
-      <Question {...game[position]} onAnswer={onAnswer}/>
+    <main className="p-4 container mx-auto md:max-w-screen-md select-none">
+      {game[position] && <Question {...game[position]} onAnswer={onAnswer}/>}
     </main>
   );
 };

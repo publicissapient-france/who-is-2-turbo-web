@@ -1,8 +1,12 @@
 import * as React from 'react';
 
-interface QuestionPropTypes {
-  picture: string
+export type QuestionType = {
+  picture: string;
+  answerId?: number;
   answers: string[]
+}
+
+type QuestionPropTypes = QuestionType & {
   onAnswer: (id: number) => void
 }
 
