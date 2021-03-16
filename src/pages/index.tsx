@@ -51,8 +51,8 @@ const IndexPage = () => {
   };
 
   return (
-    <main className="p-4 select-none bg-[#393A56] h-screen sm:flex sm:flex-col sm:justify-center">
-      <div className="container mx-auto md:max-w-screen-sm">
+    <main className="p-4 select-none bg-[#393A56] h-screen">
+      <div className="container mx-auto md:max-w-screen-sm flex flex-col sm:justify-center h-full items-center">
         {game[position] && <Question key={game[position].picture} {...game[position]} onAnswer={onAnswer}/>}
       </div>
     </main>
