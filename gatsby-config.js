@@ -22,14 +22,5 @@ module.exports = {
       },
       __key: 'images',
     },
-    {
-      resolve: `gatsby-plugin-sass`,
-      options: {
-        postCssPlugins: [
-          require('tailwindcss'),
-          require('./tailwind.config.js'),
-        ],
-      },
-    },
   ],
 };
