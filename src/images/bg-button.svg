@@ -1,21 +1,13 @@
-<svg width="272" height="48" viewBox="0 0 272 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect x="1" y="1" width="270" height="42" fill="#DBE0E7" stroke="#141020" stroke-width="2"/>
-  <rect x="4" y="2" width="264" height="2" fill="white"/>
-  <rect x="4" y="36" width="264" height="2" fill="white" fill-opacity="0.7"/>
-  <rect x="2" y="4" width="2" height="32" fill="white"/>
-  <rect x="268" y="4" width="2" height="32" fill="white"/>
-  <rect x="2" y="38" width="268" height="4" fill="#4E5371"/>
-  <rect width="2" height="2" fill="#393A56"/>
-  <rect y="42" width="2" height="2" fill="#26253B"/>
-  <rect x="2" y="36" width="2" height="2" fill="#4E5371"/>
-  <rect y="44" width="2" height="2" fill="black" fill-opacity="0.2"/>
-  <rect x="270" y="42" width="2" height="2" fill="#26253B"/>
-  <rect x="268" y="36" width="2" height="2" fill="#4E5371"/>
-  <rect x="270" y="44" width="2" height="2" fill="black" fill-opacity="0.2"/>
-  <rect x="270" width="2" height="2" fill="#393A56"/>
-  <rect width="268" height="2" transform="matrix(1 0 0 -1 2 46)" fill="#141020" fill-opacity="0.5"/>
-  <rect width="268" height="2" transform="matrix(1 0 0 -1 2 48)" fill="black" fill-opacity="0.2"/>
+<svg width="280" height="50" viewBox="0 0 280 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M5 12V10H7V8H273V10H275V12H277V44H275V46H273V48H7V46H5V44H3V12H5Z" stroke="#141020" stroke-opacity="0.2" stroke-width="4"/>
+  <path d="M6 5V3H8V1H272V3H274V5H276V41H274V43H272V45H8V43H6V41H4V5H6Z" fill="#DBE0E7" stroke="#141020" stroke-width="2"/>
+  <path d="M8 7V5H10V3H270V5H272V7H274V33H272V35H270V37H10V35H8V33H6V7H8Z" stroke="white" stroke-width="2"/>
+  <rect x="9" y="38" width="262" height="6" fill="#4E5371"/>
+  <rect x="7" y="36" width="2" height="6" fill="#4E5371"/>
+  <rect x="5" y="34" width="2" height="6" fill="#4E5371"/>
+  <rect x="273" y="34" width="2" height="6" fill="#4E5371"/>
+  <rect x="271" y="36" width="2" height="6" fill="#4E5371"/>
   <path fill-rule="evenodd" clip-rule="evenodd"
-        d="M125 2H149V4H147V6H145V8H143V10H141V12H139V14H137V16H135V18H133V20H131V22H129V24H127V26H125V28H123V30H121V32H119V34H117V36H115V38H91V36H93V34H95V32H97V30H99V28H101V26H103V24H105V22H107V20H109V18H111V16H113V14H115V12H117V10H119V8H121V6H123V4H125V2ZM125 36H123V38H131V36H133V34H135V32H137V30H139V28H141V26H143V24H145V22H147V20H149V18H151V16H153V14H155V12H157V10H159V8H161V6H163V4H165V2H157V4H155V6H153V8H151V10H149V12H147V14H145V16H143V18H141V20H139V22H137V24H135V26H133V28H131V30H129V32H127V34H125V36Z"
-        fill="white" fill-opacity="0.4"/>
+        d="M137 4H161V6H159V8H157V10H155V12H153V14H151V16H149V18H147V20H145V22H143V24H141V26H139V28H137V30H135V32H133V34H131V36H129V38H105V36H107V34H109V32H111V30H113V28H115V26H117V24H119V22H121V20H123V18H125V16H127V14H129V12H131V10H133V8H135V6H137V4ZM145 30H143V32H141V34H139V36H137V38H145V36H147V34H149V32H151V30H153V28H155V26H157V24H159V22H161V20H163V18H165V16H167V14H169V12H171V10H173V8H175V6H177V4H169V6H167V8H165V10H163V12H161V14H159V16H157V18H155V20H153V22H151V24H149V26H147V28H145V30Z"
+        fill="white" fill-opacity="0.5"/>
 </svg>
