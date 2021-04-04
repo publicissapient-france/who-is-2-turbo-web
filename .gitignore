@@ -10,3 +10,6 @@ node_modules
 # Build
 .cache
 public
+
+# Deployment
+.firebase
