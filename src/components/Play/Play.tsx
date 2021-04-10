@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { Question, QuestionType } from '../components/Question/Question';
+import { Question, QuestionType } from '../Question/Question';
 import { navigate } from 'gatsby';
 
 const gameFromService = [
@@ -26,7 +26,7 @@ const gameFromService = [
   }
 ];
 
-const PlayPage = () => {
+export const Play = () => {
   const [position, setPosition] = useState(0);
   const [game, setGame] = useState<QuestionType[]>([]);
 
@@ -46,7 +46,7 @@ const PlayPage = () => {
       setPosition(position + 1);
     } else {
       // TODO get score from service using game
-      navigate(`/end?score=4&count=5`);
+      navigate(`/app/end?score=4&count=5`);
     }
   };
 
@@ -58,5 +58,3 @@ const PlayPage = () => {
     </main>
   );
 };
-
-export default PlayPage;

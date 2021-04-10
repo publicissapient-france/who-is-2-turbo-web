@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: 'Who Is 2 Turbo',
+    title: 'Whois',
   },
   plugins: [
     'gatsby-plugin-postcss',
