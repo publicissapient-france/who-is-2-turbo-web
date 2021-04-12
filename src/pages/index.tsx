@@ -1,19 +1,21 @@
 import firebase from 'firebase/app';
 import { Link, navigate } from 'gatsby';
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { Button } from '../components/Button/Button';
-import { isLoggedIn, setEnteredEmail } from '../services/firebase';
+import { getFirebase, isLoggedIn, setEnteredEmail } from '../services/firebase';
 
 const IndexPage = () => {
   const [email, setEmail] = useState('');
   const [valid, setValid] = useState(true);
   const [logged, setLogged] = useState(isLoggedIn());
 
-  firebase.auth().onAuthStateChanged(user => {
-    if (!user) {
-      setLogged(false);
-    }
-  });
+  useEffect(() => {
+    getFirebase(firebase).auth().onAuthStateChanged(user => {
+      if (!user) {
+        setLogged(false);
+      }
+    });
+  }, []);
 
   const actionCodeSettings = {
     url: process.env.GATSBY_SITE_URL + 'cb-auth',
@@ -38,7 +40,7 @@ const IndexPage = () => {
     event.preventDefault();
     if (isEmailValid()) {
       try {
-        await firebase.auth().sendSignInLinkToEmail(email, actionCodeSettings);
+        await getFirebase(firebase).auth().sendSignInLinkToEmail(email, actionCodeSettings);
         setEnteredEmail(email);
         navigate('/wait-auth/');
         return null;

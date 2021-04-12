@@ -3,7 +3,7 @@
 
 # Env
 .envrc
-.env.development
+.env.*
 
 # Dependencies
 node_modules

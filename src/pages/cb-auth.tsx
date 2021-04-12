@@ -1,21 +1,21 @@
 import firebase from 'firebase/app';
 import { navigate } from 'gatsby';
 import React, { useEffect } from 'react';
-import { clearEnteredEmail, getEnteredEmail, setLoggedIn } from '../services/firebase';
+import { clearEnteredEmail, getEnteredEmail, getFirebase, setLoggedIn } from '../services/firebase';
 
 const CallbackPage = () => {
 
   const finishAuthentication = async () => {
-    if (firebase.auth().isSignInWithEmailLink(window.location.href)) {
+    if (getFirebase(firebase).auth().isSignInWithEmailLink(window.location.href)) {
       const email = getEnteredEmail();
       if (!email) {
         navigate('/unauthorized/');
       }
       try {
-        await firebase.auth().signInWithEmailLink(email || '', window.location.href);
+        await getFirebase(firebase).auth().signInWithEmailLink(email || '', window.location.href);
         clearEnteredEmail();
         setLoggedIn();
-        navigate('/app/choice/');
+        navigate('/');
         return null;
       } catch (e) {
         navigate('/unauthorized/');
