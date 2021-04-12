@@ -2,12 +2,12 @@ import firebase from 'firebase/app';
 import { Link, navigate } from 'gatsby';
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { Button } from '../components/Button/Button';
-import { getFirebase, isLoggedIn, setEnteredEmail } from '../services/firebase';
+import { getFirebase, setEnteredEmail } from '../services/firebase';
 
 const IndexPage = () => {
   const [email, setEmail] = useState('');
   const [valid, setValid] = useState(true);
-  const [logged, setLogged] = useState(isLoggedIn());
+  const [logged, setLogged] = useState(true);
 
   useEffect(() => {
     getFirebase(firebase).auth().onAuthStateChanged(user => {
