@@ -12,7 +12,7 @@ export const GalleryCard = () => (
     <img className="absolute inset-0 w-full"
          src={bgItemGallery}
          alt="user's background"/>
-    <div className="absolute bottom-[9%] lg:bottom-[8%] inset-x-0">
+    <div className="absolute bottom-[7%] lg:bottom-[8%] inset-x-0 leading-tight">
       <div className="font-game text-white mt-1 text-xs lg:text-sm">John</div>
       <div className="font-game text-white text-xs lg:text-sm">Doe</div>
     </div>
