@@ -2,7 +2,8 @@
 .idea
 
 # Env
-.direnv
+.envrc
+.env.*
 
 # Dependencies
 node_modules

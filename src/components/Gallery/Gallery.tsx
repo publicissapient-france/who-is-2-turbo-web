@@ -1,7 +1,7 @@
 import React from 'react';
-import { GalleryCard } from '../components/GalleryCard/GalleryCard';
+import { GalleryCard } from '../GalleryCard/GalleryCard';
 
-const GalleryPage = () => {
+export const Gallery = () => {
   return (
     <main className="mb-4 lg:mb-12">
       <h1 className="font-game text-center mt-12 text-2xl">Gallery</h1>
@@ -18,5 +18,3 @@ const GalleryPage = () => {
     </main>
   );
 };
-
-export default GalleryPage;

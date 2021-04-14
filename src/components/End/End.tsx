@@ -1,8 +1,12 @@
-import { Link, PageProps } from 'gatsby';
+import { Link } from 'gatsby';
 import React, { FunctionComponent } from 'react';
-import { Button } from '../components/Button/Button';
+import { Button } from '../Button/Button';
 
-const EndPage: FunctionComponent<PageProps> = ({ location }) => {
+interface EndPropTypes {
+  location: Location
+}
+
+export const End: FunctionComponent<EndPropTypes> = ({ location }) => {
   const query = new URLSearchParams(location.search);
   return (
     <main className="p-4 container mx-auto md:max-w-screen-sm text-center select-none h-screen sm:flex sm:flex-col sm:justify-center">
@@ -13,11 +17,9 @@ const EndPage: FunctionComponent<PageProps> = ({ location }) => {
           {query.get('score')}/{query.get('count')}
         </div>
       </div>
-      <Link to="/play">
+      <Link to="/app/play/">
         <Button>Play again</Button>
       </Link>
     </main>
   );
 };
-
-export default EndPage;

@@ -20,7 +20,7 @@ export const Question = ({ picture, answers, onAnswer }: QuestionPropTypes) => (
       <img className="absolute inset-0" src={bgGame} alt="game's retro background"/>
     </div>
     {answers.map((answer, id) => (
-      <Button onClick={() => onAnswer(id)}>{answer}</Button>
+      <Button onClick={() => onAnswer(id)} key={id}>{answer}</Button>
     ))}
   </>
 );
