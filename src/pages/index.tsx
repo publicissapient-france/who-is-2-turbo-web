@@ -57,13 +57,16 @@ const IndexPage = () => {
       <h1 className="font-game mt-12 text-l text-[#F0AF00] text-shadow">Welcome to</h1>
       <img className="w-full my-8 px-4 max-w-md" src={Logo} alt="whois's logo"/>
       {!logged && <form className="w-full px-4">
-        <div className="my-6">
-          <input style={{ backgroundImage: `url(${BgInput})` }} className="bg-[#1F23A0] w-full bg-cover p-2 outline-none" placeholder="jd@mail.com" required type="email"
+        <div className="relative">
+          <input className="mx-auto max-w-sm w-full bg-[#1F23A0] inset-0 max-w-sm p-2 absolute bg-transparent outline-none" placeholder="jd@mail.com" required type="email"
                  value={email}
                  onChange={onEmailChange}/>
-          {!valid && <p className="text-red-500 text-xs leading-tight mt-2">Only {process.env.GATSBY_ALLOWED_DOMAIN} users are allowed to sign-in.</p>}
+          <img src={BgInput} alt="button background" className="mx-auto w-full max-w-sm"/>
         </div>
-        <Button submit onClick={signIn}>Sign in</Button>
+        {!valid && <p className="mx-auto text-left max-w-sm text-red-500 text-xs leading-tight mt-2">Only {process.env.GATSBY_ALLOWED_DOMAIN} users are allowed to sign-in.</p>}
+        <div className="mt-6">
+          <Button submit onClick={signIn}>Sign in</Button>
+        </div>
       </form>}
       {logged && <div className="w-full px-4">
         <Link to="/app/play" className="mt-16">
