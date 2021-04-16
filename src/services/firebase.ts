@@ -1,3 +1,4 @@
+import axios from 'axios';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 
@@ -12,8 +13,14 @@ export const setEnteredEmail = (email: string) => isBrowser() && window.localSto
 export const clearEnteredEmail = () => isBrowser() && window.localStorage.removeItem(EMAIL_FOR_SIGN_IN_KEY);
 
 export const isLoggedIn = () => isBrowser() && window.localStorage.getItem(LOGGED_IN_KEY) === LOGGED_IN_VALUE;
-export const setLoggedIn = () => isBrowser() && window.localStorage.setItem(LOGGED_IN_KEY, LOGGED_IN_VALUE);
-export const clearLoggedIn = () => isBrowser() && window.localStorage.removeItem(LOGGED_IN_KEY);
+
+export const setLoggedIn = () => isBrowser()
+  && window.localStorage.setItem(LOGGED_IN_KEY, LOGGED_IN_VALUE)
+  && setBearer();
+
+export const clearLoggedIn = () => isBrowser()
+  && window.localStorage.removeItem(LOGGED_IN_KEY)
+  && setBearer();
 
 let fb: firebase.app.App;
 export const getFirebase: (firebase: any) => firebase.app.App = (firebase: any) => {
@@ -31,3 +38,18 @@ export const getFirebase: (firebase: any) => firebase.app.App = (firebase: any) 
   fb = firebase;
   return firebase;
 };
+
+const AUTHORIZATION_HEADER = 'Authorization';
+const setBearer = () => {
+  getFirebase(firebase).auth().onAuthStateChanged(async user => {
+    if (user) {
+      axios.defaults.headers.common[AUTHORIZATION_HEADER] = `Bearer ${await user.getIdToken()}`;
+    } else {
+      delete axios.defaults.headers.common[AUTHORIZATION_HEADER];
+    }
+  });
+};
+
+if (isBrowser()) {
+  setBearer();
+}
