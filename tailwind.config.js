@@ -7,5 +7,5 @@ module.exports = {
       text: ['"Roboto Mono"'],
       game: ['"Press Start 2P"']
     },
-  }
+  },
 }

@@ -3,6 +3,8 @@ import { Link, navigate } from 'gatsby';
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { Button } from '../components/Button/Button';
 import { getFirebase, setEnteredEmail } from '../services/firebase';
+import Logo from '../images/logo.png';
+import BgInput from '../images/bg-input.svg';
 
 const IndexPage = () => {
   const [email, setEmail] = useState('');
@@ -51,15 +53,20 @@ const IndexPage = () => {
   };
 
   return (
-    <main className="text-center flex flex-col h-screen container items-center">
-      <h1 className="font-game mt-12 text-2xl">Welcome</h1>
-      <img className="my-8 px-4" src="https://dummyimage.com/600x300/9e189e/fff.jpg&text=LOGO" alt="app's logo"/>
+    <main className="flex flex-col container mx-auto max-w-screen-sm text-center justify-center items-center">
+      <h1 className="font-game mt-12 text-l text-[#F0AF00] text-shadow">Welcome to</h1>
+      <img className="w-full my-8 px-4 max-w-md" src={Logo} alt="whois's logo"/>
       {!logged && <form className="w-full px-4">
-        <div className="my-6">
-          <input className="w-full p-2 rounded outline-none" placeholder="john.doe@publicissapient.com" required type="email" value={email} onChange={onEmailChange}/>
-          {!valid && <p className="text-red-400 text-sm leading-tight mt-2">Only {process.env.GATSBY_ALLOWED_DOMAIN} users are allowed to sign-in.</p>}
+        <div className="relative">
+          <input className="mx-auto max-w-sm w-full bg-[#1F23A0] inset-0 max-w-sm p-2 absolute bg-transparent outline-none" placeholder="jd@mail.com" required type="email"
+                 value={email}
+                 onChange={onEmailChange}/>
+          <img src={BgInput} alt="button background" className="mx-auto w-full max-w-sm"/>
         </div>
-        <Button submit onClick={signIn}>Sign in</Button>
+        {!valid && <p className="mx-auto text-left max-w-sm text-red-500 text-xs leading-tight mt-2">Only {process.env.GATSBY_ALLOWED_DOMAIN} users are allowed to sign-in.</p>}
+        <div className="mt-6">
+          <Button submit onClick={signIn}>Sign in</Button>
+        </div>
       </form>}
       {logged && <div className="w-full px-4">
         <Link to="/app/play" className="mt-16">
