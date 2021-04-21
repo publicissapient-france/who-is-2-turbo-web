@@ -4,7 +4,7 @@ import Idea from '../images/idea.svg';
 
 const WaitAuthPage = () => {
   return (
-    <main className="text-center flex flex-col h-screen container items-center">
+    <main className="text-center flex flex-col h-screen container items-center mx-auto">
       <img className="my-8 px-4" src={Logo} alt="whois's logo"/>
       <div className="px-4 text-white">
         <h2 className="font-game mt-8 text-l text-[#F0AF00] text-shadow">
