@@ -1,14 +1,9 @@
 import React from 'react';
 import { Button } from '../Button/Button';
 import bgGame from '../../images/bg-game.png';
+import { TQuestion } from '../../services/game';
 
-export type QuestionType = {
-  picture: string;
-  answerId?: number;
-  answers: string[]
-}
-
-type QuestionPropTypes = QuestionType & {
+type QuestionPropTypes = TQuestion & {
   onAnswer: (id: number) => void
 }
 
@@ -20,7 +15,7 @@ export const Question = ({ picture, answers, onAnswer }: QuestionPropTypes) => (
       <img className="absolute inset-0" src={bgGame} alt="game's retro background"/>
     </div>
     {answers.map((answer, id) => (
-      <Button onClick={() => onAnswer(id)} key={id}>{answer}</Button>
+      <Button onClick={() => onAnswer(id)} key={id}>{answer.firstName} {answer.lastName}</Button>
     ))}
   </>
 );
