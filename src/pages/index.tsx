@@ -5,6 +5,7 @@ import { Button } from '../components/Button/Button';
 import { getFirebase, setEnteredEmail } from '../services/firebase';
 import Logo from '../images/logo.png';
 import BgInput from '../images/bg-input.svg';
+import { Metadata } from '../components/Metadata/Metadata';
 
 const IndexPage = () => {
   const [email, setEmail] = useState('');
@@ -54,6 +55,7 @@ const IndexPage = () => {
 
   return (
     <main className="flex flex-col container mx-auto max-w-screen-sm text-center justify-center items-center">
+      <Metadata/>
       <h1 className="font-game mt-12 text-l text-[#F0AF00] text-shadow">Welcome to</h1>
       <img className="w-full my-8 px-4 max-w-md" src={Logo} alt="whois's logo"/>
       {!logged && <form className="w-full px-4">

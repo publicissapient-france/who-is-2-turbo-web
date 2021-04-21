@@ -1,11 +1,12 @@
 import { Link } from 'gatsby';
 import * as React from 'react';
 import { Button } from '../components/Button/Button';
+import { Metadata } from '../components/Metadata/Metadata';
 
 const NotFoundPage = () => {
   return (
     <main className="m-4 text-center">
-      <title>Unauthorized</title>
+      <Metadata/>
       <h1 className="mt-12 mb-14">You should be signed using your <span className="font-mono">{process.env.GATSBY_ALLOWED_DOMAIN}</span> email to access this content.</h1>
       <Link to="/">
         <Button>Sign in</Button>

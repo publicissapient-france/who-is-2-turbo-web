@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { navigate } from 'gatsby';
 import { getGame, getScore, TQuestion } from '../../services/game';
 import { Question } from '../Question/Question';
+import { Metadata } from '../Metadata/Metadata';
 
 export const Play = () => {
   const [position, setPosition] = useState(0);
@@ -30,6 +31,7 @@ export const Play = () => {
 
   return (
     <main className="p-4 select-none h-screen">
+      <Metadata/>
       <div className="container mx-auto md:max-w-screen-sm flex flex-col sm:justify-center h-full items-center">
         {questions[position] && <Question key={questions[position].picture} {...questions[position]} onAnswer={onAnswer}/>}
       </div>
