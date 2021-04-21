@@ -1,7 +1,7 @@
 import React, { Component, FunctionComponent, useEffect } from 'react';
 import { navigate } from 'gatsby';
 import firebase from 'firebase/app';
-import { clearLoggedIn, getFirebase, isLoggedIn, setLoggedIn } from '../../services/firebase';
+import { clearLoggedIn, getFirebase, isLoggedIn } from '../../services/firebase';
 
 interface PrivateRoutePropTypes {
   component: FunctionComponent<any>
@@ -10,10 +10,10 @@ interface PrivateRoutePropTypes {
 export const PrivateRoute: FunctionComponent<PrivateRoutePropTypes> = ({ component: Component, ...rest }) => {
   useEffect(() => {
     getFirebase(firebase).auth().onAuthStateChanged(user => {
-      if (user) {
-        setLoggedIn();
-      } else {
+      if (!user) {
         clearLoggedIn();
+        navigate('/unauthorized');
+        return null;
       }
     });
   }, []);
