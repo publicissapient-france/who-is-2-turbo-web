@@ -7,7 +7,7 @@ type ButtonPropTypes = {
 }
 
 export const Button: FunctionComponent<ButtonPropTypes> = ({ onClick, submit, children }) => (
-  <button type={submit ? 'submit' : 'button'} className="w-full font-game text-xs relative max-w-sm py-2" onClick={onClick ? onClick : () => {
+  <button type={submit ? 'submit' : 'button'} className="w-full font-game text-xs relative max-w-sm py-2 focus:outline-none" onClick={onClick ? onClick : () => {
   }}>
     <img src={bgButton} alt="button background" className="w-full"/>
     <span className="absolute inset-x-0 top-1/2 transform -translate-y-3/4 mx-auto">{children}</span>

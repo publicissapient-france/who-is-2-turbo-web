@@ -1,12 +1,11 @@
 import axios from 'axios';
 import firebase from 'firebase/app';
 import 'firebase/auth';
+import { isBrowser } from './common';
 
 const EMAIL_FOR_SIGN_IN_KEY = 'emailForSignIn';
 const LOGGED_IN_KEY = 'loggedIn';
 const LOGGED_IN_VALUE = 'y';
-
-const isBrowser = () => typeof window !== 'undefined';
 
 export const getEnteredEmail = () => isBrowser() && window.localStorage.getItem(EMAIL_FOR_SIGN_IN_KEY);
 export const setEnteredEmail = (email: string) => isBrowser() && window.localStorage.setItem(EMAIL_FOR_SIGN_IN_KEY, email);
@@ -19,7 +18,7 @@ export const setLoggedIn = () => isBrowser()
   && setBearer();
 
 export const clearLoggedIn = () => isBrowser()
-  && window.localStorage.removeItem(LOGGED_IN_KEY)
+  && localStorage.clear()
   && setBearer();
 
 let fb: firebase.app.App;

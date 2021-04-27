@@ -27,7 +27,7 @@ export interface Game {
 }
 
 export const getGame: () => Promise<Game> = async () => {
-  const { data } = await axios.post<GameEntity>(`${process.env.GATSBY_API_URL}/games`);
+  const { data } = await axios.post<GameEntity>('/games');
   return {
     ...data,
     questions: data.questions.map(q => ({
@@ -48,7 +48,7 @@ interface Result {
 }
 
 export const getScore: (gameId: string, answers: number[]) => Promise<Result> = async (gameId: string, answers: number[]) => {
-  const { data: { correct, total } } = await axios.post<ResultEntity>(`${process.env.GATSBY_API_URL}/games/${gameId}/score`, { answers: answers });
+  const { data: { correct, total } } = await axios.post<ResultEntity>(`/games/${gameId}/score`, { answers: answers });
   return {
     score: correct,
     count: total
