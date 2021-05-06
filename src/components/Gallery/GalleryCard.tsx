@@ -1,6 +1,6 @@
-import React, { FunctionComponent } from 'react';
+import React, {FunctionComponent} from 'react';
 import bgItemGallery from '../../images/bg-item-gallery.png';
-import { User } from './GalleryPage';
+import {User} from './Gallery';
 
 export const GalleryCard: FunctionComponent<User> = ({ firstName, lastName, picture }) => (
   <div className="relative text-center">

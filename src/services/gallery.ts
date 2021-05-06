@@ -1,6 +1,8 @@
-import { isBrowser } from './common';
-import { User } from '../components/Gallery/GalleryPage';
+import {isBrowser} from './common';
+import {User} from '../components/Gallery/Gallery';
 
-export const saveGalleryPage = (offset: number, limit: number, users: User[]) => isBrowser() && window.localStorage.setItem(`galleryPage:${offset}:${limit}`, JSON.stringify(users));
-export const clearGalleryPage = (offset: number, limit: number) => isBrowser() && window.localStorage.removeItem(`galleryPage:${offset}:${limit}`);
-export const getGalleryPage = (offset: number, limit: number) => isBrowser() && JSON.parse(window.localStorage.getItem(`galleryPage:${offset}:${limit}`) || '[]');
+const GALLERY_PAGE_KEY = `galleryPage`;
+
+export const saveGalleryPage = (users: User[]) => isBrowser() && window.localStorage.setItem(GALLERY_PAGE_KEY, JSON.stringify(users));
+export const clearGalleryPage = () => isBrowser() && window.localStorage.removeItem(GALLERY_PAGE_KEY);
+export const getGalleryPage = () => isBrowser() && JSON.parse(window.localStorage.getItem(GALLERY_PAGE_KEY) || '[]');
