@@ -29,7 +29,7 @@ export const Gallery = () => {
     <main className="mb-4 lg:mb-12">
       <Metadata/>
       <Toolbar title="Gallery" buttonLabel="Back"/>
-      <div className="flex flex-wrap items-center mx-3 my-4 gap-3 md:gap-2 lg:gap-7">
+      <div className="flex flex-wrap items-center mx-3 my-4 gap-3 md:gap-2 lg:gap-7 justify-center">
         {data.map((user: User) => (
           <GalleryCard key={user.picture} {...user}/>
         ))}

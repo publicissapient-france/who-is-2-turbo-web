@@ -1,11 +1,11 @@
 import firebase from 'firebase/app';
-import {Link, navigate} from 'gatsby';
-import React, {ChangeEvent, useEffect, useState} from 'react';
-import {Button} from '../components/Button/Button';
-import {getFirebase, setEnteredEmail} from '../services/firebase';
+import { Link, navigate } from 'gatsby';
+import React, { ChangeEvent, useEffect, useState } from 'react';
+import { Button } from '../components/Button/Button';
+import { getFirebase, setEnteredEmail } from '../services/firebase';
 import Logo from '../images/logo.png';
 import BgInput from '../images/bg-input.svg';
-import {Metadata} from '../components/Metadata/Metadata';
+import { Metadata } from '../components/Metadata/Metadata';
 
 const IndexPage = () => {
   const [email, setEmail] = useState('');
@@ -39,7 +39,7 @@ const IndexPage = () => {
     return false;
   };
 
-  const signIn = async (event: Event) => {
+  const signIn = async (event: MouseEvent) => {
     event.preventDefault();
     if (isEmailValid()) {
       try {
