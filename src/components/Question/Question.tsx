@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from '../Button/Button';
-import bgGame from '../../images/bg-game.png';
+import bgGameSm from '../../images/bg-game-sm.png';
+import bgGameMd from '../../images/bg-game-md.png';
 import { TQuestion } from '../../services/game';
 
 type QuestionPropTypes = TQuestion & {
@@ -8,14 +9,21 @@ type QuestionPropTypes = TQuestion & {
 }
 
 export const Question = ({ picture, answers, onAnswer }: QuestionPropTypes) => (
-  <>
-    <div className="relative max-w-sm">
-      <img className="invisible mb-4" src={bgGame} alt="game's retro background"/>
-      <img className="absolute inset-0 w-[60%] top-[6%] mx-auto rounded" src={picture} alt="user's picture"/>
-      <img className="absolute inset-0" src={bgGame} alt="game's retro background"/>
+  <div className="flex flex-col items-center lg:flex-row lg:gap-12">
+    <div>
+      <div className="relative h-[251px] w-[288px] mb-4 md:hidden">
+        <img className="absolute inset-0 mx-auto rounded mt-5" src={picture} alt="user's picture" height={186} width={141}/>
+        <img className="absolute inset-0" src={bgGameSm} alt="game's retro background" height={251} width={288}/>
+      </div>
+      <div className="hidden md:block relative h-[449px] w-[434px] mb-4">
+        <img className="absolute inset-0 mx-auto rounded mt-[1.6rem]" src={picture} alt="user's picture" height={378} width={284}/>
+        <img className="absolute inset-0" src={bgGameMd} alt="game's retro background" height={449} width={434}/>
+      </div>
     </div>
-    {answers.map((answer, id) => (
-      <Button onClick={() => onAnswer(id)} key={id}>{answer.firstName} {answer.lastName}</Button>
-    ))}
-  </>
+    <div className="text-center w-[288px]">
+      {answers.map((answer, id) => (
+        <Button onClick={() => onAnswer(id)} key={id}>{answer.firstName} {answer.lastName}</Button>
+      ))}
+    </div>
+  </div>
 );

@@ -3,19 +3,19 @@ import bgItemGallery from '../../images/bg-item-gallery.png';
 import {User} from './Gallery';
 
 export const GalleryCard: FunctionComponent<User> = ({ firstName, lastName, picture }) => (
-  <div className="relative text-center">
+  <div className="relative text-center w-[142px]">
     <img className="invisible w-full"
          src={bgItemGallery}
          alt="user's background"/>
-    <img className="absolute inset-0 w-[86%] mx-auto mt-[11%]"
+    <img className="absolute inset-0 w-full mt-3"
          src={picture}
          alt="user's picture"/>
     <img className="absolute inset-0 w-full"
          src={bgItemGallery}
          alt="user's background"/>
-    <div className="absolute bottom-[7%] lg:bottom-[8%] inset-x-0 leading-tight">
-      <div className="font-game text-white mt-1 text-xs lg:text-sm">{firstName}</div>
-      <div className="font-game text-white text-xs lg:text-sm">{lastName}</div>
+    <div className="absolute bottom-[23px] inset-x-0 leading-tight">
+      <div className="font-game mt-1 text-[8px]">{firstName}</div>
+      <div className="font-game text-[8px]">{lastName}</div>
     </div>
   </div>
 );

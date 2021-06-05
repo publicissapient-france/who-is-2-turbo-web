@@ -7,6 +7,10 @@
     .text-shadow {
       text-shadow: 0 2px 0 #060968;
     }
+
+    .text-shadow-2 {
+      text-shadow: 0 6px 0 #373BD3;
+    }
   }
 }
 

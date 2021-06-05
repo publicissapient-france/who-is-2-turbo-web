@@ -4,6 +4,8 @@ import { navigate } from 'gatsby';
 import { getGame, getScore, TQuestion } from '../../services/game';
 import { Question } from '../Question/Question';
 import { Metadata } from '../Metadata/Metadata';
+import { Toolbar } from "../Toolbar/Toolbar";
+import { Loading } from "../Loading/Loading";
 
 export const Play = () => {
   const [position, setPosition] = useState(0);
@@ -25,16 +27,24 @@ export const Play = () => {
       setPosition(position + 1);
     } else {
       const { score, count } = await getScore(gameId, questions.map(question => question.answerId || 0));
-      navigate(`/app/end?score=${score}&count=${count}`);
+      navigate(`/app/end?score=${score}&count=${count}`, { replace: true });
     }
   };
 
   return (
-    <main className="p-4 select-none h-screen">
+    <main className="select-none h-screen">
       <Metadata/>
-      <div className="container mx-auto md:max-w-screen-sm flex flex-col sm:justify-center h-full items-center">
-        {questions[position] && <Question key={questions[position].picture} {...questions[position]} onAnswer={onAnswer}/>}
-      </div>
+      {!questions[position] && <section className="flex justify-center items-center h-3/4">
+        <Loading/>
+      </section>}
+      {questions[position] && <>
+        <Toolbar title="Series 5" buttonLabel="Abort"/>
+        <section className="md:flex md:h-4/5 md:justify-center md:items-center">
+          <div className="mt-4 flex flex-col items-center">
+            {questions[position] && <Question key={questions[position].picture} {...questions[position]} onAnswer={onAnswer}/>}
+          </div>
+        </section>
+      </>}
     </main>
   );
 };
