@@ -2,7 +2,7 @@ import bgButton from '../../images/bg-button.svg';
 import React, { FunctionComponent, MouseEventHandler } from 'react';
 
 type ButtonPropTypes = {
-  onClick?: MouseEventHandler<HTMLButtonElement>
+  onClick?: MouseEventHandler
   submit?: boolean
 }
 

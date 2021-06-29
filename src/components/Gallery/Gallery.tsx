@@ -3,16 +3,14 @@ import { Metadata } from '../Metadata/Metadata';
 import useSWR from "swr";
 import { clearGalleryPage, getGalleryPage, saveGalleryPage } from "../../services/gallery";
 import { GalleryCard } from "./GalleryCard";
-import axios from "axios";
 import { Toolbar } from "../Toolbar/Toolbar";
+import { fetcher } from "../../services/fetch";
 
 export interface User {
   firstName: string;
   lastName: string;
   picture: string;
 }
-
-const fetcher = (url: string) => axios.get(url).then(res => res.data);
 
 export const Gallery = () => {
   const {data} = useSWR(`/members`, fetcher, {
