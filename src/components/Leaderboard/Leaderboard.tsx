@@ -27,8 +27,8 @@ export const Leaderboard = () => {
           <div className="col-span-2 md:col-span-4">player</div>
           <div className="text-right">score</div>
         </div>
-        {isLoading && <section className="flex justify-center items-center h-3/4"><Loading/></section>}
-        {!isLoading && leaderboard.map((player: LeaderboardUser, rank: number) => <LeaderboardRow rank={rank} player={player}/>)}
+        {isLoading ? <section className="flex justify-center items-center h-3/4"><Loading/></section> :
+          leaderboard.map((player: LeaderboardUser, rank: number) => <LeaderboardRow rank={rank} player={player}/>)}
       </section>
     </main>
   )
