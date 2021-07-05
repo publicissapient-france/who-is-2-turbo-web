@@ -39,7 +39,7 @@ const IndexPage = () => {
     return false;
   };
 
-  const signIn = async (event: MouseEvent) => {
+  const signIn = async (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
     if (isEmailValid()) {
       try {
@@ -81,6 +81,9 @@ const IndexPage = () => {
         </Link>
         <Link to="/app/gallery">
           <Button>Gallery</Button>
+        </Link>
+        <Link to="/app/leaderboard">
+          <Button>Leaderboard</Button>
         </Link>
       </div>}
     </main>
