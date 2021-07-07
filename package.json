@@ -18,7 +18,7 @@
     "@fontsource/roboto-mono": "^4.4.5",
     "autoprefixer": "^10.2.6",
     "axios": "^0.21.1",
-    "firebase": "^8.6.8",
+    "firebase": "^8.7.0",
     "gatsby": "^3.8.1",
     "gatsby-plugin-image": "^1.8.0",
     "gatsby-plugin-manifest": "^3.8.0",
