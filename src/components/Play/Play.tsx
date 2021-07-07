@@ -34,9 +34,7 @@ export const Play = () => {
   return (
     <main className="select-none h-screen">
       <Metadata/>
-      {!questions[position] && <section className="flex justify-center items-center h-3/4">
-        <Loading/>
-      </section>}
+      {!questions[position] && <Loading/>}
       {questions[position] && <>
         <Toolbar title="Series 5" buttonLabel="Abort"/>
         <section className="md:flex md:h-4/5 md:justify-center md:items-center">

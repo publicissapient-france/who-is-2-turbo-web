@@ -4,22 +4,10 @@ import 'firebase/auth';
 import { isBrowser } from './common';
 
 const EMAIL_FOR_SIGN_IN_KEY = 'emailForSignIn';
-const LOGGED_IN_KEY = 'loggedIn';
-const LOGGED_IN_VALUE = 'y';
 
 export const getEnteredEmail = () => isBrowser() && window.localStorage.getItem(EMAIL_FOR_SIGN_IN_KEY);
 export const setEnteredEmail = (email: string) => isBrowser() && window.localStorage.setItem(EMAIL_FOR_SIGN_IN_KEY, email);
 export const clearEnteredEmail = () => isBrowser() && window.localStorage.removeItem(EMAIL_FOR_SIGN_IN_KEY);
-
-export const isLoggedIn = () => isBrowser() && window.localStorage.getItem(LOGGED_IN_KEY) === LOGGED_IN_VALUE;
-
-export const setLoggedIn = () => isBrowser()
-  && window.localStorage.setItem(LOGGED_IN_KEY, LOGGED_IN_VALUE)
-  && setBearer();
-
-export const clearLoggedIn = () => isBrowser()
-  && localStorage.clear()
-  && setBearer();
 
 let fb: firebase.app.App;
 export const getFirebase: (firebase: any) => firebase.app.App = (firebase: any) => {
@@ -39,16 +27,26 @@ export const getFirebase: (firebase: any) => firebase.app.App = (firebase: any) 
 };
 
 const AUTHORIZATION_HEADER = 'Authorization';
-const setBearer = () => {
-  getFirebase(firebase).auth().onAuthStateChanged(async user => {
-    if (user) {
-      axios.defaults.headers.common[AUTHORIZATION_HEADER] = `Bearer ${await user.getIdToken()}`;
-    } else {
-      delete axios.defaults.headers.common[AUTHORIZATION_HEADER];
+
+export const logout = () => {
+  getFirebase(firebase).auth().signOut();
+  delete axios.defaults.headers.common[AUTHORIZATION_HEADER];
+  localStorage.clear();
+};
+
+export const login = async (user: firebase.User) => {
+  axios.defaults.headers.common[AUTHORIZATION_HEADER] = `Bearer ${await user.getIdToken()}`;
+};
+
+const interceptUnauthorized = () => {
+  axios.interceptors.response.use(response => response, error => {
+    if (error && error.response && error.response.status === 401) {
+      logout();
     }
-  });
+    return error;
+  })
 };
 
 if (isBrowser()) {
-  setBearer();
+  interceptUnauthorized();
 }
