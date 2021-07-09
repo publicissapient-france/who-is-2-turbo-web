@@ -4,7 +4,6 @@ export interface ProfileEntity {
   firstName: string
   lastName: string
   gender: string
-  email: string
   picture?: string
 }
 

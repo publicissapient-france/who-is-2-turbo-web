@@ -14,18 +14,20 @@ interface UiProfile {
   lastName: string
   lastNameError?: boolean
   gender: string
-  email: string
   preview?: string
   pictureError?: boolean
   picture?: string
+  loading: boolean,
+  updated: boolean,
 }
 
 export const Profile = () => {
   const [uiProfile, setUiProfile] = useState<UiProfile>({
     firstName: '',
     lastName: '',
-    gender: 'MALE',
-    email: '',
+    gender: 'FEMALE',
+    loading: true,
+    updated: false,
   });
 
   useEffect(() => {
@@ -34,6 +36,9 @@ export const Profile = () => {
         ...await getProfile(),
         firstNameError: false,
         lastNameError: false,
+        pictureError: false,
+        loading: false,
+        updated: false,
       });
     }
     fetchProfile();
@@ -54,13 +59,21 @@ export const Profile = () => {
       pictureError = true;
     }
     if (!firstNameError && !lastNameError && !pictureError) {
+      setUiProfile({
+        ...uiProfile,
+        loading: true,
+      })
       await postProfile({
         firstName: uiProfile.firstName,
         lastName: uiProfile.lastName,
         gender: uiProfile.gender,
-        email: uiProfile.email,
         picture: uiProfile.picture,
       });
+      setUiProfile({
+        ...uiProfile,
+        loading: false,
+        updated: true,
+      })
     } else {
       setUiProfile({ ...uiProfile, firstNameError, lastNameError, pictureError })
     }
@@ -117,20 +130,23 @@ export const Profile = () => {
     }
   }
 
+  const updatedBanner = <div className="bg-[#6FCF97] font-game text-white text-center text-xs px-4 py-3 absolute z-10">Profile updated successfully!</div>;
+
   return (
     <main className="mb-4 lg:mb-12 h-screen">
       <Metadata/>
-      {uiProfile.email ? <>
+      {!uiProfile.loading ? <>
         <Toolbar title="Profile" buttonLabel="Back"/>
+        {uiProfile.updated && updatedBanner}
         <section className="flex flex-col container mx-auto text-center justify-center items-center mt-8">
           <label htmlFor="load-picture">
-            {uiProfile.preview ?
+            {uiProfile.preview || uiProfile.picture ?
               <div className="relative w-[142px]">
                 <img className="invisible w-full"
                      src={ProfileImageChange}
                      alt="user's background"/>
                 <img className="absolute inset-0 w-full mt-3"
-                     src={uiProfile.preview}
+                     src={uiProfile.preview || uiProfile.picture}
                      alt="user's picture"/>
                 <img className="absolute inset-0 w-full"
                      src={ProfileImageChange}
