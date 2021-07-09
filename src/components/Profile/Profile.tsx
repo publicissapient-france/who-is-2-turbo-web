@@ -120,8 +120,8 @@ export const Profile = () => {
   return (
     <main className="mb-4 lg:mb-12 h-screen">
       <Metadata/>
-      <Toolbar title="Profile" buttonLabel="Back"/>
-      {uiProfile.email ?
+      {uiProfile.email ? <>
+        <Toolbar title="Profile" buttonLabel="Back"/>
         <section className="flex flex-col container mx-auto text-center justify-center items-center mt-8">
           <label htmlFor="load-picture">
             {uiProfile.preview ?
@@ -177,7 +177,8 @@ export const Profile = () => {
               <Button submit onClick={updateProfile}>Save profile</Button>
             </div>
           </form>
-        </section> : <section className="flex justify-center items-center h-3/4"><Loading/></section>}
+        </section>
+      </> : <Loading/>}
     </main>
   )
 }
