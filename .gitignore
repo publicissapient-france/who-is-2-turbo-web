@@ -14,6 +14,7 @@ public
 
 # Deployment
 .firebase
+firebase-debug.log
 
 # OS
 .DS_Store
