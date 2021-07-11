@@ -43,7 +43,7 @@ const interceptUnauthorized = () => {
     if (error && error.response && error.response.status === 401) {
       logout();
     }
-    return error;
+    throw error;
   })
 };
 

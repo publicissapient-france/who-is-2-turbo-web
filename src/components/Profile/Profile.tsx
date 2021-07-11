@@ -4,7 +4,7 @@ import { Toolbar } from "../Toolbar/Toolbar";
 import { Input } from "../Input/Input";
 import { Button } from "../Button/Button";
 import ProfileImageAdd from "../../images/profile-image-add.svg";
-import { getProfile, postProfile } from "../../services/profile";
+import { getProfile, setProfile } from "../../services/profile";
 import { Loading } from "../Loading/Loading";
 import ProfileImageChange from "../../images/profile-image-change.png";
 
@@ -19,6 +19,7 @@ interface UiProfile {
   picture?: string
   loading: boolean,
   updated: boolean,
+  isNewUser: boolean,
 }
 
 export const Profile = () => {
@@ -28,21 +29,41 @@ export const Profile = () => {
     gender: 'FEMALE',
     loading: true,
     updated: false,
+    isNewUser: false,
   });
 
   useEffect(() => {
-    const fetchProfile = async () => {
-      setUiProfile({
-        ...await getProfile(),
-        firstNameError: false,
-        lastNameError: false,
-        pictureError: false,
-        loading: false,
-        updated: false,
-      });
-    }
-    fetchProfile();
-  }, []);
+      const fetchProfile = async () => {
+        try {
+          setUiProfile({
+            ...await getProfile(),
+            firstNameError: false,
+            lastNameError: false,
+            pictureError: false,
+            loading: false,
+            updated: false,
+            isNewUser: false,
+          });
+        } catch (error) {
+          const unknownUser = error && error.response && error.response.status === 404;
+          if (unknownUser) {
+            setUiProfile({
+              firstName: '',
+              lastName: '',
+              gender: 'FEMALE',
+              firstNameError: false,
+              lastNameError: false,
+              pictureError: false,
+              loading: false,
+              updated: false,
+              isNewUser: true,
+            });
+          }
+        }
+      }
+      fetchProfile();
+    }, []
+  );
 
   const updateProfile = async (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
@@ -63,16 +84,19 @@ export const Profile = () => {
         ...uiProfile,
         loading: true,
       })
-      await postProfile({
-        firstName: uiProfile.firstName,
-        lastName: uiProfile.lastName,
-        gender: uiProfile.gender,
-        picture: uiProfile.picture,
-      });
+      await setProfile(
+        uiProfile.isNewUser,
+        {
+          firstName: uiProfile.firstName,
+          lastName: uiProfile.lastName,
+          gender: uiProfile.gender,
+          picture: uiProfile.picture,
+        });
       setUiProfile({
         ...uiProfile,
         loading: false,
         updated: true,
+        isNewUser: false,
       })
     } else {
       setUiProfile({ ...uiProfile, firstNameError, lastNameError, pictureError })

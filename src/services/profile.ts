@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 
 export interface ProfileEntity {
   firstName: string
@@ -12,5 +12,9 @@ export const getProfile: () => Promise<ProfileEntity> = async () => {
   return data;
 };
 
-export const postProfile: (profile: ProfileEntity) => Promise<ProfileEntity> = async (profile: ProfileEntity) =>
-  await axios.post('/members/me', profile);
+export const setProfile: (isNewUser: boolean, profile: ProfileEntity) => Promise<AxiosResponse> = async (isNewUser: boolean, profile: ProfileEntity) =>
+  await axios({
+    method: isNewUser ? 'post' : 'put',
+    url: '/members/me',
+    data: profile,
+  });
