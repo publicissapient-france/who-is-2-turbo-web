@@ -1,5 +1,5 @@
 import React from "react";
-import { LeaderboardUser } from "../../services/leaderboard";
+import { LeaderboardUser } from "./Leaderboard";
 
 export const LeaderboardRow = (props: { rank: number, player: LeaderboardUser }) =>
   <div
