@@ -3,7 +3,7 @@ import axios, { AxiosResponse } from "axios";
 export interface ProfileEntity {
   firstName: string
   lastName: string
-  gender: string
+  gender: 'FEMALE' | 'MALE'
   picture?: string
 }
 

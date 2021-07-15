@@ -4,22 +4,18 @@ import { Toolbar } from "../Toolbar/Toolbar";
 import { Input } from "../Input/Input";
 import { Button } from "../Button/Button";
 import ProfileImageAdd from "../../images/profile-image-add.svg";
-import { getProfile, setProfile } from "../../services/profile";
+import { getProfile, ProfileEntity, setProfile } from "../../services/profile";
 import { Loading } from "../Loading/Loading";
 import ProfileImageChange from "../../images/profile-image-change.png";
 
-interface UiProfile {
-  firstName: string
+interface UiProfile extends ProfileEntity {
   firstNameError?: boolean
-  lastName: string
   lastNameError?: boolean
-  gender: string
   preview?: string
   pictureError?: boolean
-  picture?: string
-  loading: boolean,
-  updated: boolean,
-  isNewUser: boolean,
+  loading: boolean
+  updated: boolean
+  isNewUser: boolean
 }
 
 export const Profile = () => {

@@ -37,15 +37,17 @@ export const Play = () => {
   return (
     <main className="select-none h-screen">
       <Metadata/>
-      {loading && <Loading/>}
-      {!loading && <>
-        <Toolbar title="Series 5" buttonLabel="Abort"/>
-        <section className="md:flex md:h-4/5 md:justify-center md:items-center">
-          <div className="mt-4 flex flex-col items-center">
-            {questions[position] && <Question key={questions[position].picture} {...questions[position]} onAnswer={onAnswer}/>}
-          </div>
-        </section>
-      </>}
+      {loading
+        ? <Loading/>
+        : <>
+          <Toolbar title="Series 5" buttonLabel="Abort"/>
+          <section className="md:flex md:h-4/5 md:justify-center md:items-center">
+            <div className="mt-4 flex flex-col items-center">
+              {questions[position] && <Question key={questions[position].picture} {...questions[position]} onAnswer={onAnswer}/>}
+            </div>
+          </section>
+        </>
+      }
     </main>
   );
 };
