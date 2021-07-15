@@ -33,7 +33,7 @@ export const Leaderboard = () => {
             <div className="col-span-2 md:col-span-4">player</div>
             <div className="text-right">score</div>
           </div>
-          {leaderboard.map((player: LeaderboardUser, rank: number) => <LeaderboardRow rank={rank} player={player}/>)}
+          {leaderboard.map((player: LeaderboardUser, rank: number) => <LeaderboardRow key={rank} rank={rank} player={player}/>)}
         </section>
       </> : <Loading/>}
     </main>

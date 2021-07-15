@@ -14,20 +14,20 @@
     "clean": "gatsby clean"
   },
   "dependencies": {
-    "@fontsource/press-start-2p": "^4.4.5",
-    "@fontsource/roboto-mono": "^4.4.5",
-    "autoprefixer": "^10.2.6",
+    "@fontsource/press-start-2p": "^4.5.0",
+    "@fontsource/roboto-mono": "^4.5.0",
+    "autoprefixer": "^10.3.1",
     "axios": "^0.21.1",
-    "firebase": "^8.7.0",
-    "gatsby": "^3.8.1",
-    "gatsby-plugin-image": "^1.8.0",
-    "gatsby-plugin-manifest": "^3.8.0",
-    "gatsby-plugin-offline": "^4.8.0",
-    "gatsby-plugin-postcss": "^4.8.0",
-    "gatsby-plugin-react-helmet": "^4.8.0",
-    "gatsby-plugin-sharp": "^3.8.0",
-    "gatsby-source-filesystem": "^3.8.0",
-    "gatsby-transformer-sharp": "^3.8.0",
+    "firebase": "^8.7.1",
+    "gatsby": "^3.9.1",
+    "gatsby-plugin-image": "^1.9.0",
+    "gatsby-plugin-manifest": "^3.9.0",
+    "gatsby-plugin-offline": "^4.9.0",
+    "gatsby-plugin-postcss": "^4.9.0",
+    "gatsby-plugin-react-helmet": "^4.9.0",
+    "gatsby-plugin-sharp": "^3.9.0",
+    "gatsby-source-filesystem": "^3.9.0",
+    "gatsby-transformer-sharp": "^3.9.0",
     "graphql": "^15.5.1",
     "postcss": "^8.3.5",
     "react": "^17.0.2",
@@ -37,7 +37,7 @@
     "tailwindcss": "^2.2.4"
   },
   "devDependencies": {
-    "@types/reach__router": "^1.3.8",
-    "@types/react-helmet": "^6.1.1"
+    "@types/reach__router": "^1.3.9",
+    "@types/react-helmet": "^6.1.2"
   }
 }
