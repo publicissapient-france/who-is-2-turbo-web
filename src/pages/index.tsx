@@ -4,8 +4,8 @@ import React, { ChangeEvent, useEffect, useState } from 'react';
 import { Button } from '../components/Button/Button';
 import { getFirebase, setEnteredEmail } from '../services/firebase';
 import Logo from '../images/logo.png';
-import BgInput from '../images/bg-input.svg';
 import { Metadata } from '../components/Metadata/Metadata';
+import { Input } from "../components/Input/Input";
 
 const IndexPage = () => {
   const [email, setEmail] = useState('');
@@ -59,17 +59,14 @@ const IndexPage = () => {
       <h1 className="font-game mb-2 text-sm md:text-base text-[#F0AF00] text-shadow">Welcome to</h1>
       <img className="mb-8" width={195} height={148} src={Logo} alt="whois's logo"/>
       {!logged && <form className="w-full px-4">
-        <div className="relative">
-          <input className="mx-auto max-w-[288px] w-full bg-[#1F23A0] inset-0 p-2 absolute bg-transparent outline-none"
-                 placeholder="jd@mail.com"
-                 required
-                 type="email"
-                 value={email}
-                 autoComplete="email"
-                 autoFocus={true}
-                 onChange={onEmailChange}/>
-          <img src={BgInput} alt="button background" className="mx-auto w-full max-w-[288px]"/>
-        </div>
+        <Input
+          value={email}
+          onChange={onEmailChange}
+          placeholder="jd@mail.com"
+          type="email"
+          autoComplete="email"
+          autoFocus={true}
+        />
         {!valid && <p className="mx-auto text-left max-w-sm text-red-500 text-xs leading-tight mt-2">Only {process.env.GATSBY_ALLOWED_DOMAIN} users are allowed to sign-in.</p>}
         <div className="mt-4">
           <Button submit onClick={signIn}>Sign in</Button>
@@ -77,7 +74,10 @@ const IndexPage = () => {
       </form>}
       {logged && <div className="px-4 flex flex-col">
         <Link to="/app/play">
-          <Button>Play</Button>
+          <Button>Play!</Button>
+        </Link>
+        <Link to="/app/profile">
+          <Button>Edit profile</Button>
         </Link>
         <Link to="/app/gallery">
           <Button>Gallery</Button>

@@ -1,29 +1,18 @@
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect x="8" width="8" height="2" fill="#FCC739"/>
-  <rect x="16" y="2" width="2" height="2" fill="#FCC739"/>
-  <rect x="8" y="2" width="8" height="2" fill="#FFD951"/>
-  <rect x="8" y="12" width="8" height="2" fill="#FFD951"/>
-  <rect x="6" y="4" width="12" height="2" fill="#FFD951"/>
-  <rect x="6" y="4" width="12" height="8" fill="#FFD951"/>
-  <rect x="16" y="12" width="2" height="2" fill="#F0AF00"/>
-  <rect x="6" y="12" width="2" height="2" fill="#F0AF00"/>
-  <rect width="2" height="2" transform="matrix(-1 0 0 1 16 18)" fill="#D3D4E9"/>
-  <rect width="2" height="2" transform="matrix(-1 0 0 1 16 14)" fill="#B0B1C4"/>
-  <rect width="2" height="2" transform="matrix(-1 0 0 1 16 20)" fill="#B0B1C4"/>
-  <rect width="2" height="2" transform="matrix(-1 0 0 1 14 20)" fill="#B0B1C4"/>
-  <rect width="2" height="2" transform="matrix(-1 0 0 1 14 18)" fill="#B0B1C4"/>
-  <rect width="8" height="2" transform="matrix(-1 0 0 1 16 14)" fill="#F0AF00"/>
-  <rect width="2" height="2" transform="matrix(-1 0 0 1 12 20)" fill="#D3D4E9"/>
-  <rect width="2" height="2" transform="matrix(-1 0 0 1 12 18)" fill="#B0B1C4"/>
-  <rect width="4" height="2" transform="matrix(-1 0 0 1 12 16)" fill="#B0B1C4"/>
-  <rect width="2" height="2" transform="matrix(-1 0 0 1 14 16)" fill="#D3D4E9"/>
-  <rect width="2" height="2" transform="matrix(-1 0 0 1 10 18)" fill="#D3D4E9"/>
-  <rect width="2" height="2" transform="matrix(-1 0 0 1 10 20)" fill="#B0B1C4"/>
-  <rect width="2" height="2" transform="matrix(-1 0 0 1 16 16)" fill="#B0B1C4"/>
-  <rect x="6" y="2" width="2" height="2" fill="#FCC739"/>
-  <rect x="10" y="22" width="4" height="2" fill="#87889B"/>
-  <rect x="18" y="4" width="2" height="8" fill="#F0AF00"/>
-  <rect x="4" y="4" width="2" height="8" fill="#F0AF00"/>
-  <rect x="4" y="4" width="2" height="4" fill="#FCC739"/>
-  <path fill-rule="evenodd" clip-rule="evenodd" d="M10 4H12V6H10V8H8V6V4H10Z" fill="#FAFAFF"/>
+<svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill="#FCC739" d="M8 0h8v2H8zM16 2h2v2h-2z"/>
+  <path fill="#FFD951" d="M8 2h8v2H8zM8 12h8v2H8zM6 4h12v2H6z"/>
+  <path fill="#FFD951" d="M6 4h12v8H6z"/>
+  <path fill="#F0AF00" d="M16 12h2v2h-2zM6 12h2v2H6z"/>
+  <path fill="#D3D4E9" d="M16 18h-2v2h2z"/>
+  <path fill="#B0B1C4" d="M16 14h-2v2h2zM16 20h-2v2h2zM14 20h-2v2h2zM14 18h-2v2h2z"/>
+  <path fill="#F0AF00" d="M16 14H8v2h8z"/>
+  <path fill="#D3D4E9" d="M12 20h-2v2h2z"/>
+  <path fill="#B0B1C4" d="M12 18h-2v2h2zM12 16H8v2h4z"/>
+  <path fill="#D3D4E9" d="M14 16h-2v2h2zM10 18H8v2h2z"/>
+  <path fill="#B0B1C4" d="M10 20H8v2h2zM16 16h-2v2h2z"/>
+  <path fill="#FCC739" d="M6 2h2v2H6z"/>
+  <path fill="#87889B" d="M10 22h4v2h-4z"/>
+  <path fill="#F0AF00" d="M18 4h2v8h-2zM4 4h2v8H4z"/>
+  <path fill="#FCC739" d="M4 4h2v4H4z"/>
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M10 4h2v2h-2v2H8V4h2z" fill="#FAFAFF"/>
 </svg>

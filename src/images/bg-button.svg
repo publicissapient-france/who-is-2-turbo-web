@@ -1,13 +1,9 @@
-<svg width="288" height="48" viewBox="0 0 288 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M4 10V8H6V6H282V8H284V10H286V42H284V44H282V46H6V44H4V42H2V10H4Z" stroke="#141020" stroke-opacity="0.2" stroke-width="4"/>
-  <path d="M7 7V5H9V3H279V5H281V7H283V31H281V33H279V35H9V33H7V31H5V7H7Z" fill="#EDEDFF" stroke="white" stroke-width="2"/>
-  <rect x="8" y="36" width="272" height="6" fill="#373BD3"/>
-  <rect x="6" y="34" width="2" height="6" fill="#373BD3"/>
-  <rect x="4" y="32" width="2" height="6" fill="#373BD3"/>
-  <rect x="282" y="32" width="2" height="6" fill="#373BD3"/>
-  <rect x="280" y="34" width="2" height="6" fill="#373BD3"/>
-  <path d="M5 5V3H7V1H281V3H283V5H285V39H283V41H281V43H7V41H5V39H3V5H5Z" stroke="#202125" stroke-width="2"/>
+<svg width="288" height="48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M4 10V8h2V6h276v2h2v2h2v32h-2v2h-2v2H6v-2H4v-2H2V10h2z" stroke="#141020" stroke-opacity=".2" stroke-width="4"/>
+  <path d="M7 7V5h2V3h270v2h2v2h2v24h-2v2h-2v2H9v-2H7v-2H5V7h2z" fill="#EDEDFF" stroke="#fff" stroke-width="2"/>
+  <path fill="#373BD3" d="M8 36h272v6H8zM6 34h2v6H6zM4 32h2v6H4zM282 32h2v6h-2zM280 34h2v6h-2z"/>
+  <path d="M5 5V3h2V1h274v2h2v2h2v34h-2v2h-2v2H7v-2H5v-2H3V5h2z" stroke="#202125" stroke-width="2"/>
   <path fill-rule="evenodd" clip-rule="evenodd"
-        d="M139 2H163V4H161V6H159V8H157V10H155V12H153V14H151V16H149V18H147V20H145V22H143V24H141V26H139V28H137V30H135V32H133V34H109V32H111V30H113V28H115V26H117V24H119V22H121V20H123V18H125V16H127V14H129V12H131V10H133V8H135V6H137V4H139V2ZM147 28H145V30H143V32H141V34H149V32H151V30H153V28H155V26H157V24H159V22H161V20H163V18H165V16H167V14H169V12H171V10H173V8H175V6H177V4H179V2H171V4H169V6H167V8H165V10H163V12H161V14H159V16H157V18H155V20H153V22H151V24H149V26H147V28Z"
-        fill="white"/>
+        d="M139 2h24v2h-2v2h-2v2h-2v2h-2v2h-2v2h-2v2h-2v2h-2v2h-2v2h-2v2h-2v2h-2v2h-2v2h-2v2h-2v2h-24v-2h2v-2h2v-2h2v-2h2v-2h2v-2h2v-2h2v-2h2v-2h2v-2h2v-2h2v-2h2V8h2V6h2V4h2V2zm8 26h-2v2h-2v2h-2v2h8v-2h2v-2h2v-2h2v-2h2v-2h2v-2h2v-2h2v-2h2v-2h2v-2h2v-2h2v-2h2V8h2V6h2V4h2V2h-8v2h-2v2h-2v2h-2v2h-2v2h-2v2h-2v2h-2v2h-2v2h-2v2h-2v2h-2v2h-2v2z"
+        fill="#fff"/>
 </svg>
