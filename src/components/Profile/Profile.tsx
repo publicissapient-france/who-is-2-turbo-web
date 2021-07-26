@@ -103,7 +103,9 @@ export const Profile = () => {
 
   const onLastnameChange = (event: ChangeEvent<HTMLInputElement>) => setUiProfile({ ...uiProfile, lastName: event.target.value, lastNameError: false });
 
-  const onGenderChange = (event: ChangeEvent<HTMLInputElement>) => setUiProfile({ ...uiProfile, gender: event.target.value });
+  const onGenderChange = (event: ChangeEvent<HTMLInputElement>) => setUiProfile({ ...uiProfile, gender: getGender(event) });
+
+  const getGender = (event: React.ChangeEvent<HTMLInputElement>) => event.target.value === 'MALE' ? 'MALE' : 'FEMALE';
 
   const loadImageFromFileSystem = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length) {
@@ -150,7 +152,7 @@ export const Profile = () => {
     }
   }
 
-  const updatedBanner = <div className="bg-[#6FCF97] font-game text-white text-center text-xs px-4 py-3 absolute z-10">Profile updated successfully!</div>;
+  const updatedBanner = <div className="w-full bg-[#6FCF97] font-game text-white text-center text-xs px-4 py-3 absolute z-10">Profile updated successfully!</div>;
 
   return (
     <main className="mb-4 lg:mb-12 h-screen">
