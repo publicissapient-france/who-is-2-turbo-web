@@ -29,6 +29,7 @@ jobs:
           GATSBY_ALLOWED_DOMAIN: ${{ secrets.GATSBY_ALLOWED_DOMAIN }}
           GATSBY_HELLO_EMAIL: ${{ secrets.GATSBY_HELLO_EMAIL }}
           GATSBY_API_URL: ${{ secrets.GATSBY_API_URL }}
+          GATSBY_FIREBASE_ANALYTICS: ${{ secrets.GATSBY_FIREBASE_ANALYTICS }}
       - name: Archive Production Artifact
         uses: actions/upload-artifact@master
         with:
