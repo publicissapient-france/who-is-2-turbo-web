@@ -1,9 +1,21 @@
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
+
 module.exports = {
   plugins: [
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-image',
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
+    {
+      resolve: 'gatsby-plugin-google-gtag',
+      options: {
+        trackingIds: [
+          process.env.GATSBY_FIREBASE_ANALYTICS,
+        ],
+      }
+    },
     {
       resolve: 'gatsby-source-filesystem',
       options: {
