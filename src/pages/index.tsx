@@ -62,7 +62,7 @@ const IndexPage = () => {
         <Input
           value={email}
           onChange={onEmailChange}
-          placeholder="jd@mail.com"
+          placeholder={`bob@${process.env.GATSBY_ALLOWED_DOMAIN}`}
           type="email"
           autoComplete="email"
           autoFocus={true}

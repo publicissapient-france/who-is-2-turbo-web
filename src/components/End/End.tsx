@@ -18,11 +18,14 @@ export const End: FunctionComponent<EndPropTypes> = ({ location }) => {
         <Link to="/app/play/" replace>
           <Button>Play again!</Button>
         </Link>
+        <Link to="/app/leaderboard/" replace>
+          <Button>Leaderboard</Button>
+        </Link>
         <Link to="/app/gallery/" replace>
           <Button>Gallery</Button>
         </Link>
         <Link to="/" replace>
-          <span className="text-[#D3D4E9] font-game text-xs mt-6 block">Home</span>
+          <span className="text-[#D3D4E9] font-game text-xs mt-6 block">Back to Home</span>
         </Link>
       </div>
     </main>
