@@ -117,22 +117,12 @@ export const Profile = () => {
   const checkPictureRatioIs4_3 = (rawPicture: File, objectUrl: string) => {
     const image = document.createElement("img");
     image.onload = () => {
-      const width = image.naturalWidth;
-      const height = image.naturalHeight;
-      const ratio4_3 = height / width > 1.33 && height / width < 1.34;
-      if (ratio4_3) {
-        encodeImageToBase64Webp(objectUrl);
-      } else {
-        setUiProfile({
-          ...uiProfile,
-          pictureError: true
-        })
-      }
+      cropAndEncodeImageToBase64Webp(objectUrl);
     }
     image.src = objectUrl;
   }
 
-  const encodeImageToBase64Webp = async (objectUrl: string) => {
+  const cropAndEncodeImageToBase64Webp = async (objectUrl: string) => {
     const image: HTMLImageElement = await new Promise((resolve) => {
       const rawImage = new Image();
       rawImage.addEventListener('load', () => resolve(rawImage));
@@ -141,12 +131,27 @@ export const Profile = () => {
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
     if (ctx) {
-      canvas.width = image.width;
-      canvas.height = image.height;
-      ctx.drawImage(image, 0, 0);
+      if (image.height * 3 / 4 > image.width) {
+        canvas.height = image.width * 4 / 3;
+        canvas.width = image.width;
+        ctx.drawImage(image,
+          0, (image.height - image.width * 4 / 3) / 2,
+          canvas.width, canvas.height,
+          0, 0,
+          canvas.width, canvas.height
+        );
+      } else {
+        canvas.height = image.height;
+        canvas.width = image.height * 3 / 4;
+        ctx.drawImage(image,
+          (image.width - image.height * 3 / 4) / 2, 0,
+          canvas.width, canvas.height,
+          0, 0,
+          canvas.width, canvas.height
+        );
+      }
       setUiProfile({
         ...uiProfile,
-        preview: objectUrl,
         picture: canvas.toDataURL('image/webp')
       });
     }
@@ -167,7 +172,7 @@ export const Profile = () => {
                 <img className="invisible w-full"
                      src={ProfileImageChange}
                      alt="user's background"/>
-                <img className="absolute inset-0 w-full mt-3"
+                <img className="absolute inset-0 w-full p-[10px] mt-[2px]"
                      src={uiProfile.preview || uiProfile.picture}
                      alt="user's picture"/>
                 <img className="absolute inset-0 w-full"
