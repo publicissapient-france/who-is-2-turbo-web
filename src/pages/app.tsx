@@ -7,8 +7,10 @@ import { PageProps } from 'gatsby';
 import { Gallery } from '../components/Gallery/Gallery';
 import { Leaderboard } from "../components/Leaderboard/Leaderboard";
 import { Profile } from "../components/Profile/Profile";
+import { PlayChoice } from "../components/PlayChoice/PlayChoice";
 
-const PlayPage = (_props: RouteComponentProps) => <PrivateRoute component={Play}/>;
+const PlayChoicePage = (_props: RouteComponentProps) => <PrivateRoute component={PlayChoice}/>;
+const PlayPage = (props: RouteComponentProps) => <PrivateRoute component={Play} {...props}/>;
 const GalleryPage = (_props: RouteComponentProps) => <PrivateRoute component={Gallery}/>;
 const LeaderboardPage = (_props: RouteComponentProps) => <PrivateRoute component={Leaderboard}/>;
 const EndPage = (props: RouteComponentProps) => <PrivateRoute component={End} {...props}/>;
@@ -17,6 +19,7 @@ const ProfilePage = (_props: RouteComponentProps) => <PrivateRoute component={Pr
 const App: FunctionComponent<PageProps> = ({ location }) => (
   <>
     <Router>
+      <PlayChoicePage path="/app/play-choice"/>
       <PlayPage path="/app/play"/>
       <GalleryPage path="/app/gallery"/>
       <LeaderboardPage path="/app/leaderboard"/>

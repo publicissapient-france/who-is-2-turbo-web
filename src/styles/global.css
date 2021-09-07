@@ -11,6 +11,10 @@
     .text-shadow-2 {
       text-shadow: 0 6px 0 #373BD3;
     }
+
+    .text-shadow-3 {
+      text-shadow: 0 2px 0 #FCC739;
+    }
   }
 }
 

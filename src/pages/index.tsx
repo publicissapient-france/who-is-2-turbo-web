@@ -73,7 +73,7 @@ const IndexPage = () => {
         </div>
       </form>}
       {logged && <div className="px-4 flex flex-col">
-        <Link to="/app/play">
+        <Link to="/app/play-choice">
           <Button>Play!</Button>
         </Link>
         <Link to="/app/profile">
