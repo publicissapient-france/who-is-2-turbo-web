@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useEffect, useState } from 'react';
+import { FunctionComponent, useEffect, useState } from 'react';
 import { navigate } from 'gatsby';
 import { getGame, getScore, TQuestion } from '../../services/game';
 import { Question } from '../Question/Question';
@@ -7,7 +7,12 @@ import { Metadata } from '../Metadata/Metadata';
 import { Toolbar } from "../Toolbar/Toolbar";
 import { Loading } from "../Loading/Loading";
 
-export const Play = () => {
+interface PlayPropTypes {
+  location: Location
+}
+
+export const Play: FunctionComponent<PlayPropTypes> = ({ location }) => {
+  const query = new URLSearchParams(location.search);
   const [position, setPosition] = useState(0);
   const [questions, setQuestions] = useState<TQuestion[]>([]);
   const [gameId, setGameId] = useState<string>('');
@@ -15,7 +20,7 @@ export const Play = () => {
 
   useEffect(() => {
     const loadGame = async () => {
-      const { id, questions } = await getGame();
+      const { id, questions } = await getGame(parseInt(query.get('series') || '5', 10));
       setQuestions(questions);
       setGameId(id);
       setLoading(false);
