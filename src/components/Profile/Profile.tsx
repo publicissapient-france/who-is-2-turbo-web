@@ -7,12 +7,12 @@ import ProfileImageAdd from "../../images/profile-image-add.svg";
 import { getProfile, ProfileEntity, setProfile } from "../../services/profile";
 import { Loading } from "../Loading/Loading";
 import ProfileImageChange from "../../images/profile-image-change.png";
+import { Message } from "../Message/Message";
 
 interface UiProfile extends ProfileEntity {
   firstNameError?: boolean
   lastNameError?: boolean
   preview?: string
-  pictureError?: boolean
   loading: boolean
   updated: boolean
   isNewUser: boolean
@@ -35,7 +35,6 @@ export const Profile = () => {
             ...await getProfile(),
             firstNameError: false,
             lastNameError: false,
-            pictureError: false,
             loading: false,
             updated: false,
             isNewUser: false,
@@ -49,7 +48,6 @@ export const Profile = () => {
               gender: 'FEMALE',
               firstNameError: false,
               lastNameError: false,
-              pictureError: false,
               loading: false,
               updated: false,
               isNewUser: true,
@@ -95,7 +93,7 @@ export const Profile = () => {
         isNewUser: false,
       })
     } else {
-      setUiProfile({ ...uiProfile, firstNameError, lastNameError, pictureError })
+      setUiProfile({ ...uiProfile, firstNameError, lastNameError })
     }
   }
 
@@ -165,6 +163,9 @@ export const Profile = () => {
       {!uiProfile.loading ? <>
         <Toolbar title="Profile" buttonLabel="Back"/>
         {uiProfile.updated && updatedBanner}
+        <section className="my-6 flex justify-center">
+          <Message/>
+        </section>
         <section className="flex flex-col container mx-auto text-center justify-center items-center mt-8">
           <label htmlFor="load-picture">
             {uiProfile.preview || uiProfile.picture ?
@@ -181,10 +182,6 @@ export const Profile = () => {
               </div> :
               <img src={ProfileImageAdd} alt="add an image caption"/>}
           </label>
-          {uiProfile.pictureError &&
-          <p className="mx-auto text-left max-w-sm text-red-500 text-xs leading-tight mt-2">
-            Picture should have ratio 4/3.
-          </p>}
           <input
             id="load-picture"
             type="file"
