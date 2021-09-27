@@ -1,29 +1,30 @@
-import bgButton from '../../images/bg-big-button.svg';
-import bgLeftButton from '../../images/bg-big-left-button.svg';
-import bgRightButton from '../../images/bg-big-right-button.svg';
+import cardL from '../../images/card-left.svg';
+import cardR from '../../images/card-right.svg';
 import React, { FunctionComponent } from 'react';
+import { Button } from "./Button";
+import { Link } from 'gatsby';
+import icLeaderboard from "../../images/ic-leaderboard.svg";
+import icPlay from "../../images/ic-play.svg";
 
 type BigButtonPropTypes = {
   series: number
 }
 
 export const SeriesButton: FunctionComponent<BigButtonPropTypes> = ({ series }) => (
-  <button type="button" className="relative w-full font-game text-[10px] relative max-w-[298px] focus:outline-none flex">
-    <div className="flex">
-      <img src={bgLeftButton}/>
-      <img src={bgButton} alt="button background"/>
-      <img src={bgRightButton}/>
+  <div className="flex h-40">
+    <img src={cardL} className="h-full"/>
+    <div className="bg-blue-3 flex flex-col text-left px-4 justify-center flex-grow">
+      <p className="font-game text-tlg text-yellow-3 text-shadow-3">Series {series}</p>
+      <p className="text-white text-sm mt-1">Match {series} faces to their names</p>
+      <div className="mt-4 flex gap-x-4">
+        <Link to={`/app/leaderboard?series=${series}`}>
+          <Button icon={icLeaderboard}/>
+        </Link>
+        <Link to={`/app/play?series=${series}`} className="flex-grow">
+          <Button wide primary icon={icPlay}>Play!</Button>
+        </Link>
+      </div>
     </div>
-    <span className="absolute w-full">
-      <span className="relative flex justify-between items-center h-[102px] px-4">
-        <span className="flex flex-col items-start justify-center">
-          <span className="font-game text-base text-[#1F23AD] text-shadow-3">Series {series}</span>
-          <span className="text-[#5256E0] font-text text-sm">Match {series} faces to their names</span>
-        </span>
-        <svg width="16" height="10" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M10 0H12V2H14V4H16V6H14V8H12V10H10V8H12V6H0V4H12V2H10V0Z" fill="#5256E0"/>
-        </svg>
-      </span>
-    </span>
-  </button>
+    <img src={cardR} className="h-full"/>
+  </div>
 );

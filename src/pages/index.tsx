@@ -3,9 +3,10 @@ import { Link, navigate } from 'gatsby';
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { Button } from '../components/Button/Button';
 import { getFirebase, setEnteredEmail } from '../services/firebase';
-import Logo from '../images/logo.png';
+import Logo from '../images/logo.svg';
 import { Metadata } from '../components/Metadata/Metadata';
 import { Input } from "../components/Input/Input";
+import icPlay from "../images/ic-play.svg";
 
 const IndexPage = () => {
   const [email, setEmail] = useState('');
@@ -54,36 +55,44 @@ const IndexPage = () => {
   };
 
   return (
-    <main className="flex flex-col container mx-auto text-center justify-center items-center md:h-screen mt-12 md:-mt-12">
+    <main className="flex flex-col container mx-auto justify-center items-center md:h-screen mt-20 md:-mt-20 px-6 max-w-screen-sm">
       <Metadata/>
-      <h1 className="font-game mb-2 text-sm md:text-base text-[#F0AF00] text-shadow">Welcome to</h1>
-      <img className="mb-8" width={195} height={148} src={Logo} alt="whois's logo"/>
-      {!logged && <form className="w-full px-4">
+      {!logged && <h2 className="font-game text-tlg text-yellow-3 text-shadow">Welcome to</h2>}
+      <img className="mb-8" src={Logo} alt="whois's logo"/>
+      {!logged && <form className="w-full mt-6">
         <Input
+          label="Email"
+          wide
           value={email}
           onChange={onEmailChange}
-          placeholder={`bob@${process.env.GATSBY_ALLOWED_DOMAIN}`}
+          placeholder={`bob${process.env.GATSBY_ALLOWED_DOMAIN}`}
           type="email"
           autoComplete="email"
           autoFocus={true}
+          error={!valid}
+          errorMessage={`Only ${process.env.GATSBY_ALLOWED_DOMAIN} users are allowed to sign-in.`}
         />
-        {!valid && <p className="mx-auto text-left max-w-sm text-red-500 text-xs leading-tight mt-2">Only {process.env.GATSBY_ALLOWED_DOMAIN} users are allowed to sign-in.</p>}
         <div className="mt-4">
-          <Button submit onClick={signIn}>Sign in</Button>
+          <Button
+            submit
+            onClick={signIn}
+            wide
+            primary
+          >Sign in</Button>
         </div>
       </form>}
-      {logged && <div className="px-4 flex flex-col">
+      {logged && <div className="w-full flex flex-col mt-6 gap-y-2">
         <Link to="/app/play-choice">
-          <Button>Play!</Button>
+          <Button wide primary icon={icPlay}>Play</Button>
         </Link>
         <Link to="/app/profile">
-          <Button>Edit profile</Button>
+          <Button wide>Edit profile</Button>
         </Link>
         <Link to="/app/gallery">
-          <Button>Gallery</Button>
+          <Button wide>Gallery</Button>
         </Link>
         <Link to="/app/leaderboard">
-          <Button>Leaderboard</Button>
+          <Button wide>Leaderboard</Button>
         </Link>
       </div>}
     </main>

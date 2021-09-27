@@ -1,24 +1,36 @@
 import React from "react";
-import BgInput from "../../images/bg-input.svg";
+import inputBody from "../../images/input-body.svg";
+import inputLeft from "../../images/input-left.svg";
+import inputRight from "../../images/input-right.svg";
 
 type InputPropTypes = {
-  value: string,
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
-  placeholder: string,
-  type: string,
-  autoComplete: string,
-  autoFocus: boolean
+  value: string;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  placeholder: string;
+  type: string;
+  autoComplete: string;
+  autoFocus: boolean;
+  wide?: boolean;
+  label?: string;
+  errorMessage?: string;
+  error?: boolean;
 };
 
-export const Input = ({ autoComplete, autoFocus, onChange, placeholder, type, value }: InputPropTypes) =>
-  <div className="relative">
-    <input className="mx-auto max-w-[288px] w-full bg-[#1F23A0] inset-0 p-2 absolute bg-transparent outline-none"
-           placeholder={placeholder}
-           required
-           type={type}
-           value={value}
-           autoComplete={autoComplete}
-           autoFocus={autoFocus}
-           onChange={onChange}/>
-    <img src={BgInput} alt="button background" className="mx-auto w-full max-w-[288px]"/>
-  </div>;
+export const Input = ({ autoComplete, autoFocus, onChange, placeholder, type, value, wide, label, error, errorMessage }: InputPropTypes) =>
+  <>
+    {label && <label className="text-sm text-white -mb-2">{label}<sup>*</sup></label>}
+    <span className={`flex ${wide && 'w-full'}`}>
+      <img src={inputLeft}/>
+      <input className={`bg-[#1F23A0] p-2 outline-none ${wide && 'flex-grow'}`}
+             placeholder={placeholder}
+             required
+             type={type}
+             value={value}
+             autoComplete={autoComplete}
+             autoFocus={autoFocus}
+             onChange={onChange}
+             style={{ backgroundImage: `url(${inputBody})` }}/>
+      <img src={inputRight}/>
+    </span>
+    {error && <span className="text-red-4 text-xs -mt-2">{errorMessage}</span>}
+  </>

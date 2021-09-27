@@ -28,10 +28,10 @@ export const Leaderboard = () => {
       <Metadata/>
       {!isLoading ? <>
         <Toolbar title="Leaderboard" buttonLabel="Back"/>
-        <section className="my-6 flex text-center justify-center">
+        <section className="my-6 flex justify-center">
           <Message actionLabel="Create profile" actionLink="/app/profile"/>
         </section>
-        <section className="font-game h-screen max-w-md mx-auto md:mt-8">
+        <section className="font-game h-screen max-w-screen-sm mx-auto md:mt-8">
           <div className="px-4 grid grid-cols-4 md:grid-cols-6 gap-4 text-xs h-10 items-center text-white uppercase bg-[#060968]">
             <div>rank</div>
             <div className="col-span-2 md:col-span-4">player</div>

@@ -9,7 +9,7 @@ type QuestionPropTypes = TQuestion & {
 }
 
 export const Question = ({ picture, answers, onAnswer }: QuestionPropTypes) => (
-  <div className="flex flex-col items-center lg:flex-row lg:gap-12">
+  <div className="flex flex-col">
     <div>
       <div className="relative h-[251px] w-[288px] mb-4 md:hidden">
         <img className="absolute inset-0 mx-auto rounded mt-5" src={picture} alt="user's picture" height={186} width={141}/>
@@ -20,10 +20,10 @@ export const Question = ({ picture, answers, onAnswer }: QuestionPropTypes) => (
         <img className="absolute inset-0" src={bgGameMd} alt="game's retro background" height={449} width={434}/>
       </div>
     </div>
-    <div className="text-center w-[288px]">
-      {answers.map((answer, id) => (
-        <Button onClick={() => onAnswer(id)} key={id}>{answer.firstName} {answer.lastName}</Button>
-      ))}
-    </div>
+    {answers.map((answer, id) => (
+      <div className="mb-2">
+        <Button wide onClick={() => onAnswer(id)} key={id}>{answer.firstName} {answer.lastName}</Button>
+      </div>
+    ))}
   </div>
 );
