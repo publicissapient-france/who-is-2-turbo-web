@@ -17,10 +17,10 @@ export const SeriesButton: FunctionComponent<BigButtonPropTypes> = ({ series }) 
       <p className="font-game text-tlg text-yellow-3 text-shadow-3">Series {series}</p>
       <p className="text-white text-sm mt-1">Match {series} faces to their names</p>
       <div className="mt-4 flex gap-x-4">
-        <Link to={`/app/leaderboard?series=${series}`}>
+        <Link to={`/app/leaderboard?series=${series}`} replace>
           <Button icon={icLeaderboard}/>
         </Link>
-        <Link to={`/app/play?series=${series}`} className="flex-grow">
+        <Link to={`/app/play?series=${series}`} className="flex-grow" replace>
           <Button wide primary icon={icPlay}>Play!</Button>
         </Link>
       </div>
