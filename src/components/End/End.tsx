@@ -15,7 +15,7 @@ export const End: FunctionComponent<EndPropTypes> = ({ location }) => {
       <Metadata/>
       <div className="text-center flex flex-col justify-center md:h-4/5 mx-auto max-w-screen-sm">
         <h1 className="mt-6 mb-4 font-game text-tlg text-yellow-3 text-shadow">Your score!</h1>
-        <span className="font-game text-[48px] text-shadow-2 text-white mb-14">{query.get('score')}/{query.get('count')}</span>
+        <span className="font-game text-[48px] text-shadow-2 text-white mb-16 mt-6">{query.get('score')}/{query.get('count')}</span>
         <Link className="mb-2" to="/app/play-choice" replace>
           <Button wide primary icon={icPlay}>Play again!</Button>
         </Link>
