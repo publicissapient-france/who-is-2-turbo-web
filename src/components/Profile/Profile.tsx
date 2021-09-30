@@ -166,7 +166,7 @@ export const Profile = () => {
         <section className="m-6 flex md:mx-auto max-w-screen-sm">
           <Message/>
         </section>
-        <section className="flex flex-col container md:mx-auto justify-center items-center mt-8 max-w-screen-sm">
+        <section className="flex flex-col container mx-auto justify-center items-center mt-8 max-w-screen-sm">
           <label htmlFor="load-picture">
             {uiProfile.preview || uiProfile.picture ?
               <div className="relative w-[142px]">
