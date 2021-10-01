@@ -10,15 +10,15 @@ interface MessageProps {
 }
 
 export const Message: FunctionComponent<MessageProps> = ({ actionLabel, actionLink }) => (
-  <span className="flex w-72">
+  <span className="flex w-full max-w-screen-sm">
     <img src={BgMessageLeft} className="h-full"/>
-      <span className="flex flex-col border-t-2 border-b-2 border-[#5256E0] pt-2">
-        <span className="flex items-center">
-          <img src={HintImage} className="ml-2 mr-3"/>
-          <span className="leading-5 text-white text-left">Create your profile to appear in the game and in the leaderboard!</span>
-        </span>
-        {actionLabel && actionLink && <Link replace to={actionLink} className="text-right p-3 text-[#F0AF00]">{actionLabel}</Link>}
+    <span className="flex border-t-2 border-b-2 border-blue-3 pt-2 items-center pb-2 flex-grow">
+      <img src={HintImage} className="ml-2 mr-3 h-7"/>
+      <span className="py-3">
+        <span className="leading-5 text-white text-left">Create your profile to appear in the game and in the leaderboard!</span>
+        {actionLabel && actionLink && <div className="mt-2 text-right px-3 text-yellow-3"><Link replace to={actionLink}>{actionLabel}</Link></div>}
       </span>
+    </span>
     <img src={BgMessageRight} className="h-full"/>
   </span>
 );

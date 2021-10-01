@@ -155,18 +155,18 @@ export const Profile = () => {
     }
   }
 
-  const updatedBanner = <div className="w-full bg-[#6FCF97] font-game text-white text-center text-xs px-4 py-3 absolute z-10">Profile updated successfully!</div>;
+  const updatedBanner = <div className="w-full bg-green-3 font-game text-blue-1 text-center text-txs px-4 py-3 absolute z-10">Profile updated successfully!</div>;
 
   return (
-    <main className="mb-4 lg:mb-12 h-screen">
+    <main className="mb-4 lg:mb-12">
       <Metadata/>
       {!uiProfile.loading ? <>
         <Toolbar title="Profile" buttonLabel="Back"/>
         {uiProfile.updated && updatedBanner}
-        <section className="my-6 flex justify-center">
+        <section className="m-6 flex md:mx-auto max-w-screen-sm">
           <Message/>
         </section>
-        <section className="flex flex-col container mx-auto text-center justify-center items-center mt-8">
+        <section className="flex flex-col container mx-auto justify-center items-center mt-8 max-w-screen-sm">
           <label htmlFor="load-picture">
             {uiProfile.preview || uiProfile.picture ?
               <div className="relative w-[142px]">
@@ -188,8 +188,8 @@ export const Profile = () => {
             className="hidden"
             onChange={loadImageFromFileSystem}
           />
-          <form action="" className="flex flex-col gap-4 mt-8">
-            <div className="grid grid-cols-2 text-white" onChange={onGenderChange}>
+          <form action="" className="flex flex-col gap-4 mt-8 w-full px-6 md:px-0">
+            <div className="flex gap-x-8 text-white mb-4" onChange={onGenderChange}>
               <label>
                 <input type="radio" name="gender" value="FEMALE" defaultChecked={uiProfile.gender === 'FEMALE'}/>
                 <span className="ml-2">Female</span>
@@ -199,22 +199,39 @@ export const Profile = () => {
                 <span className="ml-2">Male</span>
               </label>
             </div>
-            <div>
-              <Input value={uiProfile.firstName} autoComplete="given-name" placeholder="John" type="text" autoFocus={true} onChange={onFirstnameChange}/>
-              {uiProfile.firstNameError &&
-              <p className="mx-auto text-left max-w-sm text-red-500 text-xs leading-tight mt-2">
-                Firstname should have length above 1.
-              </p>}
-            </div>
-            <div>
-              <Input value={uiProfile.lastName} autoComplete="family-name" placeholder="Doe" type="text" autoFocus={false} onChange={onLastnameChange}/>
-              {uiProfile.lastNameError &&
-              <p className="mx-auto text-left max-w-sm text-red-500 text-xs leading-tight mt-2">
-                Lastname should have length above 1.
-              </p>}
-            </div>
-            <div>
-              <Button submit onClick={updateProfile}>Save profile</Button>
+            <Input
+              label="Firstname"
+              wide
+              value={uiProfile.firstName}
+              autoComplete="given-name"
+              placeholder="John"
+              type="text"
+              autoFocus={true}
+              onChange={onFirstnameChange}
+              errorMessage="Firstname should have at least one character."
+              error={uiProfile.firstNameError}
+            />
+            <Input
+              label="Lastname"
+              wide
+              value={uiProfile.lastName}
+              autoComplete="family-name"
+              placeholder="Doe"
+              type="text"
+              autoFocus={false}
+              onChange={onLastnameChange}
+              errorMessage="Lastname should have at least one character."
+              error={uiProfile.lastNameError}
+            />
+            <div className="mt-6">
+              <Button
+                submit
+                wide
+                primary
+                onClick={updateProfile}
+              >
+                Save profile
+              </Button>
             </div>
           </form>
         </section>

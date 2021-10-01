@@ -13,12 +13,16 @@
     }
 
     .text-shadow-3 {
-      text-shadow: 0 2px 0 #FCC739;
+      text-shadow: 0 2px 0 #1F23AD;
     }
   }
 }
 
 body {
-  background-color: #1F23A0;
+  background-color: #1F23AD;
   font-family: Roboto Mono, serif;
+  user-select: none;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: -.6px;
 }
