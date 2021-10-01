@@ -13,6 +13,7 @@ interface PlayPropTypes {
 
 export const Play: FunctionComponent<PlayPropTypes> = ({ location }) => {
   const query = new URLSearchParams(location.search);
+  const gameType = parseInt(query.get('series') || '5', 10)
   const [position, setPosition] = useState(0);
   const [questions, setQuestions] = useState<TQuestion[]>([]);
   const [gameId, setGameId] = useState<string>('');
@@ -20,7 +21,7 @@ export const Play: FunctionComponent<PlayPropTypes> = ({ location }) => {
 
   useEffect(() => {
     const loadGame = async () => {
-      const { id, questions } = await getGame(parseInt(query.get('series') || '5', 10));
+      const { id, questions } = await getGame(gameType);
       setQuestions(questions);
       setGameId(id);
       setLoading(false);
@@ -45,7 +46,7 @@ export const Play: FunctionComponent<PlayPropTypes> = ({ location }) => {
       {loading
         ? <Loading/>
         : <>
-          <Toolbar title="Series 5" buttonLabel="Abort"/>
+          <Toolbar title={`Series ${gameType}`} buttonLabel="Abort"/>
           <section className="md:flex md:h-4/5 md:justify-center md:items-center">
             <div className="mt-4 flex flex-col items-center">
               {questions[position] && <Question key={questions[position].picture} {...questions[position]} onAnswer={onAnswer}/>}
