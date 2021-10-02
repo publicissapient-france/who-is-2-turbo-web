@@ -10,6 +10,7 @@ export const LeaderboardRow = (props: { rank: number, player: LeaderboardUser })
       <span>{props.player.lastName}</span>
     </div>
     <div className="text-right">
-      {props.player.score}
+      <span className="text-base font-text text-grey-4 mr-4 -mt-2">{Math.round(props.player.score.time / 1000)}s</span>
+      <span className="text-txs text-white align-bottom">{props.player.score.count}</span>
     </div>
   </div>;

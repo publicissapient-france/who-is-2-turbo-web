@@ -8,9 +8,12 @@ import { LeaderboardRow } from "./LeaderboardRow";
 import { Message } from "../Message/Message";
 
 export interface LeaderboardUser {
-  firstName: string
-  lastName: string
-  score: number
+  firstName: string;
+  lastName: string;
+  score: {
+    count: number;
+    time: number;
+  }
 }
 
 const useLeaderboard = () => {
