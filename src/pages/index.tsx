@@ -91,9 +91,6 @@ const IndexPage = () => {
         <Link to="/app/gallery">
           <Button wide>Gallery</Button>
         </Link>
-        <Link to="/app/leaderboard">
-          <Button wide>Leaderboard</Button>
-        </Link>
       </div>}
     </main>
   );

@@ -19,7 +19,7 @@ export const End: FunctionComponent<EndPropTypes> = ({ location }) => {
         <Link className="mb-2" to="/app/play-choice" replace>
           <Button wide primary icon={icPlay}>Play again!</Button>
         </Link>
-        <Link className="mb-2" to="/app/leaderboard" replace>
+        <Link className="mb-2" to={`/app/leaderboard?series=${query.get('series')}`} replace>
           <Button wide>Leaderboard</Button>
         </Link>
         <Link className="mb-2" to="/app/gallery" replace>

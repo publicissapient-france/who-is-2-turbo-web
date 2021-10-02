@@ -16,8 +16,8 @@ export interface LeaderboardUser {
   }
 }
 
-const useLeaderboard = () => {
-  const { data } = useSWR(`/members/leaderboard`, fetcher);
+const useLeaderboard = (type: number) => {
+  const { data } = useSWR(`/members/leaderboard?gameType=SERIES_${type}`, fetcher);
   return {
     leaderboard: data,
     isLoading: !data
@@ -25,7 +25,9 @@ const useLeaderboard = () => {
 }
 
 export const Leaderboard = () => {
-  const { leaderboard, isLoading } = useLeaderboard();
+  const query = new URLSearchParams(location.search);
+  const gameType = parseInt(query.get('series') || '5', 10)
+  const { leaderboard, isLoading } = useLeaderboard(gameType);
   return (
     <main>
       <Metadata/>
