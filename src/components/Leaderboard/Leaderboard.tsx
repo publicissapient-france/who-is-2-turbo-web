@@ -37,6 +37,7 @@ export const Leaderboard = () => {
           <Message actionLabel="Create profile" actionLink="/app/profile"/>
         </section>
         <section className="font-game h-screen max-w-screen-sm mx-auto md:mt-8">
+          <h1 className="font-game text-tsm text-yellow-3 text-shadow text-center mb-6">Series {gameType}</h1>
           <div className="px-4 grid grid-cols-4 md:grid-cols-6 gap-4 text-xs h-10 items-center text-white uppercase bg-[#060968]">
             <div>rank</div>
             <div className="col-span-2 md:col-span-4">player</div>
