@@ -33,7 +33,7 @@ export const Leaderboard = () => {
       <Metadata/>
       {!isLoading ? <>
         <Toolbar title="Leaderboard" buttonLabel="Back"/>
-        <section className="my-6 flex justify-center">
+        <section className="m-6 flex justify-center">
           <Message actionLabel="Create profile" actionLink="/app/profile"/>
         </section>
         <section className="font-game h-screen max-w-screen-sm mx-auto md:mt-8">

@@ -12,7 +12,7 @@ type BigButtonPropTypes = {
 
 export const SeriesButton: FunctionComponent<BigButtonPropTypes> = ({ series }) => (
   <div className="flex h-40">
-    <img src={cardL} className="h-full"/>
+    <span style={{ backgroundImage: `url(${cardL})` }} className="w-2 h-40 block bg-cover"/>
     <div className="bg-blue-3 flex flex-col text-left px-4 justify-center flex-grow">
       <p className="font-game text-tlg text-yellow-3 text-shadow-3">Series {series}</p>
       <p className="text-white text-sm mt-1">Match {series} faces to their names</p>
@@ -25,6 +25,6 @@ export const SeriesButton: FunctionComponent<BigButtonPropTypes> = ({ series }) 
         </Link>
       </div>
     </div>
-    <img src={cardR} className="h-full"/>
+    <span style={{ backgroundImage: `url(${cardR})` }} className="w-2 h-40 block bg-cover"/>
   </div>
 );
