@@ -11,8 +11,8 @@ import { PlayChoice } from "../components/PlayChoice/PlayChoice";
 
 const PlayChoicePage = (_props: RouteComponentProps) => <PrivateRoute component={PlayChoice}/>;
 const PlayPage = (props: RouteComponentProps) => <PrivateRoute component={Play} {...props}/>;
-const GalleryPage = (_props: RouteComponentProps) => <PrivateRoute component={Gallery}/>;
-const LeaderboardPage = (_props: RouteComponentProps) => <PrivateRoute component={Leaderboard}/>;
+const GalleryPage = (props: RouteComponentProps) => <PrivateRoute component={Gallery} {...props}/>;
+const LeaderboardPage = (props: RouteComponentProps) => <PrivateRoute component={Leaderboard} {...props}/>;
 const EndPage = (props: RouteComponentProps) => <PrivateRoute component={End} {...props}/>;
 const ProfilePage = (_props: RouteComponentProps) => <PrivateRoute component={Profile}/>;
 

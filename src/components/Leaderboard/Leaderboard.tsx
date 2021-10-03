@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import { Metadata } from "../Metadata/Metadata";
 import { Toolbar } from "../Toolbar/Toolbar";
 import useSWR from "swr";
@@ -25,7 +25,7 @@ const useLeaderboard = (type: number) => {
   }
 }
 
-export const Leaderboard = () => {
+export const Leaderboard: FunctionComponent<{ location: Location }> = ({ location }) => {
   const query = new URLSearchParams(location.search);
   const gameType = parseInt(query.get('series') || '5', 10)
   const { leaderboard, isLoading } = useLeaderboard(gameType);
@@ -33,7 +33,7 @@ export const Leaderboard = () => {
     <main>
       <Metadata/>
       {!isLoading ? <>
-        <Toolbar title="Leaderboard" buttonLabel="Back"/>
+        <Toolbar title="Leaderboard" buttonLabel="Back" link={location.state.from}/>
         {!isProfileCompleted() && <section className="m-6 flex justify-center">
           <Message actionLabel="Create profile" actionLink="/app/profile"/>
         </section>}

@@ -21,8 +21,8 @@ export const Question = ({ picture, answers, onAnswer }: QuestionPropTypes) => (
       </div>
     </div>
     {answers.map((answer, id) => (
-      <div className="mb-2">
-        <Button wide onClick={() => onAnswer(id)} key={id}>{answer.firstName} {answer.lastName}</Button>
+      <div className="mb-2" key={id}>
+        <Button wide onClick={() => onAnswer(id)}>{answer.firstName} {answer.lastName}</Button>
       </div>
     ))}
   </div>
