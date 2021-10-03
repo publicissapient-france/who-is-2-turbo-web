@@ -18,3 +18,9 @@ export const setProfile: (isNewUser: boolean, profile: ProfileEntity) => Promise
     url: '/members/me',
     data: profile,
   });
+
+const PROFILE_COMPLETED_KEY = 'profileCompleted';
+
+export const setProfileCompleted = () => localStorage.setItem(PROFILE_COMPLETED_KEY, 'y');
+
+export const isProfileCompleted = () => localStorage.getItem(PROFILE_COMPLETED_KEY) != null;

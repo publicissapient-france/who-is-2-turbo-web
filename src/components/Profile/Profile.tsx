@@ -4,7 +4,7 @@ import { Toolbar } from "../Toolbar/Toolbar";
 import { Input } from "../Input/Input";
 import { Button } from "../Button/Button";
 import ProfileImageAdd from "../../images/profile-image-add.svg";
-import { getProfile, ProfileEntity, setProfile } from "../../services/profile";
+import { getProfile, ProfileEntity, setProfile, setProfileCompleted } from "../../services/profile";
 import { Loading } from "../Loading/Loading";
 import ProfileImageChange from "../../images/profile-image-change.png";
 import { Message } from "../Message/Message";
@@ -39,6 +39,7 @@ export const Profile = () => {
             updated: false,
             isNewUser: false,
           });
+          setProfileCompleted();
         } catch (error) {
           const unknownUser = error && error.response && error.response.status === 404;
           if (unknownUser) {
@@ -92,6 +93,7 @@ export const Profile = () => {
         updated: true,
         isNewUser: false,
       })
+      setProfileCompleted();
     } else {
       setUiProfile({ ...uiProfile, firstNameError, lastNameError })
     }
@@ -163,9 +165,9 @@ export const Profile = () => {
       {!uiProfile.loading ? <>
         <Toolbar title="Profile" buttonLabel="Back"/>
         {uiProfile.updated && updatedBanner}
-        <section className="m-6 flex md:mx-auto max-w-screen-sm">
+        {uiProfile.isNewUser && <section className="m-6 flex md:mx-auto max-w-screen-sm">
           <Message/>
-        </section>
+        </section>}
         <section className="flex flex-col container mx-auto justify-center items-center mt-8 max-w-screen-sm">
           <label htmlFor="load-picture">
             {uiProfile.preview || uiProfile.picture ?
