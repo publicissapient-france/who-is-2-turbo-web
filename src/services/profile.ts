@@ -4,7 +4,16 @@ export interface ProfileEntity {
   firstName: string
   lastName: string
   gender: 'FEMALE' | 'MALE'
+  capability?: string
   picture?: string
+}
+
+export enum Capability {
+  STRATEGY = 1,
+  PRODUCT,
+  ENGINEERING,
+  EXPERIENCE,
+  DATA,
 }
 
 export const getProfile: () => Promise<ProfileEntity> = async () => {

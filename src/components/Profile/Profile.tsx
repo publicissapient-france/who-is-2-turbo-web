@@ -4,10 +4,12 @@ import { Toolbar } from "../Toolbar/Toolbar";
 import { Input } from "../Input/Input";
 import { Button } from "../Button/Button";
 import ProfileImageAdd from "../../images/profile-image-add.svg";
-import { getProfile, ProfileEntity, setProfile, setProfileCompleted } from "../../services/profile";
+import { Capability, getProfile, ProfileEntity, setProfile, setProfileCompleted } from "../../services/profile";
 import { Loading } from "../Loading/Loading";
 import ProfileImageChange from "../../images/profile-image-change.png";
 import { Message } from "../Message/Message";
+import { Radio } from "../Radio/Radio";
+import New from "../../images/new.svg";
 
 interface UiProfile extends ProfileEntity {
   firstNameError?: boolean
@@ -86,6 +88,7 @@ export const Profile = () => {
           lastName: uiProfile.lastName,
           gender: uiProfile.gender,
           picture: uiProfile.picture,
+          capability: uiProfile.capability,
         });
       setUiProfile({
         ...uiProfile,
@@ -104,6 +107,8 @@ export const Profile = () => {
   const onLastnameChange = (event: ChangeEvent<HTMLInputElement>) => setUiProfile({ ...uiProfile, lastName: event.target.value, lastNameError: false });
 
   const onGenderChange = (event: ChangeEvent<HTMLInputElement>) => setUiProfile({ ...uiProfile, gender: getGender(event) });
+
+  const onCapabilityChange = (event: ChangeEvent<HTMLInputElement>) => setUiProfile({ ...uiProfile, capability: event.target.value });
 
   const getGender = (event: React.ChangeEvent<HTMLInputElement>) => event.target.value === 'MALE' ? 'MALE' : 'FEMALE';
 
@@ -159,6 +164,7 @@ export const Profile = () => {
 
   const updatedBanner = <div className="w-full bg-green-3 font-game text-blue-1 text-center text-txs px-4 py-3 absolute z-10">Profile updated successfully!</div>;
 
+  // noinspection SuspiciousTypeOfGuard
   return (
     <main className="mb-4 lg:mb-12">
       <Metadata/>
@@ -202,7 +208,7 @@ export const Profile = () => {
               </label>
             </div>
             <Input
-              label="Firstname"
+              label="First name"
               wide
               value={uiProfile.firstName}
               autoComplete="given-name"
@@ -214,7 +220,7 @@ export const Profile = () => {
               error={uiProfile.firstNameError}
             />
             <Input
-              label="Lastname"
+              label="Last name"
               wide
               value={uiProfile.lastName}
               autoComplete="family-name"
@@ -225,6 +231,21 @@ export const Profile = () => {
               errorMessage="Lastname should have at least one character."
               error={uiProfile.lastNameError}
             />
+            <div className="flex flex-col gap-y-4 text-white mb-4" onChange={onCapabilityChange}>
+              <span className="text-sm -mb-2">Select your capability (SPEED) <img className="inline-block" src={New}/></span>
+              {Object.values(Capability)
+                .filter(value => typeof value === 'string')
+                .map(value => value.toString())
+                .map(value => (
+                  <Radio
+                    key={value}
+                    checked={uiProfile.capability === value}
+                    name="capability"
+                    value={value}
+                    label={`${value.substring(0, 1)} - ${value}`}
+                  />
+                ))}
+            </div>
             <div className="mt-6">
               <Button
                 submit
