@@ -10,17 +10,22 @@ import ProfileImageChange from "../../images/profile-image-change.png";
 import { Message } from "../Message/Message";
 import { Radio } from "../Radio/Radio";
 import New from "../../images/new.svg";
+import { Select } from "../Select/Select";
 
 interface UiProfile extends ProfileEntity {
-  firstNameError?: boolean
-  lastNameError?: boolean
-  preview?: string
-  loading: boolean
-  updated: boolean
-  isNewUser: boolean
+  firstNameError?: boolean;
+  lastNameError?: boolean;
+  preview?: string;
+  loading: boolean;
+  updated: boolean;
+  isNewUser: boolean;
+  capability?: string;
+  month: number;
+  year: number;
 }
 
 export const Profile = () => {
+  const now = new Date();
   const [uiProfile, setUiProfile] = useState<UiProfile>({
     firstName: '',
     lastName: '',
@@ -28,18 +33,23 @@ export const Profile = () => {
     loading: true,
     updated: false,
     isNewUser: false,
+    month: now.getMonth(),
+    year: now.getFullYear()
   });
 
   useEffect(() => {
       const fetchProfile = async () => {
         try {
+          const profileEntity = await getProfile();
           setUiProfile({
-            ...await getProfile(),
+            ...profileEntity,
             firstNameError: false,
             lastNameError: false,
             loading: false,
             updated: false,
             isNewUser: false,
+            month: profileEntity.arrivalDate ? new Date(profileEntity.arrivalDate).getMonth() : now.getMonth(),
+            year: profileEntity.arrivalDate ? new Date(profileEntity.arrivalDate).getFullYear() : now.getFullYear(),
           });
           setProfileCompleted();
         } catch (error) {
@@ -54,6 +64,8 @@ export const Profile = () => {
               loading: false,
               updated: false,
               isNewUser: true,
+              month: now.getMonth(),
+              year: now.getFullYear(),
             });
           }
         }
@@ -89,6 +101,7 @@ export const Profile = () => {
           gender: uiProfile.gender,
           picture: uiProfile.picture,
           capability: uiProfile.capability,
+          arrivalDate: new Date(uiProfile.year, uiProfile.month),
         });
       setUiProfile({
         ...uiProfile,
@@ -164,6 +177,27 @@ export const Profile = () => {
 
   const updatedBanner = <div className="w-full bg-green-3 font-game text-blue-1 text-center text-txs px-4 py-3 absolute z-10">Profile updated successfully!</div>;
 
+  const pastTwentyYears = () => {
+    const year = new Date().getFullYear();
+    const years = new Array(21);
+    for (let y = year - 20; y <= year; y++) {
+      years.push(y)
+    }
+    return years.reverse();
+  }
+
+  const months = ['january', 'february', 'march', 'april', 'mai', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
+
+  const onMonthChanged = (event: ChangeEvent<HTMLSelectElement>) => setUiProfile({
+    ...uiProfile,
+    month: parseInt(event.target.value, 10)
+  })
+
+  const onYearChanged = (event: ChangeEvent<HTMLSelectElement>) => setUiProfile({
+    ...uiProfile,
+    year: parseInt(event.target.value, 10)
+  })
+
   // noinspection SuspiciousTypeOfGuard
   return (
     <main className="mb-4 lg:mb-12">
@@ -231,7 +265,7 @@ export const Profile = () => {
               errorMessage="Lastname should have at least one character."
               error={uiProfile.lastNameError}
             />
-            <div className="flex flex-col gap-y-4 text-white mb-4" onChange={onCapabilityChange}>
+            <div className="flex flex-col gap-y-4 text-white" onChange={onCapabilityChange}>
               <span className="text-sm -mb-2">Select your capability (SPEED) <img className="inline-block" src={New}/></span>
               {Object.values(Capability)
                 .filter(value => typeof value === 'string')
@@ -245,6 +279,23 @@ export const Profile = () => {
                     label={`${value.substring(0, 1)} - ${value}`}
                   />
                 ))}
+            </div>
+            <div className="text-white mb-4">
+              <span className="text-sm -mb-2">Arrival date <img className="inline-block" src={New}/></span>
+              <div className="text-grey-3 flex gap-x-4 pt-2">
+                <Select
+                  onChange={onMonthChanged}
+                  name="arrivalMonth"
+                  value={`${uiProfile.month}`}
+                  options={months.map((label, index) => ({ label, value: index }))}
+                />
+                <Select
+                  onChange={onYearChanged}
+                  name="arrivalYear"
+                  value={`${uiProfile.year}`}
+                  options={pastTwentyYears().map(y => ({ value: y, label: y }))}
+                />
+              </div>
             </div>
             <div className="mt-6">
               <Button
