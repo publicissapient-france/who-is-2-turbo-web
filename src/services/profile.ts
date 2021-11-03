@@ -6,6 +6,7 @@ export interface ProfileEntity {
   gender: 'FEMALE' | 'MALE'
   capability?: string
   picture?: string
+  arrivalDate?: Date
 }
 
 export enum Capability {
