@@ -30,6 +30,7 @@ export const Gallery: FunctionComponent<{ location: Location }> = ({ location })
       {!isLoading ? <>
         <Toolbar title="Gallery" buttonLabel="Back" link={location.state.from}/>
         <div className="flex flex-wrap items-center mx-3 my-4 gap-3 md:gap-2 lg:gap-7 justify-center">
+        <div className="text-white flex-grow w-full text-center">{gallery.length} members</div>
           {gallery.map((user: User) => (
             <GalleryCard key={user.picture} {...user}/>
           ))}
