@@ -35,8 +35,8 @@ export const Play: FunctionComponent<PlayPropTypes> = ({ location }) => {
       setPosition(position + 1);
     } else {
       setLoading(true);
-      const { score, count } = await getScore(gameId, questions.map(question => question.answerId || 0));
-      navigate(`/app/end?score=${score}&count=${count}&series=${gameType}`, { replace: true });
+      const gameResult = await getScore(gameId, questions.map(question => question.answerId || 0));
+      navigate(`/app/end`, { replace: true, state: { gameResult, gameType } });
     }
   };
 

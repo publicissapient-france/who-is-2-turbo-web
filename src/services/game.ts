@@ -40,19 +40,29 @@ export const getGame: (type: number) => Promise<Game> = async (type: number) => 
 };
 
 interface ResultEntity {
-  readonly correct: number
-  readonly total: number
+  readonly currentScore: {
+    readonly count: number;
+    readonly time: number;
+  }
+  readonly previousBestScore: {
+    readonly time: number;
+  }
+  readonly betterScoresInLeaderboard: number;
 }
 
-interface Result {
+export interface GameResult {
   readonly score: number;
-  readonly count: number;
+  readonly time: number;
+  readonly rank: number;
+  readonly bestTime: number;
 }
 
-export const getScore: (gameId: string, answers: number[]) => Promise<Result> = async (gameId: string, answers: number[]) => {
-  const { data: { correct, total } } = await axios.post<ResultEntity>(`/games/${gameId}/score`, { answers: answers });
+export const getScore: (gameId: string, answers: number[]) => Promise<GameResult> = async (gameId: string, answers: number[]) => {
+  const { data: { currentScore, previousBestScore, betterScoresInLeaderboard } } = await axios.post<ResultEntity>(`/games/${gameId}/score`, { answers: answers });
   return {
-    score: correct,
-    count: total
+    score: currentScore.count,
+    time: Math.round(currentScore.time / 1000),
+    rank: betterScoresInLeaderboard + 1,
+    bestTime: Math.round(previousBestScore.time / 1000),
   };
 };

@@ -24,9 +24,10 @@ type ButtonPropTypes = {
   primary?: boolean;
   icon?: string;
   wide?: boolean;
+  capitalize?: boolean;
 }
 
-export const Button: FunctionComponent<ButtonPropTypes> = ({ wide, onClick, submit, primary, icon, children }) => (
+export const Button: FunctionComponent<ButtonPropTypes> = ({ capitalize, wide, onClick, submit, primary, icon, children }) => (
   <button type={submit ? 'submit' : 'button'} className={`group flex focus:outline-none ${wide ? 'w-full' : ''}`} onClick={onClick}>
     <span className="h-12 w-2 block group-hover:hidden group-active:hidden" style={{ background: `url(${primary ? primaryButtonLeft : secondaryButtonLeft})` }}/>
     <span className="h-12 w-2 hidden group-hover:block group-active:hidden" style={{ background: `url(${primary ? primaryButtonLeftHover : secondaryButtonLeftHover})` }}/>
@@ -34,17 +35,17 @@ export const Button: FunctionComponent<ButtonPropTypes> = ({ wide, onClick, subm
     <span className={`group-hover:hidden group-active:hidden px-2 h-12 text-txs text-blue-2 font-game flex items-center ${wide ? 'flex-grow justify-center' : ''}`}
           style={{ background: `url(${primary ? primaryButtonBody : secondaryButtonBody})` }}>
       {icon && <img src={icon} className="-mt-2"/>}
-      {children && <span className="ml-2 -mt-1">{children}</span>}
+      {children && <span className={`ml-2 -mt-1 ${capitalize ? 'capitalize' : 'uppercase'}`}>{children}</span>}
     </span>
     <span className={`hidden group-hover:flex group-active:hidden px-2 h-12 text-txs text-blue-2 font-game flex items-center ${wide ? 'flex-grow justify-center' : ''}`}
           style={{ background: `url(${primary ? primaryButtonBodyHover : secondaryButtonBodyHover})` }}>
       {icon && <img src={icon} className="-mt-1"/>}
-      {children && <span className="ml-2">{children}</span>}
+      {children && <span className={`ml-2 ${capitalize ? 'capitalize' : 'uppercase'}`}>{children}</span>}
     </span>
     <span className={`hidden group-active:flex px-2 h-12 text-txs text-blue-2 font-game flex items-center ${wide ? 'flex-grow justify-center' : ''}`}
           style={{ background: `url(${primary ? primaryButtonBodyActive : secondaryButtonBodyActive})` }}>
       {icon && <img src={icon}/>}
-      {children && <span className="ml-2 mt-1">{children}</span>}
+      {children && <span className={`ml-2 mt-1 ${capitalize ? 'capitalize' : 'uppercase'}`}>{children}</span>}
     </span>
     <span className="h-12 w-2 block group-hover:hidden group-active:hidden" style={{ background: `url(${primary ? primaryButtonRight : secondaryButtonRight})` }}/>
     <span className="h-12 w-2 hidden group-hover:block group-active:hidden" style={{ background: `url(${primary ? primaryButtonRightHover : secondaryButtonRightHover})` }}/>

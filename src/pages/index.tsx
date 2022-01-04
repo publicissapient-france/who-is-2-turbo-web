@@ -6,7 +6,6 @@ import { getFirebase, setEnteredEmail } from '../services/firebase';
 import Logo from '../images/logo.svg';
 import { Metadata } from '../components/Metadata/Metadata';
 import { Input } from "../components/Input/Input";
-import icPlay from "../images/ic-play.svg";
 
 const IndexPage = () => {
   const [email, setEmail] = useState('');
@@ -83,7 +82,7 @@ const IndexPage = () => {
       </form>}
       {logged && <div className="w-full flex flex-col mt-6 gap-y-2">
         <Link to="/app/play-choice">
-          <Button wide primary icon={icPlay}>Play</Button>
+          <Button wide primary>Start</Button>
         </Link>
         <Link to="/app/profile">
           <Button wide>Edit profile</Button>
