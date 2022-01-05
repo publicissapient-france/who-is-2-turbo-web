@@ -1,4 +1,4 @@
-import { Link } from 'gatsby';
+import { Link, navigate } from 'gatsby';
 import React, { FunctionComponent } from 'react';
 import { Button } from '../Button/Button';
 import { Metadata } from '../Metadata/Metadata';
@@ -12,15 +12,19 @@ import icLeaderboard from "../../images/ic-leaderboard.svg";
 import { GameResult } from "../../services/game";
 
 interface EndPropTypes {
-  location: Location
+  location: { state?: { gameResult: GameResult, gameType: number } }
 }
 
 export const End: FunctionComponent<EndPropTypes> = ({ location }) => {
-  const { gameResult, gameType }: { gameResult: GameResult, gameType: number } = location.state;
+  if (!location.state) {
+    navigate('/');
+    return <></>;
+  }
+  const { gameResult, gameType } = location.state;
   return (
     <main className="h-screen">
       <Metadata/>
-      <Toolbar title={`Series ${gameType}`} buttonLabel="Back" link={location.state.from}/>
+      <Toolbar title={`Series ${gameType}`} buttonLabel="Back" link="/app/play-choice"/>
       <div className="flex py-6 px-4 md:h-4/5 justify-center mx-auto max-w-screen-sm items-center">
         <div className="flex h-[356px] w-full">
           <span style={{ backgroundImage: `url(${bgLeft})` }} className="w-[6px] h-[356px] block bg-cover"/>
@@ -43,7 +47,7 @@ export const End: FunctionComponent<EndPropTypes> = ({ location }) => {
                       <span className="text-t2xs text-grey-4 invisible">Best: 2</span>
                     </div>
                     <div>
-                      <Link to={`/app/leaderboard?series=${gameType}`} state={{ from: '/app/play-choice' }}>
+                      <Link to={`/app/leaderboard?series=${gameType}`} state={{ ...location.state, from: '/app/end' }}>
                         <Button icon={icLeaderboard}/>
                       </Link>
                     </div>
