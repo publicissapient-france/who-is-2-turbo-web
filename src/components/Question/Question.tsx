@@ -22,7 +22,7 @@ export const Question = ({ picture, answers, onAnswer }: QuestionPropTypes) => (
     </div>
     {answers.map((answer, id) => (
       <div className="mb-2" key={id}>
-        <Button wide onClick={() => onAnswer(id)}>{answer.firstName} {answer.lastName}</Button>
+        <Button wide capitalize onClick={() => onAnswer(id)}>{answer.firstName} {answer.lastName}</Button>
       </div>
     ))}
   </div>

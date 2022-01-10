@@ -65,6 +65,7 @@ module.exports = {
       'tlg': ['16px', '22px'],
       'txl': ['20px', '26px'],
       't2xl': ['24px', '32px'],
+      't8xl': ['48px', '56px'],
     },
     screens: {
       'sm': '360px',
