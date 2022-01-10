@@ -44,7 +44,7 @@ export const End: FunctionComponent<EndPropTypes> = ({ location }) => {
                     <div className="flex flex-col">
                       <span className="text-t2xs font-game text-white">Rank</span>
                       <span className="text-tlg text-yellow-3">{gameResult.rank}</span>
-                      <span className="text-t2xs text-grey-4 invisible">Best: 2</span>
+                      <span className="text-t2xs text-grey-4">Best: {gameResult.bestRank}</span>
                     </div>
                     <div>
                       <Link to={`/app/leaderboard?series=${gameType}`} state={{ ...location.state, from: '/app/end' }}>
