@@ -231,15 +231,12 @@ export const Profile = () => {
             onChange={loadImageFromFileSystem}
           />
           <form action="" className="flex flex-col gap-4 mt-8 w-full px-6 md:px-0">
-            <div className="flex gap-x-8 text-white mb-4" onChange={onGenderChange}>
-              <label>
-                <input type="radio" name="gender" value="FEMALE" defaultChecked={uiProfile.gender === 'FEMALE'}/>
-                <span className="ml-2">Female</span>
-              </label>
-              <label>
-                <input type="radio" name="gender" value="MALE" defaultChecked={uiProfile.gender === 'MALE'}/>
-                <span className="ml-2">Male</span>
-              </label>
+            <div className="text-white" onChange={onGenderChange}>
+              <span className="text-sm">Gender</span>
+              <div className="flex flex-auto gap-x-4 mt-2">
+                <div className="basis-1/2"><Radio key='FEMALE' checked={uiProfile.gender === 'FEMALE'} name='gender' value='FEMALE' label='Female'></Radio></div>
+                <div className="basis-1/2"><Radio key='MALE' checked={uiProfile.gender === 'MALE'} name='gender' value='MALE' label='Male'></Radio></div>
+              </div>
             </div>
             <Input
               label="First name"
