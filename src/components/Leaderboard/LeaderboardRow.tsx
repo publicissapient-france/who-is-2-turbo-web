@@ -15,22 +15,25 @@ const currentUser = () => {
   };
 };
 
+const isItMe = (me : LeaderboardUser, player: LeaderboardUser) => {
+  return me.firstName === player.firstName && me.lastName === player.lastName && me.picture === player.picture
+}
+
 export const LeaderboardRow = (props: { rank: number, player: LeaderboardUser }) => {
   const { me, isLoading } = currentUser()
   return (
     <div className="h-[79px] flex py-1">
       {!isLoading ? <>
-      {/*  TODO How to differentiate if 2 people have same firstname and lastname */}
-      <span style={{backgroundImage: `url(${ me.firstName == props.player.firstName && me.lastName == props.player.lastName ? leaderboardLMe : leaderboardL})`}}
+      <span style={{backgroundImage: `url(${ isItMe(me, props.player) ? leaderboardLMe : leaderboardL})`}}
             className="w-2 block bg-cover"/>
       <div className="px-2 grid grid-cols-8 gap-2 text-xs items-center text-white border-blue-3 bg-blue-3">
-        <div className="text-sm w-[20px]">{props.rank + 1}</div>
+        <div className="text-xs w-5">{props.rank + 1}</div>
         <div className="w-14">
           <span>
-              <img className="p-1 rounded-lg h-[63px] -mx-2" src={props.player.picture} alt=""/>
+              <img className="p-1 rounded-lg h-[63px] -ml-3" src={props.player.picture} alt=""/>
           </span>
         </div>
-        <div className="col-span-4 flex flex-col ml-4">
+        <div className="col-span-4 flex flex-col ml-2">
           <span>{props.player.firstName}</span>
           <span>{props.player.lastName}</span>
         </div>
