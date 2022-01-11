@@ -57,7 +57,7 @@ export const End: FunctionComponent<EndPropTypes> = ({ location }) => {
               </div>
               <div className="mt-4">
                 <Link to="/app/play-choice" className="flex-grow" replace>
-                  <Button wide>Coming soon!</Button>
+                  <Button wide disabled>Coming soon!</Button>
                 </Link>
               </div>
               <div className="mt-4 flex gap-x-4">
