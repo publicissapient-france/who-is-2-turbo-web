@@ -18,6 +18,18 @@ export interface LeaderboardUser {
   }
 }
 
+const getCurrentUser = () => {
+  const { data } = useSWR(`/members/me`, fetcher);
+  return {
+    me: data,
+    isUserLoading: !data
+  };
+};
+
+const isItMe = (me:LeaderboardUser, player: LeaderboardUser) => {
+  return me.firstName === player.firstName && me.lastName === player.lastName && me.picture === player.picture
+}
+
 const useLeaderboard = (type: number) => {
   const { data } = useSWR(`/members/leaderboard?gameType=SERIES_${type}`, fetcher);
   return {
@@ -30,17 +42,18 @@ export const Leaderboard: FunctionComponent<{ location: { search: any, state?: a
   const query = new URLSearchParams(location.search);
   const gameType = parseInt(query.get('series') || '5', 10)
   const { leaderboard, isLoading } = useLeaderboard(gameType);
+  const { me, isUserLoading } = getCurrentUser()
   return (
     <main>
       <Metadata/>
-      {!isLoading ? <>
+      {!isLoading && !isUserLoading ? <>
         <Toolbar title="Leaderboard" buttonLabel="Back" link={location.state.from} state={location.state}/>
         {!isProfileCompleted() && <section className="m-6 flex justify-center">
           <Message actionLabel="Create profile" actionLink="/app/profile"/>
         </section>}
         <section className="font-game h-screen max-w-screen-sm mx-auto mt-6 md:mt-8">
           <h1 className="font-game text-tsm text-yellow-3 text-shadow text-center mb-6">Series {gameType}</h1>
-          {leaderboard.map((player: LeaderboardUser, rank: number) => <LeaderboardRow key={rank} rank={rank} player={player}/>)}
+          {leaderboard.map((player: LeaderboardUser, rank: number) => <LeaderboardRow key={rank} rank={rank} player={player} isCurrentUser={isItMe(me, player)}/>)}
         </section>
       </> : <Loading/>}
     </main>

@@ -3,28 +3,11 @@ import {LeaderboardUser} from "./Leaderboard";
 import leaderboardL from "../../images/leaderboard-left.svg";
 import leaderboardLMe from "../../images/leaderboard-left-me.svg";
 import leaderboardR from "../../images/leaderboard-right.svg";
-import useSWR from "swr";
-import {fetcher} from "../../services/fetch";
-import {Loading} from "../Loading/Loading";
 
-const currentUser = () => {
-  const { data } = useSWR(`/members/me`, fetcher);
-  return {
-    me: data,
-    isLoading: !data
-  };
-};
-
-const isItMe = (me : LeaderboardUser, player: LeaderboardUser) => {
-  return me.firstName === player.firstName && me.lastName === player.lastName && me.picture === player.picture
-}
-
-export const LeaderboardRow = (props: { rank: number, player: LeaderboardUser }) => {
-  const { me, isLoading } = currentUser()
+export const LeaderboardRow = (props: { rank: number, player: LeaderboardUser, isCurrentUser: boolean }) => {
   return (
     <div className="h-[79px] flex py-1">
-      {!isLoading ? <>
-      <span style={{backgroundImage: `url(${ isItMe(me, props.player) ? leaderboardLMe : leaderboardL})`}}
+      <span style={{backgroundImage: `url(${ props.isCurrentUser ? leaderboardLMe : leaderboardL})`}}
             className="w-2 block bg-cover"/>
       <div className="px-2 grid grid-cols-8 gap-2 text-xs items-center text-white border-blue-3 bg-blue-3">
         <div className="text-xs w-5">{props.rank + 1}</div>
@@ -44,7 +27,6 @@ export const LeaderboardRow = (props: { rank: number, player: LeaderboardUser })
       </div>
       <span style={{backgroundImage: `url(${leaderboardR})`}}
             className="w-2 block bg-cover"/>
-      </> : <Loading/>}
     </div>
   )
 }
