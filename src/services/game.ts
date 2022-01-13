@@ -65,7 +65,7 @@ export const getScore: (gameId: string, answers: number[]) => Promise<GameResult
   return {
     score: score.count,
     time: Math.round(score.time / 1000),
-    rank: rank + 1,
+    rank: rank,
     bestTime: Math.round(bestScore.time / 1000),
     bestRank,
   };
