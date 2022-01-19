@@ -6,8 +6,10 @@ import leaderboardR from "../../images/leaderboard-right.svg";
 
 export const LeaderboardRow = (props: { rank: number, player: LeaderboardUser, isCurrentUser: boolean }) =>
   <div className="h-[79px] flex py-1">
-      <span style={{ backgroundImage: `url(${props.isCurrentUser ? leaderboardLMe : leaderboardL})` }}
-            className="w-2 block bg-cover"/>
+    <span
+      style={{ backgroundImage: `url(${props.isCurrentUser ? leaderboardLMe : leaderboardL})` }}
+      className="w-2 block bg-cover"
+    />
     <div className="px-2 grid grid-cols-8 gap-2 text-xs items-center text-white border-blue-3 bg-blue-3">
       <div className="text-xs w-5">{props.rank + 1}</div>
       <div className="w-14">
@@ -24,6 +26,8 @@ export const LeaderboardRow = (props: { rank: number, player: LeaderboardUser, i
         <span className="text-txs text-white align-bottom">{props.player.score.count}</span>
       </div>
     </div>
-    <span style={{ backgroundImage: `url(${leaderboardR})` }}
-          className="w-2 block bg-cover"/>
+    <span
+      style={{ backgroundImage: `url(${leaderboardR})` }}
+      className="w-2 block bg-cover"
+    />
   </div>

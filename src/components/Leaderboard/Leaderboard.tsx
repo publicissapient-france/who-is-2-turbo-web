@@ -26,8 +26,9 @@ const getCurrentUser = () => {
   };
 };
 
-const isItMe = (me:LeaderboardUser, player: LeaderboardUser) => {
-  return me.firstName === player.firstName && me.lastName === player.lastName && me.picture === player.picture
+const isItMe = (me: LeaderboardUser, player: LeaderboardUser) => {
+  return me.firstName === player.firstName
+    && me.lastName === player.lastName
 }
 
 const useLeaderboard = (type: number) => {
