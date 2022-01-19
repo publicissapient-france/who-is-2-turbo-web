@@ -11,10 +11,23 @@ import { isProfileCompleted } from "../../services/profile";
 export interface LeaderboardUser {
   firstName: string;
   lastName: string;
+  picture?: string
   score: {
     count: number;
     time: number;
   }
+}
+
+const getCurrentUser = () => {
+  const { data } = useSWR(`/members/me`, fetcher);
+  return {
+    me: data,
+    isUserLoading: !data
+  };
+};
+
+const isItMe = (me:LeaderboardUser, player: LeaderboardUser) => {
+  return me.firstName === player.firstName && me.lastName === player.lastName && me.picture === player.picture
 }
 
 const useLeaderboard = (type: number) => {
@@ -29,22 +42,18 @@ export const Leaderboard: FunctionComponent<{ location: { search: any, state?: a
   const query = new URLSearchParams(location.search);
   const gameType = parseInt(query.get('series') || '5', 10)
   const { leaderboard, isLoading } = useLeaderboard(gameType);
+  const { me, isUserLoading } = getCurrentUser()
   return (
     <main>
       <Metadata/>
-      {!isLoading ? <>
+      {!isLoading && !isUserLoading ? <>
         <Toolbar title="Leaderboard" buttonLabel="Back" link={location.state.from} state={location.state}/>
         {!isProfileCompleted() && <section className="m-6 flex justify-center">
           <Message actionLabel="Create profile" actionLink="/app/profile"/>
         </section>}
         <section className="font-game h-screen max-w-screen-sm mx-auto mt-6 md:mt-8">
           <h1 className="font-game text-tsm text-yellow-3 text-shadow text-center mb-6">Series {gameType}</h1>
-          <div className="px-4 grid grid-cols-4 md:grid-cols-6 gap-4 text-xs h-10 items-center text-white uppercase bg-[#060968]">
-            <div>rank</div>
-            <div className="col-span-2 md:col-span-4">player</div>
-            <div className="text-right">score</div>
-          </div>
-          {leaderboard.map((player: LeaderboardUser, rank: number) => <LeaderboardRow key={rank} rank={rank} player={player}/>)}
+          {leaderboard.map((player: LeaderboardUser, rank: number) => <LeaderboardRow key={rank} rank={rank} player={player} isCurrentUser={isItMe(me, player)}/>)}
         </section>
       </> : <Loading/>}
     </main>

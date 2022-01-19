@@ -5,6 +5,9 @@
 .envrc
 .env.*
 
+# Nodeenv
+.node-version
+
 # Dependencies
 node_modules
 
