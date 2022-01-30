@@ -47,17 +47,17 @@ interface ResultEntity {
   readonly bestScore: {
     readonly count: number;
     readonly time: number;
-  }
+  } | undefined
   readonly rank: number;
-  readonly bestRank: number;
+  readonly bestRank?: number;
 }
 
 export interface GameResult {
   readonly score: number;
   readonly time: number;
   readonly rank: number;
-  readonly bestTime: number;
-  readonly bestRank: number;
+  readonly bestTime?: number;
+  readonly bestRank?: number;
 }
 
 export const getScore: (gameId: string, answers: number[]) => Promise<GameResult> = async (gameId: string, answers: number[]) => {
@@ -66,7 +66,7 @@ export const getScore: (gameId: string, answers: number[]) => Promise<GameResult
     score: score.count,
     time: Math.round(score.time / 1000),
     rank: rank,
-    bestTime: Math.round(bestScore.time / 1000),
+    ...(bestScore?.time ? { bestTime: Math.round(bestScore.time / 1000) } : {}),
     bestRank,
   };
 };
