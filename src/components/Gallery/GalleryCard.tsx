@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import bgItemGallery from '../../images/bg-item-gallery.png';
-import { User } from './Gallery';
+import {User} from "../../services/gallery";
 
 export const GalleryCard: FunctionComponent<User> = ({ firstName, lastName, picture }) => (
   <div className="relative w-[142px] text-center">

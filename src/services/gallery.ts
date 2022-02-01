@@ -54,6 +54,8 @@ export const updateFilters = (filters: Filter[], filter_name: string, value: str
   return updated_filters;
 }
 
+export const getSearchedValue = (filters: Filter[]) => filters.filter((f: Filter) => f.name === 'search').map((f: Filter) => f.value).toString();
+
 const isMemberMatchingCriteria = (member: User, filter: Filter) => {
   const filterType: { [index: string]: any } = {
     'search': isMatchingSearch(member, filter.value),
