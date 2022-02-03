@@ -17,6 +17,7 @@ const removeSigns = (value: string) => {
     '’', // U+2019
     '-', // hyphen
     '_', // underscore
+    ' ' // space
   ]
   return allSigns.reduce((value, signChar) => {
     const re = new RegExp(signChar, 'g')
@@ -33,7 +34,7 @@ const normalizeString = (value: string) => removeSigns(removeDiacritics(value)).
 
 const isMatchingSearch = (member: User, criteria: string) => {
   const normalizedCriteria = normalizeString(criteria)
-  return normalizeString(member.firstName).startsWith(normalizedCriteria) || normalizeString(member.lastName).startsWith(normalizedCriteria);
+  return normalizeString(member.firstName+member.lastName).startsWith(normalizedCriteria) || normalizeString(member.lastName+member.firstName).startsWith(normalizedCriteria);
 }
 
 export const updateFilters = (filters: Filter[], filter_name: string, value: string) => {
