@@ -1,0 +1,5 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="20" height="20" transform="matrix(1 0 0 -1 2 22)" fill="#F07575"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M22 0H2V2H0V22H2V24H22V22H24V2H22V0ZM22 2V22H2V2H22Z" fill="#EB4747"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M7 7H9V9H7V7ZM11 11H9V9H11V11ZM13 11H11V13H9V15H7V17H9V15H11V13H13V15H15V17H17V15H15V13H13V11ZM15 9V11H13V9H15ZM15 9V7H17V9H15Z" fill="#8A0F0F"/>
+</svg>

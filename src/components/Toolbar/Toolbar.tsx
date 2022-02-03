@@ -16,6 +16,6 @@ export const Toolbar: FunctionComponent<ToolbarPropTypes> = ({ title, buttonLabe
         <img src={IcBack} height={16} width={16} /> {buttonLabel}
       </button>
     </Link>
-    <h1 className="text-shadow font-game text-sm text-[#F0AF00]">{title}</h1>
+    <h1 className="font-game text-[#F0AF00] text-shadow">{title}</h1>
   </section>
 );

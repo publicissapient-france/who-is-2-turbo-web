@@ -9,22 +9,32 @@ import { Leaderboard } from '../components/Leaderboard/Leaderboard';
 import { Profile } from '../components/Profile/Profile';
 import { PlayChoice } from '../components/PlayChoice/PlayChoice';
 
-const PlayChoicePage = (_props: RouteComponentProps) => <PrivateRoute component={PlayChoice} />;
-const PlayPage = (props: RouteComponentProps) => <PrivateRoute component={Play} {...props} />;
-const GalleryPage = (props: RouteComponentProps) => <PrivateRoute component={Gallery} {...props} />;
-const LeaderboardPage = (props: RouteComponentProps) => <PrivateRoute component={Leaderboard} {...props} />;
-const EndPage = (props: RouteComponentProps) => <PrivateRoute component={End} {...props} />;
-const ProfilePage = (_props: RouteComponentProps) => <PrivateRoute component={Profile} />;
+const PlayChoicePage = (_props: RouteComponentProps) => <PrivateRoute component={PlayChoice}/>;
+const PlayPage = (props: RouteComponentProps) => <PrivateRoute component={Play} {...props}/>;
+const GalleryPage = (props: RouteComponentProps) => <PrivateRoute component={Gallery} {...props}/>;
+const LeaderboardPage = (props: RouteComponentProps) => <PrivateRoute component={Leaderboard} {...props}/>;
+const EndPage = (props: RouteComponentProps) => <PrivateRoute component={End} {...props}/>;
+const EndWithSummaryPage = (props: RouteComponentProps) => <PrivateRoute component={End} {...props}/>
+const ProfilePage = (_props: RouteComponentProps) => <PrivateRoute component={Profile}/>;
+
+export const PlayChoicePath = "/app/play-choice";
+export const PlayPath = "app/play";
+export const GalleryPath = "/app/gallery";
+export const LeaderboardPath = "/app/leaderboard";
+export const ProfilePath = "/app/profile";
+export const EndPath = "/app/end";
+export const EndWithSummaryPath = "/app/end/summary";
 
 const App: FunctionComponent<PageProps> = ({ location }) => (
   <>
     <Router>
-      <PlayChoicePage path="/app/play-choice" />
-      <PlayPage path="/app/play" />
-      <GalleryPage path="/app/gallery" />
-      <LeaderboardPage path="/app/leaderboard" />
-      <ProfilePage path="/app/profile" />
-      <EndPage path="/app/end" location={location} />
+      <PlayChoicePage path={ PlayChoicePath }/>
+      <PlayPage path={ PlayPath }/>
+      <GalleryPage path={ GalleryPath }/>
+      <LeaderboardPage path={ LeaderboardPath }/>
+      <ProfilePage path={ ProfilePath }/>
+      <EndPage path={ EndPath } location={location}/>
+      <EndWithSummaryPage path={ EndWithSummaryPath } location={location}/>
     </Router>
   </>
 );
