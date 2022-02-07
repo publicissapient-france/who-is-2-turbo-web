@@ -2,19 +2,22 @@ import { Link } from 'gatsby';
 import * as React from 'react';
 import { Button } from '../components/Button/Button';
 import { Metadata } from '../components/Metadata/Metadata';
-import Logo from "../images/logo.png";
+import Logo from '../images/logo.png';
 
 const NotFoundPage = () => {
   return (
-    <main className="max-w-xs m-4 text-center flex flex-col container mx-auto text-center justify-center items-center md:h-screen mt-12 md:-mt-12">
-      <Metadata/>
-      <img className="mb-8" src={Logo} alt="whois's logo"/>
-      <h1 className="mb-6 text-white mx-4">You should be signed using your <span className="text-yellow-3">{process.env.GATSBY_ALLOWED_DOMAIN}</span> email to access this
-        content.</h1>
+    <main className="container m-4 mx-auto mt-12 flex max-w-xs flex-col items-center justify-center text-center text-center md:-mt-12 md:h-screen">
+      <Metadata />
+      <img className="mb-8" src={Logo} alt="whois's logo" />
+      <h1 className="mx-4 mb-6 text-white">
+        You should be signed using your <span className="text-yellow-3">{process.env.GATSBY_ALLOWED_DOMAIN}</span> email to access this content.
+      </h1>
       <Link to="/" className="mb-6">
-        <Button wide primary>Sign in</Button>
+        <Button wide primary>
+          Sign in
+        </Button>
       </Link>
-      <p className="text-yellow-3 mx-4">💡 You have to open the received link in the same browser you entered your email.</p>
+      <p className="mx-4 text-yellow-3">💡 You have to open the received link in the same browser you entered your email.</p>
     </main>
   );
 };

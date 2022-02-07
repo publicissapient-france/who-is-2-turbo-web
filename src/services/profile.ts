@@ -1,12 +1,12 @@
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosResponse } from 'axios';
 
 export interface ProfileEntity {
-  firstName: string
-  lastName: string
-  gender: 'FEMALE' | 'MALE'
-  capability?: string
-  picture?: string
-  arrivalDate?: Date
+  firstName: string;
+  lastName: string;
+  gender: 'FEMALE' | 'MALE';
+  capability?: string;
+  picture?: string;
+  arrivalDate?: Date;
 }
 
 export enum Capability {

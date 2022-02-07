@@ -11,7 +11,9 @@ const CallbackPage = () => {
         return navigate('/unauthorized/');
       }
       try {
-        await getFirebase(firebase).auth().signInWithEmailLink(email || '', window.location.href);
+        await getFirebase(firebase)
+          .auth()
+          .signInWithEmailLink(email || '', window.location.href);
         clearEnteredEmail();
         return navigate('/');
       } catch (e) {
@@ -24,9 +26,7 @@ const CallbackPage = () => {
     finishAuthentication();
   }, [finishAuthentication]);
 
-  return (
-    <main/>
-  );
+  return <main />;
 };
 
 export default CallbackPage;
