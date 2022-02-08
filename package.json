@@ -11,7 +11,9 @@
     "start": "GATSBY_ACTIVE_ENV=local gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
-    "clean": "gatsby clean"
+    "clean": "gatsby clean",
+    "test": "jest",
+    "test:coverage": "jest --coverage"
   },
   "dependencies": {
     "@fontsource/press-start-2p": "^4.5.1",
@@ -39,10 +41,30 @@
     "tailwindcss": "^3.0.18"
   },
   "devDependencies": {
+    "@types/jest": "^27.4.0",
     "@types/pica": "^5.1.3",
     "@types/reach__router": "^1.3.10",
     "@types/react-helmet": "^6.1.5",
     "prettier": "^2.5.1",
-    "prettier-plugin-tailwindcss": "^0.1.5"
+    "prettier-plugin-tailwindcss": "^0.1.5",
+    "jest": "^27.4.7",
+    "ts-jest": "^27.1.3",
+    "typescript": "^4.5.5"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": "src",
+    "testRegex": ".*\\.spec\\.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "collectCoverageFrom": [
+      "**/*.(t|j)s"
+    ],
+    "testEnvironment": "node"
   }
 }

@@ -228,6 +228,7 @@ export const Profile = () => {
               <Input
                 label="First name"
                 wide
+                name="firstName"
                 value={uiProfile.firstName}
                 autoComplete="given-name"
                 placeholder="John"
@@ -240,6 +241,7 @@ export const Profile = () => {
               <Input
                 label="Last name"
                 wide
+                name="lastName"
                 value={uiProfile.lastName}
                 autoComplete="family-name"
                 placeholder="Doe"
