@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 
 export const Loading = () => (
-  <section className="select-none h-screen">
-    <div className="flex justify-center items-center h-3/4">
-      <div className="font-game text-white text-base color-white text-shadow uppercase animate-pulse">Loading...</div>
+  <section className="h-screen select-none">
+    <div className="flex h-3/4 items-center justify-center">
+      <div className="color-white text-shadow animate-pulse font-game text-base uppercase text-white">Loading...</div>
     </div>
   </section>
-)
+);

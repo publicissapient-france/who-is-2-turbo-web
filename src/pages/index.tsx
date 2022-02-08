@@ -5,7 +5,7 @@ import { Button } from '../components/Button/Button';
 import { getFirebase, setEnteredEmail } from '../services/firebase';
 import Logo from '../images/logo.svg';
 import { Metadata } from '../components/Metadata/Metadata';
-import { Input } from "../components/Input/Input";
+import { Input } from '../components/Input/Input';
 
 const IndexPage = () => {
   const [email, setEmail] = useState('');
@@ -13,16 +13,18 @@ const IndexPage = () => {
   const [logged, setLogged] = useState(true);
 
   useEffect(() => {
-    getFirebase(firebase).auth().onAuthStateChanged(user => {
-      if (!user) {
-        setLogged(false);
-      }
-    });
+    getFirebase(firebase)
+      .auth()
+      .onAuthStateChanged((user) => {
+        if (!user) {
+          setLogged(false);
+        }
+      });
   }, []);
 
   const actionCodeSettings = {
     url: process.env.GATSBY_SITE_URL + 'cb-auth',
-    handleCodeInApp: true
+    handleCodeInApp: true,
   };
 
   const onEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -54,43 +56,46 @@ const IndexPage = () => {
   };
 
   return (
-    <main className="flex flex-col container mx-auto justify-center items-center md:h-screen mt-20 md:-mt-20 px-6 max-w-screen-sm">
-      <Metadata/>
-      {!logged && <h2 className="font-game text-tlg text-yellow-3 text-shadow">Welcome to</h2>}
-      <img className="mb-8" src={Logo} alt="whois's logo"/>
-      {!logged && <form className="w-full mt-6">
-        <Input
-          label="Email"
-          wide
-          value={email}
-          onChange={onEmailChange}
-          placeholder={`bob${process.env.GATSBY_ALLOWED_DOMAIN}`}
-          type="email"
-          autoComplete="email"
-          autoFocus={true}
-          error={!valid}
-          errorMessage={`Only ${process.env.GATSBY_ALLOWED_DOMAIN} users are allowed to sign-in.`}
-        />
-        <div className="mt-4">
-          <Button
-            submit
-            onClick={signIn}
+    <main className="container mx-auto mt-20 flex max-w-screen-sm flex-col items-center justify-center px-6 md:-mt-20 md:h-screen">
+      <Metadata />
+      {!logged && <h2 className="text-shadow font-game text-tlg text-yellow-3">Welcome to</h2>}
+      <img className="mb-8" src={Logo} alt="whois's logo" />
+      {!logged && (
+        <form className="mt-6 w-full">
+          <Input
+            label="Email"
             wide
-            primary
-          >Sign in</Button>
+            value={email}
+            onChange={onEmailChange}
+            placeholder={`bob${process.env.GATSBY_ALLOWED_DOMAIN}`}
+            type="email"
+            autoComplete="email"
+            autoFocus={true}
+            error={!valid}
+            errorMessage={`Only ${process.env.GATSBY_ALLOWED_DOMAIN} users are allowed to sign-in.`}
+          />
+          <div className="mt-4">
+            <Button submit onClick={signIn} wide primary>
+              Sign in
+            </Button>
+          </div>
+        </form>
+      )}
+      {logged && (
+        <div className="mt-6 flex w-full flex-col gap-y-2">
+          <Link to="/app/play-choice">
+            <Button wide primary>
+              Start
+            </Button>
+          </Link>
+          <Link to="/app/profile">
+            <Button wide>Edit profile</Button>
+          </Link>
+          <Link to="/app/gallery">
+            <Button wide>Gallery</Button>
+          </Link>
         </div>
-      </form>}
-      {logged && <div className="w-full flex flex-col mt-6 gap-y-2">
-        <Link to="/app/play-choice">
-          <Button wide primary>Start</Button>
-        </Link>
-        <Link to="/app/profile">
-          <Button wide>Edit profile</Button>
-        </Link>
-        <Link to="/app/gallery">
-          <Button wide>Gallery</Button>
-        </Link>
-      </div>}
+      )}
     </main>
   );
 };

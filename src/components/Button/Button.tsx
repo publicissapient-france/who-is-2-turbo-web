@@ -29,45 +29,57 @@ type ButtonPropTypes = {
   wide?: boolean;
   capitalize?: boolean;
   disabled?: boolean;
-}
+};
 
-const DisabledButton: FunctionComponent<ButtonPropTypes> = ({ capitalize, wide, icon, children }) =>
+const DisabledButton: FunctionComponent<ButtonPropTypes> = ({ capitalize, wide, icon, children }) => (
   <button type="button" disabled className={`group flex focus:outline-none ${wide ? 'w-full' : ''}`}>
-    <span className="h-12 w-2 block" style={{ background: `url(${disabledButtonLeft})` }}/>
-    <span className={`px-2 h-12 text-txs text-grey-3 font-game flex items-center ${wide ? 'flex-grow justify-center' : ''}`}
-          style={{ background: `url(${disabledButtonBody})` }}>{icon && <img src={icon} className="-mt-2"/>}{children &&
-      <span className={`ml-2 -mt-1 ${capitalize ? 'capitalize' : 'uppercase'}`}>{children}</span>}
+    <span className="block h-12 w-2" style={{ background: `url(${disabledButtonLeft})` }} />
+    <span className={`flex h-12 items-center px-2 font-game text-txs text-grey-3 ${wide ? 'flex-grow justify-center' : ''}`} style={{ background: `url(${disabledButtonBody})` }}>
+      {icon && <img src={icon} className="-mt-2" />}
+      {children && <span className={`ml-2 -mt-1 ${capitalize ? 'capitalize' : 'uppercase'}`}>{children}</span>}
     </span>
-    <span className="h-12 w-2" style={{ background: `url(${disabledButtonRight})` }}/>
+    <span className="h-12 w-2" style={{ background: `url(${disabledButtonRight})` }} />
   </button>
+);
 
 export const Button: FunctionComponent<ButtonPropTypes> = ({ disabled, capitalize, wide, onClick, submit, primary, icon, children }) => {
-
   if (disabled) {
-    return <DisabledButton capitalize={capitalize} wide={wide}>{children}</DisabledButton>
+    return (
+      <DisabledButton capitalize={capitalize} wide={wide}>
+        {children}
+      </DisabledButton>
+    );
   }
 
-  return <button type={submit ? 'submit' : 'button'} className={`group flex focus:outline-none ${wide ? 'w-full' : ''}`} onClick={onClick}>
-    <span className="h-12 w-2 block group-hover:hidden group-active:hidden" style={{ background: `url(${primary ? primaryButtonLeft : secondaryButtonLeft})` }}/>
-    <span className="h-12 w-2 hidden group-hover:block group-active:hidden" style={{ background: `url(${primary ? primaryButtonLeftHover : secondaryButtonLeftHover})` }}/>
-    <span className="h-12 w-2 hidden group-active:block" style={{ background: `url(${primary ? primaryButtonLeftActive : secondaryButtonLeftActive})` }}/>
-    <span className={`group-hover:hidden group-active:hidden px-2 h-12 text-txs text-blue-2 font-game flex items-center ${wide ? 'flex-grow justify-center' : ''}`}
-          style={{ background: `url(${primary ? primaryButtonBody : secondaryButtonBody})` }}>
-    {icon && <img src={icon} className="-mt-2"/>}
-      {children && <span className={`ml-2 -mt-1 ${capitalize ? 'capitalize' : 'uppercase'}`}>{children}</span>}
-  </span>
-    <span className={`hidden group-hover:flex group-active:hidden px-2 h-12 text-txs text-blue-2 font-game flex items-center ${wide ? 'flex-grow justify-center' : ''}`}
-          style={{ background: `url(${primary ? primaryButtonBodyHover : secondaryButtonBodyHover})` }}>
-    {icon && <img src={icon} className="-mt-1"/>}
-      {children && <span className={`ml-2 ${capitalize ? 'capitalize' : 'uppercase'}`}>{children}</span>}
-  </span>
-    <span className={`hidden group-active:flex px-2 h-12 text-txs text-blue-2 font-game flex items-center ${wide ? 'flex-grow justify-center' : ''}`}
-          style={{ background: `url(${primary ? primaryButtonBodyActive : secondaryButtonBodyActive})` }}>
-    {icon && <img src={icon}/>}
-      {children && <span className={`ml-2 mt-1 ${capitalize ? 'capitalize' : 'uppercase'}`}>{children}</span>}
-  </span>
-    <span className="h-12 w-2 block group-hover:hidden group-active:hidden" style={{ background: `url(${primary ? primaryButtonRight : secondaryButtonRight})` }}/>
-    <span className="h-12 w-2 hidden group-hover:block group-active:hidden" style={{ background: `url(${primary ? primaryButtonRightHover : secondaryButtonRightHover})` }}/>
-    <span className="h-12 w-2 hidden group-active:block" style={{ background: `url(${primary ? primaryButtonRightActive : secondaryButtonRightActive})` }}/>
-  </button>;
-}
+  return (
+    <button type={submit ? 'submit' : 'button'} className={`group flex focus:outline-none ${wide ? 'w-full' : ''}`} onClick={onClick}>
+      <span className="block h-12 w-2 group-hover:hidden group-active:hidden" style={{ background: `url(${primary ? primaryButtonLeft : secondaryButtonLeft})` }} />
+      <span className="hidden h-12 w-2 group-hover:block group-active:hidden" style={{ background: `url(${primary ? primaryButtonLeftHover : secondaryButtonLeftHover})` }} />
+      <span className="hidden h-12 w-2 group-active:block" style={{ background: `url(${primary ? primaryButtonLeftActive : secondaryButtonLeftActive})` }} />
+      <span
+        className={`flex h-12 items-center px-2 font-game text-txs text-blue-2 group-hover:hidden group-active:hidden ${wide ? 'flex-grow justify-center' : ''}`}
+        style={{ background: `url(${primary ? primaryButtonBody : secondaryButtonBody})` }}
+      >
+        {icon && <img src={icon} className="-mt-2" />}
+        {children && <span className={`ml-2 -mt-1 ${capitalize ? 'capitalize' : 'uppercase'}`}>{children}</span>}
+      </span>
+      <span
+        className={`flex hidden h-12 items-center px-2 font-game text-txs text-blue-2 group-hover:flex group-active:hidden ${wide ? 'flex-grow justify-center' : ''}`}
+        style={{ background: `url(${primary ? primaryButtonBodyHover : secondaryButtonBodyHover})` }}
+      >
+        {icon && <img src={icon} className="-mt-1" />}
+        {children && <span className={`ml-2 ${capitalize ? 'capitalize' : 'uppercase'}`}>{children}</span>}
+      </span>
+      <span
+        className={`flex hidden h-12 items-center px-2 font-game text-txs text-blue-2 group-active:flex ${wide ? 'flex-grow justify-center' : ''}`}
+        style={{ background: `url(${primary ? primaryButtonBodyActive : secondaryButtonBodyActive})` }}
+      >
+        {icon && <img src={icon} />}
+        {children && <span className={`ml-2 mt-1 ${capitalize ? 'capitalize' : 'uppercase'}`}>{children}</span>}
+      </span>
+      <span className="block h-12 w-2 group-hover:hidden group-active:hidden" style={{ background: `url(${primary ? primaryButtonRight : secondaryButtonRight})` }} />
+      <span className="hidden h-12 w-2 group-hover:block group-active:hidden" style={{ background: `url(${primary ? primaryButtonRightHover : secondaryButtonRightHover})` }} />
+      <span className="hidden h-12 w-2 group-active:block" style={{ background: `url(${primary ? primaryButtonRightActive : secondaryButtonRightActive})` }} />
+    </button>
+  );
+};

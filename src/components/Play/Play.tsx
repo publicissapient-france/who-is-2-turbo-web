@@ -4,16 +4,16 @@ import { navigate } from 'gatsby';
 import { getGame, getScore, TQuestion } from '../../services/game';
 import { Question } from '../Question/Question';
 import { Metadata } from '../Metadata/Metadata';
-import { Toolbar } from "../Toolbar/Toolbar";
-import { Loading } from "../Loading/Loading";
+import { Toolbar } from '../Toolbar/Toolbar';
+import { Loading } from '../Loading/Loading';
 
 interface PlayPropTypes {
-  location: Location
+  location: Location;
 }
 
 export const Play: FunctionComponent<PlayPropTypes> = ({ location }) => {
   const query = new URLSearchParams(location.search);
-  const gameType = parseInt(query.get('series') || '5', 10)
+  const gameType = parseInt(query.get('series') || '5', 10);
   const [position, setPosition] = useState(0);
   const [questions, setQuestions] = useState<TQuestion[]>([]);
   const [gameId, setGameId] = useState<string>('');
@@ -35,25 +35,29 @@ export const Play: FunctionComponent<PlayPropTypes> = ({ location }) => {
       setPosition(position + 1);
     } else {
       setLoading(true);
-      const gameResult = await getScore(gameId, questions.map(question => question.answerId || 0));
+      const gameResult = await getScore(
+        gameId,
+        questions.map((question) => question.answerId || 0)
+      );
       navigate(`/app/end`, { replace: true, state: { gameResult, gameType } });
     }
   };
 
   return (
-    <main className="select-none h-screen">
-      <Metadata/>
-      {loading
-        ? <Loading/>
-        : <>
-          <Toolbar title={`Series ${gameType}`} buttonLabel="Abort"/>
-          <section className="md:flex md:h-4/5 md:justify-center md:items-center">
+    <main className="h-screen select-none">
+      <Metadata />
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          <Toolbar title={`Series ${gameType}`} buttonLabel="Abort" />
+          <section className="md:flex md:h-4/5 md:items-center md:justify-center">
             <div className="mt-4 flex flex-col items-center">
-              {questions[position] && <Question key={questions[position].picture} {...questions[position]} onAnswer={onAnswer}/>}
+              {questions[position] && <Question key={questions[position].picture} {...questions[position]} onAnswer={onAnswer} />}
             </div>
           </section>
         </>
-      }
+      )}
     </main>
   );
 };

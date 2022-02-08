@@ -20,7 +20,7 @@ export const getFirebase: (firebase: any) => firebase.app.App = (firebase: any) 
     projectId: process.env.GATSBY_FIREBASE_PROJECT_ID,
     storageBucket: process.env.GATSBY_FIREBASE_STORAGE_BUCKET,
     messagingSenderId: process.env.GATSBY_FIREBASE_MESSAGING_SENDER_ID,
-    appId: process.env.GATSBY_FIREBASE_APP_ID
+    appId: process.env.GATSBY_FIREBASE_APP_ID,
   });
   fb = firebase;
   return firebase;
@@ -39,12 +39,15 @@ export const login = async (user: firebase.User) => {
 };
 
 const interceptUnauthorized = () => {
-  axios.interceptors.response.use(response => response, error => {
-    if (error && error.response && error.response.status === 401) {
-      logout();
+  axios.interceptors.response.use(
+    (response) => response,
+    (error) => {
+      if (error && error.response && error.response.status === 401) {
+        logout();
+      }
+      throw error;
     }
-    throw error;
-  })
+  );
 };
 
 if (isBrowser()) {

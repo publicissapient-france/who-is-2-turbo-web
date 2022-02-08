@@ -8,21 +8,21 @@
   }
 
   .text-shadow-2 {
-    text-shadow: 0 6px 0 #373BD3;
+    text-shadow: 0 6px 0 #373bd3;
   }
 
   .text-shadow-3 {
-    text-shadow: 0 2px 0 #1F23AD;
+    text-shadow: 0 2px 0 #1f23ad;
   }
 }
 
 body {
-  background-color: #1F23AD;
+  background-color: #1f23ad;
   font-family: Roboto Mono, serif;
   user-select: none;
   font-size: 14px;
   line-height: 18px;
-  letter-spacing: -.6px;
+  letter-spacing: -0.6px;
 }
 
 select {

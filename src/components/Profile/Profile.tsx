@@ -1,16 +1,16 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
-import { Metadata } from "../Metadata/Metadata";
-import { Toolbar } from "../Toolbar/Toolbar";
-import { Input } from "../Input/Input";
-import { Button } from "../Button/Button";
-import ProfileImageAdd from "../../images/profile-image-add.svg";
-import { Capability, getProfile, ProfileEntity, setProfile, setProfileCompleted } from "../../services/profile";
-import { Loading } from "../Loading/Loading";
-import ProfileImageChange from "../../images/profile-image-change.png";
-import { Message } from "../Message/Message";
-import { Radio } from "../Radio/Radio";
-import New from "../../images/new.svg";
-import { Select } from "../Select/Select";
+import React, { ChangeEvent, useEffect, useState } from 'react';
+import { Metadata } from '../Metadata/Metadata';
+import { Toolbar } from '../Toolbar/Toolbar';
+import { Input } from '../Input/Input';
+import { Button } from '../Button/Button';
+import ProfileImageAdd from '../../images/profile-image-add.svg';
+import { Capability, getProfile, ProfileEntity, setProfile, setProfileCompleted } from '../../services/profile';
+import { Loading } from '../Loading/Loading';
+import ProfileImageChange from '../../images/profile-image-change.png';
+import { Message } from '../Message/Message';
+import { Radio } from '../Radio/Radio';
+import New from '../../images/new.svg';
+import { Select } from '../Select/Select';
 
 interface UiProfile extends ProfileEntity {
   firstNameError?: boolean;
@@ -34,45 +34,44 @@ export const Profile = () => {
     updated: false,
     isNewUser: false,
     month: now.getMonth(),
-    year: now.getFullYear()
+    year: now.getFullYear(),
   });
 
   useEffect(() => {
-      const fetchProfile = async () => {
-        try {
-          const profileEntity = await getProfile();
+    const fetchProfile = async () => {
+      try {
+        const profileEntity = await getProfile();
+        setUiProfile({
+          ...profileEntity,
+          firstNameError: false,
+          lastNameError: false,
+          loading: false,
+          updated: false,
+          isNewUser: false,
+          month: profileEntity.arrivalDate ? new Date(profileEntity.arrivalDate).getMonth() : now.getMonth(),
+          year: profileEntity.arrivalDate ? new Date(profileEntity.arrivalDate).getFullYear() : now.getFullYear(),
+        });
+        setProfileCompleted();
+      } catch (error) {
+        const unknownUser = error && error.response && error.response.status === 404;
+        if (unknownUser) {
           setUiProfile({
-            ...profileEntity,
+            firstName: '',
+            lastName: '',
+            gender: 'FEMALE',
             firstNameError: false,
             lastNameError: false,
             loading: false,
             updated: false,
-            isNewUser: false,
-            month: profileEntity.arrivalDate ? new Date(profileEntity.arrivalDate).getMonth() : now.getMonth(),
-            year: profileEntity.arrivalDate ? new Date(profileEntity.arrivalDate).getFullYear() : now.getFullYear(),
+            isNewUser: true,
+            month: now.getMonth(),
+            year: now.getFullYear(),
           });
-          setProfileCompleted();
-        } catch (error) {
-          const unknownUser = error && error.response && error.response.status === 404;
-          if (unknownUser) {
-            setUiProfile({
-              firstName: '',
-              lastName: '',
-              gender: 'FEMALE',
-              firstNameError: false,
-              lastNameError: false,
-              loading: false,
-              updated: false,
-              isNewUser: true,
-              month: now.getMonth(),
-              year: now.getFullYear(),
-            });
-          }
         }
       }
-      fetchProfile();
-    }, []
-  );
+    };
+    fetchProfile();
+  }, []);
 
   const updateProfile = async (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
@@ -92,28 +91,26 @@ export const Profile = () => {
       setUiProfile({
         ...uiProfile,
         loading: true,
-      })
-      await setProfile(
-        uiProfile.isNewUser,
-        {
-          firstName: uiProfile.firstName,
-          lastName: uiProfile.lastName,
-          gender: uiProfile.gender,
-          picture: uiProfile.picture,
-          capability: uiProfile.capability,
-          arrivalDate: new Date(uiProfile.year, uiProfile.month),
-        });
+      });
+      await setProfile(uiProfile.isNewUser, {
+        firstName: uiProfile.firstName,
+        lastName: uiProfile.lastName,
+        gender: uiProfile.gender,
+        picture: uiProfile.picture,
+        capability: uiProfile.capability,
+        arrivalDate: new Date(uiProfile.year, uiProfile.month),
+      });
       setUiProfile({
         ...uiProfile,
         loading: false,
         updated: true,
         isNewUser: false,
-      })
+      });
       setProfileCompleted();
     } else {
-      setUiProfile({ ...uiProfile, firstNameError, lastNameError })
+      setUiProfile({ ...uiProfile, firstNameError, lastNameError });
     }
-  }
+  };
 
   const onFirstnameChange = (event: ChangeEvent<HTMLInputElement>) => setUiProfile({ ...uiProfile, firstName: event.target.value, firstNameError: false });
 
@@ -123,22 +120,22 @@ export const Profile = () => {
 
   const onCapabilityChange = (event: ChangeEvent<HTMLInputElement>) => setUiProfile({ ...uiProfile, capability: event.target.value });
 
-  const getGender = (event: React.ChangeEvent<HTMLInputElement>) => event.target.value === 'MALE' ? 'MALE' : 'FEMALE';
+  const getGender = (event: React.ChangeEvent<HTMLInputElement>) => (event.target.value === 'MALE' ? 'MALE' : 'FEMALE');
 
   const loadImageFromFileSystem = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length) {
       const file = event.target.files[0];
-      checkPictureRatioIs4_3(file, URL.createObjectURL(file))
+      checkPictureRatioIs4_3(file, URL.createObjectURL(file));
     }
-  }
+  };
 
   const checkPictureRatioIs4_3 = (rawPicture: File, objectUrl: string) => {
-    const image = document.createElement("img");
+    const image = document.createElement('img');
     image.onload = () => {
       cropAndEncodeImageToBase64Webp(objectUrl);
-    }
+    };
     image.src = objectUrl;
-  }
+  };
 
   const cropAndEncodeImageToBase64Webp = async (objectUrl: string) => {
     const image: HTMLImageElement = await new Promise((resolve) => {
@@ -149,164 +146,140 @@ export const Profile = () => {
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
     if (ctx) {
-      if (image.height * 3 / 4 > image.width) {
-        canvas.height = image.width * 4 / 3;
+      if ((image.height * 3) / 4 > image.width) {
+        canvas.height = (image.width * 4) / 3;
         canvas.width = image.width;
-        ctx.drawImage(image,
-          0, (image.height - image.width * 4 / 3) / 2,
-          canvas.width, canvas.height,
-          0, 0,
-          canvas.width, canvas.height
-        );
+        ctx.drawImage(image, 0, (image.height - (image.width * 4) / 3) / 2, canvas.width, canvas.height, 0, 0, canvas.width, canvas.height);
       } else {
         canvas.height = image.height;
-        canvas.width = image.height * 3 / 4;
-        ctx.drawImage(image,
-          (image.width - image.height * 3 / 4) / 2, 0,
-          canvas.width, canvas.height,
-          0, 0,
-          canvas.width, canvas.height
-        );
+        canvas.width = (image.height * 3) / 4;
+        ctx.drawImage(image, (image.width - (image.height * 3) / 4) / 2, 0, canvas.width, canvas.height, 0, 0, canvas.width, canvas.height);
       }
       setUiProfile({
         ...uiProfile,
-        picture: canvas.toDataURL('image/webp')
+        picture: canvas.toDataURL('image/webp'),
       });
     }
-  }
+  };
 
-  const updatedBanner = <div className="w-full bg-green-3 font-game text-blue-1 text-center text-txs px-4 py-3 absolute z-10">Profile updated successfully!</div>;
+  const updatedBanner = <div className="absolute z-10 w-full bg-green-3 px-4 py-3 text-center font-game text-txs text-blue-1">Profile updated successfully!</div>;
 
   const pastTwentyYears = () => {
     const year = new Date().getFullYear();
     const years = new Array(21);
     for (let y = year - 20; y <= year; y++) {
-      years.push(y)
+      years.push(y);
     }
     return years.reverse();
-  }
+  };
 
   const months = ['january', 'february', 'march', 'april', 'mai', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
 
-  const onMonthChanged = (event: ChangeEvent<HTMLSelectElement>) => setUiProfile({
-    ...uiProfile,
-    month: parseInt(event.target.value, 10)
-  })
+  const onMonthChanged = (event: ChangeEvent<HTMLSelectElement>) =>
+    setUiProfile({
+      ...uiProfile,
+      month: parseInt(event.target.value, 10),
+    });
 
-  const onYearChanged = (event: ChangeEvent<HTMLSelectElement>) => setUiProfile({
-    ...uiProfile,
-    year: parseInt(event.target.value, 10)
-  })
+  const onYearChanged = (event: ChangeEvent<HTMLSelectElement>) =>
+    setUiProfile({
+      ...uiProfile,
+      year: parseInt(event.target.value, 10),
+    });
 
   // noinspection SuspiciousTypeOfGuard
   return (
     <main className="mb-4 lg:mb-12">
-      <Metadata/>
-      {!uiProfile.loading ? <>
-        <Toolbar title="Profile" buttonLabel="Back"/>
-        {uiProfile.updated && updatedBanner}
-        {uiProfile.isNewUser && <section className="m-6 flex md:mx-auto max-w-screen-sm">
-          <Message/>
-        </section>}
-        <section className="flex flex-col container mx-auto justify-center items-center mt-8 max-w-screen-sm">
-          <label htmlFor="load-picture">
-            {uiProfile.preview || uiProfile.picture ?
-              <div className="relative w-[142px]">
-                <img className="invisible w-full"
-                     src={ProfileImageChange}
-                     alt="user's background"/>
-                <img className="absolute inset-0 w-full p-[10px] mt-[2px]"
-                     src={uiProfile.preview || uiProfile.picture}
-                     alt="user's picture"/>
-                <img className="absolute inset-0 w-full"
-                     src={ProfileImageChange}
-                     alt="user's background"/>
-              </div> :
-              <img src={ProfileImageAdd} alt="add an image caption"/>}
-          </label>
-          <input
-            id="load-picture"
-            type="file"
-            className="hidden"
-            onChange={loadImageFromFileSystem}
-          />
-          <form action="" className="flex flex-col gap-4 mt-8 w-full px-6 md:px-0">
-            <div className="text-white" onChange={onGenderChange}>
-              <span className="text-sm">Gender</span>
-              <div className="flex flex-auto gap-x-4 mt-2">
-                <div className="basis-1/2"><Radio key='FEMALE' checked={uiProfile.gender === 'FEMALE'} name='gender' value='FEMALE' label='Female'></Radio></div>
-                <div className="basis-1/2"><Radio key='MALE' checked={uiProfile.gender === 'MALE'} name='gender' value='MALE' label='Male'></Radio></div>
+      <Metadata />
+      {!uiProfile.loading ? (
+        <>
+          <Toolbar title="Profile" buttonLabel="Back" />
+          {uiProfile.updated && updatedBanner}
+          {uiProfile.isNewUser && (
+            <section className="m-6 flex max-w-screen-sm md:mx-auto">
+              <Message />
+            </section>
+          )}
+          <section className="container mx-auto mt-8 flex max-w-screen-sm flex-col items-center justify-center">
+            <label htmlFor="load-picture">
+              {uiProfile.preview || uiProfile.picture ? (
+                <div className="relative w-[142px]">
+                  <img className="invisible w-full" src={ProfileImageChange} alt="user's background" />
+                  <img className="absolute inset-0 mt-[2px] w-full p-[10px]" src={uiProfile.preview || uiProfile.picture} alt="user's picture" />
+                  <img className="absolute inset-0 w-full" src={ProfileImageChange} alt="user's background" />
+                </div>
+              ) : (
+                <img src={ProfileImageAdd} alt="add an image caption" />
+              )}
+            </label>
+            <input id="load-picture" type="file" className="hidden" onChange={loadImageFromFileSystem} />
+            <form action="" className="mt-8 flex w-full flex-col gap-4 px-6 md:px-0">
+              <div className="text-white" onChange={onGenderChange}>
+                <span className="text-sm">Gender</span>
+                <div className="mt-2 flex flex-auto gap-x-4">
+                  <div className="basis-1/2">
+                    <Radio key="FEMALE" checked={uiProfile.gender === 'FEMALE'} name="gender" value="FEMALE" label="Female"></Radio>
+                  </div>
+                  <div className="basis-1/2">
+                    <Radio key="MALE" checked={uiProfile.gender === 'MALE'} name="gender" value="MALE" label="Male"></Radio>
+                  </div>
+                </div>
               </div>
-            </div>
-            <Input
-              label="First name"
-              wide
-              value={uiProfile.firstName}
-              autoComplete="given-name"
-              placeholder="John"
-              type="text"
-              autoFocus={true}
-              onChange={onFirstnameChange}
-              errorMessage="Firstname should have at least one character."
-              error={uiProfile.firstNameError}
-            />
-            <Input
-              label="Last name"
-              wide
-              value={uiProfile.lastName}
-              autoComplete="family-name"
-              placeholder="Doe"
-              type="text"
-              autoFocus={false}
-              onChange={onLastnameChange}
-              errorMessage="Lastname should have at least one character."
-              error={uiProfile.lastNameError}
-            />
-            <div className="flex flex-col gap-y-4 text-white" onChange={onCapabilityChange}>
-              <span className="text-sm -mb-2">Select your capability (SPEED) <img className="inline-block" src={New}/></span>
-              {Object.values(Capability)
-                .filter(value => typeof value === 'string')
-                .map(value => value.toString())
-                .map(value => (
-                  <Radio
-                    key={value}
-                    checked={uiProfile.capability === value}
-                    name="capability"
-                    value={value}
-                    label={`${value.substring(0, 1)} - ${value}`}
-                  />
-                ))}
-            </div>
-            <div className="text-white mb-4">
-              <span className="text-sm -mb-2">Arrival date <img className="inline-block" src={New}/></span>
-              <div className="text-grey-3 flex gap-x-4 pt-2">
-                <Select
-                  onChange={onMonthChanged}
-                  name="arrivalMonth"
-                  value={`${uiProfile.month}`}
-                  options={months.map((label, index) => ({ label, value: index }))}
-                />
-                <Select
-                  onChange={onYearChanged}
-                  name="arrivalYear"
-                  value={`${uiProfile.year}`}
-                  options={pastTwentyYears().map(y => ({ value: y, label: y }))}
-                />
-              </div>
-            </div>
-            <div className="mt-6">
-              <Button
-                submit
+              <Input
+                label="First name"
                 wide
-                primary
-                onClick={updateProfile}
-              >
-                Save profile
-              </Button>
-            </div>
-          </form>
-        </section>
-      </> : <Loading/>}
+                value={uiProfile.firstName}
+                autoComplete="given-name"
+                placeholder="John"
+                type="text"
+                autoFocus={true}
+                onChange={onFirstnameChange}
+                errorMessage="Firstname should have at least one character."
+                error={uiProfile.firstNameError}
+              />
+              <Input
+                label="Last name"
+                wide
+                value={uiProfile.lastName}
+                autoComplete="family-name"
+                placeholder="Doe"
+                type="text"
+                autoFocus={false}
+                onChange={onLastnameChange}
+                errorMessage="Lastname should have at least one character."
+                error={uiProfile.lastNameError}
+              />
+              <div className="flex flex-col gap-y-4 text-white" onChange={onCapabilityChange}>
+                <span className="-mb-2 text-sm">
+                  Select your capability (SPEED) <img className="inline-block" src={New} />
+                </span>
+                {Object.values(Capability)
+                  .filter((value) => typeof value === 'string')
+                  .map((value) => value.toString())
+                  .map((value) => (
+                    <Radio key={value} checked={uiProfile.capability === value} name="capability" value={value} label={`${value.substring(0, 1)} - ${value}`} />
+                  ))}
+              </div>
+              <div className="mb-4 text-white">
+                <span className="-mb-2 text-sm">
+                  Arrival date <img className="inline-block" src={New} />
+                </span>
+                <div className="flex gap-x-4 pt-2 text-grey-3">
+                  <Select onChange={onMonthChanged} name="arrivalMonth" value={`${uiProfile.month}`} options={months.map((label, index) => ({ label, value: index }))} />
+                  <Select onChange={onYearChanged} name="arrivalYear" value={`${uiProfile.year}`} options={pastTwentyYears().map((y) => ({ value: y, label: y }))} />
+                </div>
+              </div>
+              <div className="mt-6">
+                <Button submit wide primary onClick={updateProfile}>
+                  Save profile
+                </Button>
+              </div>
+            </form>
+          </section>
+        </>
+      ) : (
+        <Loading />
+      )}
     </main>
-  )
-}
+  );
+};
