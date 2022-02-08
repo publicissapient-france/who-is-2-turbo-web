@@ -1,6 +1,12 @@
-require('dotenv').config({
-  path: `.env.${process.env.NODE_ENV}`,
-});
+if (process.env.PREVIEW) {
+  require("dotenv").config({
+    path: `.env.${process.env.NODE_ENV}.preview`,
+  })
+} else {
+  require("dotenv").config({
+    path: `.env.${process.env.NODE_ENV}`,
+  })
+}
 
 module.exports = {
   plugins: [
