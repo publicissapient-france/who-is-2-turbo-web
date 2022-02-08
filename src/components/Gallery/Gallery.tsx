@@ -1,16 +1,14 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { Metadata } from '../Metadata/Metadata';
-import { GalleryCard } from "./GalleryCard";
-import { Toolbar } from "../Toolbar/Toolbar";
-import { Loading } from "../Loading/Loading";
-import { Input } from "../Input/Input";
-import { fetcher } from "../../services/fetch";
-import useSWR from "swr";
-import { Filter, getFilteredGallery, getSearchedValue, updateFilters, User } from "../../services/gallery";
-
+import { GalleryCard } from './GalleryCard';
+import { Toolbar } from '../Toolbar/Toolbar';
+import { Loading } from '../Loading/Loading';
+import { Input } from '../Input/Input';
+import { fetcher } from '../../services/fetch';
+import useSWR from 'swr';
+import { Filter, getFilteredGallery, getSearchedValue, updateFilters, User } from '../../services/gallery';
 
 export const Gallery: FunctionComponent<{ location: Location }> = ({ location }) => {
-
   const [gallery, setGallery] = useState<User[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [filteredGallery, setFilteredGallery] = useState<User[]>(gallery);
@@ -18,13 +16,13 @@ export const Gallery: FunctionComponent<{ location: Location }> = ({ location })
 
   const filterGallery = () => {
     setFilteredGallery(getFilteredGallery(gallery, stateFilters));
-  }
+  };
 
   const handleGalleryFiltering = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = event.target;
     let updated_filters = updateFilters([...stateFilters], name, value);
     setStateFilters(updated_filters);
-  }
+  };
 
   const { data: member } = useSWR(`/members`, fetcher, {
     onSuccess: (data, key, config) => {
@@ -32,12 +30,12 @@ export const Gallery: FunctionComponent<{ location: Location }> = ({ location })
       setFilteredGallery(data);
       setIsLoading(!data);
     },
-    revalidateOnFocus: false
+    revalidateOnFocus: false,
   });
 
   useEffect(() => {
     filterGallery();
-  }, [stateFilters])
+  }, [stateFilters]);
 
   return (
     <main className="mb-4 lg:mb-12">
