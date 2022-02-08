@@ -39,33 +39,37 @@ export const Gallery: FunctionComponent<{ location: Location }> = ({ location })
 
   return (
     <main className="mb-4 lg:mb-12">
-      <Metadata/>
-      {!isLoading ? <>
-        <Toolbar title="Gallery" buttonLabel="Back" link={location.state.from}/>
-        <div>
-          <section className="p-4 sticky top-12 z-10 bg-blue-2 border-t-2 border-blue-1 md:max-w-screen-sm">
-            <Input
-              placeholder="Search members"
-              type="text"
-              name="search"
-              icon="lens"
-              value={getSearchedValue(stateFilters)}
-              wide
-              autoFocus={false}
-              autoComplete="firstName or lastName"
-              onChange={handleGalleryFiltering}
-            />
-          </section>
-          <section className="mx-8">
-            <div className="text-white text-right lg:mx-10">{filteredGallery.length} members</div>
-          </section>
-          <section className="flex flex-wrap mx-3 my-3 gap-3 md:gap-2 lg:gap-7 justify-center">
-            {filteredGallery.map((user: User) => (
-              <GalleryCard key={user.picture} {...user}/>
-            ))}
-          </section>
-        </div>
-      </> : <Loading/>}
+      <Metadata />
+      {!isLoading ? (
+        <>
+          <Toolbar title="Gallery" buttonLabel="Back" link={location.state.from} />
+          <div className="border-t-2 border-blue-1">
+            <section className="sticky top-12 z-10 bg-blue-2 p-4 md:max-w-screen-sm">
+              <Input
+                placeholder="Search members"
+                type="text"
+                name="search"
+                icon="lens"
+                value={getSearchedValue(stateFilters)}
+                wide
+                autoFocus={false}
+                autoComplete="firstName or lastName"
+                onChange={handleGalleryFiltering}
+              />
+            </section>
+            <section className="mx-8">
+              <div className="text-right text-white lg:mx-10">{filteredGallery.length} members</div>
+            </section>
+            <section className="mx-3 my-3 flex flex-wrap justify-center gap-3 md:gap-2 lg:gap-7">
+              {filteredGallery.map((user: User) => (
+                <GalleryCard key={user.picture} {...user} />
+              ))}
+            </section>
+          </div>
+        </>
+      ) : (
+        <Loading />
+      )}
     </main>
   );
 };
