@@ -4,9 +4,9 @@ import { navigate } from 'gatsby';
 import { getGame, getScore, TQuestion } from '../../services/game';
 import { Question } from '../Question/Question';
 import { Metadata } from '../Metadata/Metadata';
-import { Toolbar } from "../Toolbar/Toolbar";
-import { Loading } from "../Loading/Loading";
-import { EndPath } from "../../pages/app";
+import { Toolbar } from '../Toolbar/Toolbar';
+import { Loading } from '../Loading/Loading';
+import { EndPath } from '../../pages/app';
 
 interface PlayPropTypes {
   location: Location;
@@ -36,7 +36,10 @@ export const Play: FunctionComponent<PlayPropTypes> = ({ location }) => {
       setPosition(position + 1);
     } else {
       setLoading(true);
-      const gameResult = await getScore(gameId, questions.map(question => question.answerId || 0));
+      const gameResult = await getScore(
+        gameId,
+        questions.map((question) => question.answerId || 0)
+      );
       navigate(EndPath, { replace: true, state: { questions, gameResult, gameType, gameSummaryDisplayed: false } });
     }
   };

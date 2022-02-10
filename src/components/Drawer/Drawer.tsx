@@ -1,34 +1,29 @@
-import React, {FunctionComponent} from "react";
-import IcCross from "../../images/ic-cross.svg";
-
+import React, { FunctionComponent } from 'react';
+import IcCross from '../../images/ic-cross.svg';
 
 interface DrawerPropTypes {
-  display: boolean
-  title: string
-  onCloseClick: () => void
+  display: boolean;
+  title: string;
+  onCloseClick: () => void;
 }
 
 export const Drawer: FunctionComponent<DrawerPropTypes> = (props) => {
   return (
     <>
-      {
-        props.display ?
-          <div className="fixed h-screen w-screen z-20">
-            <div onClick={ props.onCloseClick } className="absolute h-screen w-screen bg-black opacity-50" />
-            <div className="absolute right-0 w-screen md:w-[540px] mt-[48px] md:mt-0 h-screen bg-white rounded-t-md opacity-100">
-              <section className="h-[48px] mb-[24px] flex items-center justify-center relative">
-                <p className="font-game text-blue-1">{ props.title }</p>
-                <button onClick={props.onCloseClick} className="flex items-center absolute right-3 top-0 bottom-0">
-                  <img src={IcCross} height={24} width={24} alt="Close"/>
-                </button>
-              </section>
-              <div className="h-screen box-border pb-[120px] md:pb-[72px] overflow-y-auto">
-                {props.children}
-              </div>
-            </div>
+      {props.display ? (
+        <div className="fixed z-20 h-screen w-screen">
+          <div onClick={props.onCloseClick} className="absolute h-screen w-screen bg-black opacity-50" />
+          <div className="absolute right-0 mt-[48px] h-screen w-screen rounded-t-md bg-white opacity-100 md:mt-0 md:w-[540px]">
+            <section className="relative mb-[24px] flex h-[48px] items-center justify-center">
+              <p className="font-game text-blue-1">{props.title}</p>
+              <button onClick={props.onCloseClick} className="absolute right-3 top-0 bottom-0 flex items-center">
+                <img src={IcCross} height={24} width={24} alt="Close" />
+              </button>
+            </section>
+            <div className="box-border h-screen overflow-y-auto pb-[120px] md:pb-[72px]">{props.children}</div>
           </div>
-          : null
-      }
+        </div>
+      ) : null}
     </>
   );
-}
+};

@@ -65,7 +65,9 @@ export interface GameResult {
 }
 
 export const getScore: (gameId: string, answers: number[]) => Promise<GameResult> = async (gameId: string, answers: number[]) => {
-  const { data: { solutions, score, bestScore, rank, bestRank } } = await axios.post<ResultEntity>(`/games/${gameId}/score`, { answers: answers });
+  const {
+    data: { solutions, score, bestScore, rank, bestRank },
+  } = await axios.post<ResultEntity>(`/games/${gameId}/score`, { answers: answers });
   return {
     solutions: solutions,
     score: score.count,
