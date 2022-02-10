@@ -40,7 +40,7 @@ export const Play: FunctionComponent<PlayPropTypes> = ({ location }) => {
         gameId,
         questions.map((question) => question.answerId || 0)
       );
-      navigate(EndPath, { replace: true, state: { questions, gameResult, gameType, gameSummaryDisplayed: false } });
+      navigate(EndPath, { replace: true, state: { questions, gameResult, gameType } });
     }
   };
 
