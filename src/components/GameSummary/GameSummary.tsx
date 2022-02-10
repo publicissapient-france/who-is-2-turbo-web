@@ -25,9 +25,9 @@ export const GameSummary: FunctionComponent<GameSummaryPropTypes> = ({ questions
       } as QuestionSummary;
     })
     .sort((summary, otherSummary) => {
-      const summaryWeight = summary.answerId === summary.solutionId ? 1 : 0;
-      const otherSummaryWeight = otherSummary.answerId === otherSummary.solutionId ? 1 : 0;
-      return otherSummaryWeight - summaryWeight;
+      const summaryWeight = summary.answerId === summary.solutionId ? 1 : -1;
+      const otherSummaryWeight = otherSummary.answerId === otherSummary.solutionId ? 1 : -1;
+      return summaryWeight - otherSummaryWeight;
     });
 
   return (
