@@ -15,7 +15,7 @@ import { Drawer } from '../Drawer/Drawer';
 import { EndPath, EndWithSummaryPath } from '../../pages/app';
 
 interface EndPropTypes {
-  location: { state?: { questions: TQuestion[]; gameResult: GameResult; gameType: number; gameSummaryDisplayed: boolean } };
+  location: { state?: { questions: TQuestion[]; gameResult: GameResult; gameType: number } };
 }
 
 export const End: FunctionComponent<EndPropTypes> = ({ location }) => {
