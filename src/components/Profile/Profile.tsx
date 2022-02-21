@@ -164,10 +164,10 @@ export const Profile = () => {
 
   const updatedBanner = <div className="absolute z-10 w-full bg-green-3 px-4 py-3 text-center font-game text-txs text-blue-1">Profile updated successfully!</div>;
 
-  const pastTwentyYears = () => {
+  const pastThirtyYears = () => {
     const year = new Date().getFullYear();
-    const years = new Array(21);
-    for (let y = year - 20; y <= year; y++) {
+    const years = new Array(31);
+    for (let y = year - 30; y <= year; y++) {
       years.push(y);
     }
     return years.reverse();
@@ -268,7 +268,7 @@ export const Profile = () => {
                 </span>
                 <div className="flex gap-x-4 pt-2 text-grey-3">
                   <Select onChange={onMonthChanged} name="arrivalMonth" value={`${uiProfile.month}`} options={months.map((label, index) => ({ label, value: index }))} />
-                  <Select onChange={onYearChanged} name="arrivalYear" value={`${uiProfile.year}`} options={pastTwentyYears().map((y) => ({ value: y, label: y }))} />
+                  <Select onChange={onYearChanged} name="arrivalYear" value={`${uiProfile.year}`} options={pastThirtyYears().map((y) => ({ value: y, label: y }))} />
                 </div>
               </div>
               <div className="mt-6">
