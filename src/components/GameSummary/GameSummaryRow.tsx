@@ -5,7 +5,7 @@ import IcResultWrong from '../../images/ic-result-wrong.svg';
 
 export const GameSummaryRow: FunctionComponent<QuestionSummary> = ({ picture, answers, answerId, solutionId }) => (
   <div className="flex w-full items-stretch">
-    <img className="mx-[30px] w-[140px] rounded-md md:ml-[60px]" src={picture} alt="user's picture" />
+    <img className="mx-7 w-36 rounded-md md:ml-14" src={picture} alt="user's picture" />
 
     <div className="flex flex-col justify-center gap-2">
       <div className="flex w-full grid-cols-5 content-center items-center gap-2">

@@ -16,14 +16,12 @@ export interface QuestionSummary {
 
 export const GameSummary: FunctionComponent<GameSummaryPropTypes> = ({ questions, gameResult }) => {
   const questionSummaries: QuestionSummary[] = questions
-    .map((question, index) => {
-      return {
-        picture: question.picture,
-        answers: question.answers,
-        answerId: question.answerId!,
-        solutionId: gameResult.solutions[index],
-      } as QuestionSummary;
-    })
+    .map((question, index) => ({
+      picture: question.picture,
+      answers: question.answers,
+      answerId: question.answerId!,
+      solutionId: gameResult.solutions[index],
+    }))
     .sort((summary, otherSummary) => {
       const summaryWeight = summary.answerId === summary.solutionId ? 1 : -1;
       const otherSummaryWeight = otherSummary.answerId === otherSummary.solutionId ? 1 : -1;
@@ -31,7 +29,7 @@ export const GameSummary: FunctionComponent<GameSummaryPropTypes> = ({ questions
     });
 
   return (
-    <div className="mb-10 flex flex-col items-center gap-3 md:gap-2 lg:gap-7">
+    <div className="mb-10 flex flex-col items-center gap-3 md:gap-7">
       {questionSummaries.map((summary: QuestionSummary) => (
         <GameSummaryRow key={summary.picture} {...summary} />
       ))}

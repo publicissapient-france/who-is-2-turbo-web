@@ -25,14 +25,8 @@ export const End: FunctionComponent<EndPropTypes> = ({ location }) => {
   }
   const { questions, gameResult, gameType } = location.state;
   const gameSummaryDisplayed = window.location.pathname === EndWithSummaryPath;
-
-  function displayGameSummary() {
-    navigate(EndWithSummaryPath, { replace: false, state: { questions, gameResult, gameType } });
-  }
-
-  function hideGameSummary() {
-    navigate(EndPath, { replace: true, state: { questions, gameResult, gameType } });
-  }
+  const displayGameSummary = () => navigate(EndWithSummaryPath, { replace: false, state: { questions, gameResult, gameType } });
+  const hideGameSummary = () => navigate(EndPath, { replace: true, state: { questions, gameResult, gameType } });
 
   return (
     <main className="h-screen">
