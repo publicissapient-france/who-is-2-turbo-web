@@ -7,11 +7,17 @@ export const GameSummaryRow: FunctionComponent<QuestionSummary> = ({ picture, an
   <div className="flex w-full items-stretch">
     <img className="mx-[30px] w-[140px] rounded-md md:ml-[60px]" src={picture} alt="user's picture" />
 
-    <div className="grid w-full grid-cols-5 content-center items-center gap-4">
-      <img src={IcResultCorrect} height={24} width={24} alt="Correct Answer" />
-      <div className="col-span-4 font-game text-sm text-green-2">{`${answers[solutionId].firstName} ${answers[solutionId].lastName}`}</div>
-      {answerId !== solutionId && <img src={IcResultWrong} height={24} width={24} alt="Wrong Answer" />}
-      {answerId !== solutionId && <div className="col-span-4 font-game text-sm text-red-2">{`${answers[answerId].firstName} ${answers[answerId].lastName}`}</div>}
+    <div className="flex flex-col justify-center gap-2">
+      <div className="flex w-full grid-cols-5 content-center items-center gap-2">
+        <img src={IcResultCorrect} height={24} width={24} alt="Correct Answer" />
+        <div className="col-span-4 font-game text-sm text-green-2">{`${answers[solutionId].firstName} ${answers[solutionId].lastName}`}</div>
+      </div>
+      {answerId !== solutionId && (
+        <div className="flex w-full grid-cols-5 content-center items-center gap-2">
+          <img src={IcResultWrong} height={24} width={24} alt="Wrong Answer" />
+          <div className="col-span-4 font-game text-sm text-red-2">{`${answers[answerId].firstName} ${answers[answerId].lastName}`}</div>
+        </div>
+      )}
     </div>
   </div>
 );
