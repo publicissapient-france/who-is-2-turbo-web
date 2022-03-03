@@ -6,6 +6,7 @@ import { Question } from '../Question/Question';
 import { Metadata } from '../Metadata/Metadata';
 import { Toolbar } from '../Toolbar/Toolbar';
 import { Loading } from '../Loading/Loading';
+import { EndPath } from '../../pages/app';
 
 interface PlayPropTypes {
   location: Location;
@@ -39,7 +40,7 @@ export const Play: FunctionComponent<PlayPropTypes> = ({ location }) => {
         gameId,
         questions.map((question) => question.answerId || 0)
       );
-      navigate(`/app/end`, { replace: true, state: { gameResult, gameType } });
+      navigate(EndPath, { replace: true, state: { questions, gameResult, gameType } });
     }
   };
 

@@ -1,6 +1,7 @@
 import { Link, navigate } from 'gatsby';
 import React, { FunctionComponent } from 'react';
 import { Button } from '../Button/Button';
+import { GameSummary } from '../GameSummary/GameSummary';
 import { Metadata } from '../Metadata/Metadata';
 import { Toolbar } from '../Toolbar/Toolbar';
 import icRestart from '../../images/ic-restart.svg';
@@ -9,10 +10,12 @@ import bgRight from '../../images/bg-result-right.svg';
 import bgHintLeft from '../../images/bg-result-hint-left.svg';
 import bgHintRight from '../../images/bg-result-hint-right.svg';
 import icLeaderboard from '../../images/ic-leaderboard.svg';
-import { GameResult } from '../../services/game';
+import { GameResult, TQuestion } from '../../services/game';
+import { Drawer } from '../Drawer/Drawer';
+import { EndPath, EndWithSummaryPath } from '../../pages/app';
 
 interface EndPropTypes {
-  location: { state?: { gameResult: GameResult; gameType: number } };
+  location: { state?: { questions: TQuestion[]; gameResult: GameResult; gameType: number } };
 }
 
 export const End: FunctionComponent<EndPropTypes> = ({ location }) => {
@@ -20,10 +23,17 @@ export const End: FunctionComponent<EndPropTypes> = ({ location }) => {
     navigate('/');
     return <></>;
   }
-  const { gameResult, gameType } = location.state;
+  const { questions, gameResult, gameType } = location.state;
+  const gameSummaryDisplayed = window.location.pathname === EndWithSummaryPath;
+  const displayGameSummary = () => navigate(EndWithSummaryPath, { replace: false, state: { questions, gameResult, gameType } });
+  const hideGameSummary = () => navigate(EndPath, { replace: true, state: { questions, gameResult, gameType } });
+
   return (
     <main className="h-screen">
       <Metadata />
+      <Drawer title="Game Summary" display={gameSummaryDisplayed} onCloseClick={hideGameSummary}>
+        <GameSummary questions={questions} gameResult={gameResult} />
+      </Drawer>
       <Toolbar title={`Series ${gameType}`} buttonLabel="Back" link="/app/play-choice" />
       <div className="mx-auto flex max-w-screen-sm items-center justify-center py-6 px-4 md:h-4/5">
         <div className="flex h-[356px] w-full">
@@ -57,12 +67,8 @@ export const End: FunctionComponent<EndPropTypes> = ({ location }) => {
                 </div>
                 <span style={{ backgroundImage: `url(${bgHintRight})` }} className="block h-[70px] w-[6px] bg-cover" />
               </div>
-              <div className="mt-4">
-                <Link to="/app/play-choice" className="flex-grow" replace>
-                  <Button wide disabled>
-                    Coming soon!
-                  </Button>
-                </Link>
+              <div onClick={displayGameSummary} className="mt-4 flex-grow">
+                <Button wide>Game summary</Button>
               </div>
               <div className="mt-4 flex gap-x-4">
                 <Link to={`/app/play?series=${gameType}`} replace>
