@@ -2,6 +2,8 @@ export interface User {
   firstName: string;
   lastName: string;
   picture: string;
+  capability?: string;
+  arrivalDate?: string;
 }
 
 export interface Filter {

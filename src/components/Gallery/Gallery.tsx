@@ -24,8 +24,8 @@ export const Gallery: FunctionComponent<{ location: Location }> = ({ location })
     setStateFilters(updated_filters);
   };
 
-  const { data: member } = useSWR(`/members`, fetcher, {
-    onSuccess: (data, key, config) => {
+  useSWR(`/members`, fetcher, {
+    onSuccess: (data) => {
       setGallery(data);
       setFilteredGallery(data);
       setIsLoading(!data);
@@ -43,29 +43,29 @@ export const Gallery: FunctionComponent<{ location: Location }> = ({ location })
       {!isLoading ? (
         <>
           <Toolbar title="Gallery" buttonLabel="Back" link={location.state.from} />
-          <div className="border-t-2 border-blue-1">
-            <section className="sticky top-12 z-10 bg-blue-2 p-4 md:max-w-screen-sm">
-              <Input
-                placeholder="Search members"
-                type="text"
-                name="search"
-                icon="lens"
-                value={getSearchedValue(stateFilters)}
-                wide
-                autoFocus={false}
-                autoComplete="firstName or lastName"
-                onChange={handleGalleryFiltering}
-              />
-            </section>
-            <section className="mx-8">
-              <div className="text-right text-white lg:mx-10">{filteredGallery.length} members</div>
-            </section>
-            <section className="mx-3 my-3 flex flex-wrap justify-center gap-3 md:gap-2 lg:gap-7">
-              {filteredGallery.map((user: User) => (
-                <GalleryCard key={user.picture} {...user} />
-              ))}
-            </section>
-          </div>
+          <section className="mx-4 flex flex-wrap justify-center justify-items-center gap-x-4">
+            <div className="fixed z-10 flex w-full justify-center bg-blue-2">
+              <div className="mb-4 w-[328px] bg-blue-2 pt-4">
+                <Input
+                  placeholder="Search members"
+                  type="text"
+                  name="search"
+                  icon="lens"
+                  value={getSearchedValue(stateFilters)}
+                  wide
+                  autoFocus={false}
+                  autoComplete="firstName or lastName"
+                  onChange={handleGalleryFiltering}
+                />
+              </div>
+            </div>
+            <div className="flex w-full justify-center bg-blue-2">
+              <div className="mt-20 mb-4 w-[328px] text-white lg:mx-10">{filteredGallery.length} members</div>
+            </div>
+            {filteredGallery.map((user: User) => (
+              <GalleryCard key={user.picture} {...user} />
+            ))}
+          </section>
         </>
       ) : (
         <Loading />
