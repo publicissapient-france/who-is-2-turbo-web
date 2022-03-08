@@ -71,6 +71,17 @@ module.exports = {
       'sm': '360px',
       'md': '768px',
       'lg': '1024px',
+    },
+    extend: {
+      keyframes: {
+        translate: {
+          '0%': { transform: 'translateX(540px)' },
+          '100%': { transform: 'translateX(0px)' },
+        }
+      },
+      animation: {
+        translate: 'translate 1s ease-in-out',
+      }
     }
   },
 }
