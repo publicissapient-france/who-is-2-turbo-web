@@ -8,7 +8,7 @@ import { fetcher } from '../../services/fetch';
 import useSWR from 'swr';
 import { Filter, getFilteredGallery, getSearchedValue, updateFilters, User } from '../../services/gallery';
 
-export const Gallery: FunctionComponent<{ location: Location }> = ({ location }) => {
+export const Gallery: FunctionComponent = () => {
   const [gallery, setGallery] = useState<User[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [filteredGallery, setFilteredGallery] = useState<User[]>(gallery);
@@ -42,7 +42,7 @@ export const Gallery: FunctionComponent<{ location: Location }> = ({ location })
       <Metadata />
       {!isLoading ? (
         <>
-          <Toolbar title="Gallery" buttonLabel="Back" link={location.state.from} />
+          <Toolbar title="Gallery" buttonLabel="Back" />
           <section className="mx-4 flex flex-wrap justify-center justify-items-center gap-x-4">
             <div className="fixed z-10 flex w-full justify-center bg-blue-2">
               <div className="mb-4 w-[328px] bg-blue-2 pt-4">
