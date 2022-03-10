@@ -9,7 +9,6 @@ import { Loading } from '../Loading/Loading';
 import ProfileImageChange from '../../images/profile-image-change.png';
 import { Message } from '../Message/Message';
 import { Radio } from '../Radio/Radio';
-import New from '../../images/new.svg';
 import { Select } from '../Select/Select';
 
 interface UiProfile extends ProfileEntity {
@@ -253,18 +252,18 @@ export const Profile = () => {
               />
               <div className="flex flex-col gap-y-4 text-white" onChange={onCapabilityChange}>
                 <span className="-mb-2 text-sm">
-                  Select your capability (SPEED) <img className="inline-block" src={New} />
+                  Select your capability (SPEED)
                 </span>
                 {Object.values(Capability)
                   .filter((value) => typeof value === 'string')
                   .map((value) => value.toString())
                   .map((value) => (
-                    <Radio key={value} checked={uiProfile.capability === value} name="capability" value={value} label={`${value.substring(0, 1)} - ${value}`} />
+                    <Radio key={value} checked={uiProfile.capability === value} name="capability" value={value} label={`${value}`} />
                   ))}
               </div>
               <div className="mb-4 text-white">
                 <span className="-mb-2 text-sm">
-                  Arrival date <img className="inline-block" src={New} />
+                  Arrival date
                 </span>
                 <div className="flex gap-x-4 pt-2 text-grey-3">
                   <Select onChange={onMonthChanged} name="arrivalMonth" value={`${uiProfile.month}`} options={months.map((label, index) => ({ label, value: index }))} />
