@@ -39,6 +39,11 @@ const isMatchingSearch = (member: User, criteria: string) => {
   return normalizeString(member.firstName + member.lastName).startsWith(normalizedCriteria) || normalizeString(member.lastName + member.firstName).startsWith(normalizedCriteria);
 };
 
+const isMatchingCapability = (member: User, criteria: string) => {
+  const normalizedCriteria = normalizeString(criteria);
+  return normalizedCriteria === 'all' || (member.capability !== undefined && normalizeString(member.capability) === normalizedCriteria);
+};
+
 export const updateFilters = (filters: Filter[], filter_name: string, value: string) => {
   let updated = false;
   let updated_filters = filters.map((filter: Filter) => {
@@ -63,9 +68,16 @@ export const getSearchedValue = (filters: Filter[]) =>
     .map((f: Filter) => f.value)
     .toString();
 
+export const getCapabilityFiltered = (filters: Filter[]) =>
+  filters
+    .filter((f: Filter) => f.name === 'capability')
+    .map((f: Filter) => f.value)
+    .toString();
+
 const isMemberMatchingCriteria = (member: User, filter: Filter) => {
   const filterType: { [index: string]: any } = {
     search: isMatchingSearch(member, filter.value),
+    capability: isMatchingCapability(member, filter.value),
   };
   return filterType[filter.name];
 };

@@ -251,9 +251,7 @@ export const Profile = () => {
                 error={uiProfile.lastNameError}
               />
               <div className="flex flex-col gap-y-4 text-white" onChange={onCapabilityChange}>
-                <span className="-mb-2 text-sm">
-                  Select your capability (SPEED)
-                </span>
+                <span className="-mb-2 text-sm">Select your capability (SPEED)</span>
                 {Object.values(Capability)
                   .filter((value) => typeof value === 'string')
                   .map((value) => value.toString())
@@ -262,9 +260,7 @@ export const Profile = () => {
                   ))}
               </div>
               <div className="mb-4 text-white">
-                <span className="-mb-2 text-sm">
-                  Arrival date
-                </span>
+                <span className="-mb-2 text-sm">Arrival date</span>
                 <div className="flex gap-x-4 pt-2 text-grey-3">
                   <Select onChange={onMonthChanged} name="arrivalMonth" value={`${uiProfile.month}`} options={months.map((label, index) => ({ label, value: index }))} />
                   <Select onChange={onYearChanged} name="arrivalYear" value={`${uiProfile.year}`} options={pastThirtyYears().map((y) => ({ value: y, label: y }))} />
