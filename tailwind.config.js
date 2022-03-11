@@ -74,13 +74,18 @@ module.exports = {
     },
     extend: {
       keyframes: {
-        translate: {
+        drawerRightLeftSlide: {
           '0%': { transform: 'translateX(540px)' },
           '100%': { transform: 'translateX(0px)' },
+        },
+        drawerDownUpSlide: {
+          '0%': { transform: 'translateY(950px)' },
+          '100%': { transform: 'translateY(0px)' },
         }
       },
       animation: {
-        translate: 'translate 1s ease-in-out',
+        drawer: 'drawerRightLeftSlide .3s ease-in-out',
+        drawerMobile: 'drawerDownUpSlide .3s ease-in-out',
       }
     }
   },
