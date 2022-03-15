@@ -74,18 +74,18 @@ module.exports = {
     },
     extend: {
       keyframes: {
-        drawerRightLeftSlide: {
+        'drawer-right': {
           '0%': { transform: 'translateX(540px)' },
           '100%': { transform: 'translateX(0px)' },
         },
-        drawerDownUpSlide: {
+        'drawer-bottom': {
           '0%': { transform: 'translateY(950px)' },
           '100%': { transform: 'translateY(0px)' },
         }
       },
       animation: {
-        drawer: 'drawerRightLeftSlide .3s ease-in-out',
-        drawerMobile: 'drawerDownUpSlide .3s ease-in-out',
+        'drawer-right': 'drawer-right .3s ease-in-out',
+        'drawer-bottom': 'drawer-bottom .3s ease-in-out',
       }
     }
   },
