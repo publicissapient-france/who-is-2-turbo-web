@@ -71,6 +71,22 @@ module.exports = {
       'sm': '360px',
       'md': '768px',
       'lg': '1024px',
+    },
+    extend: {
+      keyframes: {
+        'drawer-right': {
+          '0%': { transform: 'translateX(540px)' },
+          '100%': { transform: 'translateX(0px)' },
+        },
+        'drawer-bottom': {
+          '0%': { transform: 'translateY(950px)' },
+          '100%': { transform: 'translateY(0px)' },
+        }
+      },
+      animation: {
+        'drawer-right': 'drawer-right .3s ease-in-out',
+        'drawer-bottom': 'drawer-bottom .3s ease-in-out',
+      }
     }
   },
 }
