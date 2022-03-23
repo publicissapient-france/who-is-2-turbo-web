@@ -254,9 +254,9 @@ export const Profile = () => {
                 <span className="-mb-2 text-sm">Select your capability (SPEED)</span>
                 {Object.values(Capability)
                   .filter((value) => typeof value === 'string')
-                  .map((value) => value.toString())
+                  .map((value) => value.toString().toUpperCase())
                   .map((value) => (
-                    <Radio key={value} checked={uiProfile.capability === value} name="capability" value={value} label={`${value}`} />
+                    <Radio key={value} checked={uiProfile.capability === value} name="capability" value={value} label={value} />
                   ))}
               </div>
               <div className="mb-4 text-white">

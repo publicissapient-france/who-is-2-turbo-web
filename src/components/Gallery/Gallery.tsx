@@ -8,8 +8,7 @@ import { fetcher } from '../../services/fetch';
 import useSWR from 'swr';
 import { Filter, getFilteredGallery, getSearchedValue, updateFilters, User, getCapabilityFiltered } from '../../services/gallery';
 import { Capability } from '../../services/profile';
-import { Radio } from '../../components/Radio/Radio';
-import { capitalize } from '../../services/common';
+import { Radio } from '../Radio/Radio';
 
 export const Gallery: FunctionComponent = () => {
   const [gallery, setGallery] = useState<User[]>([]);
@@ -64,12 +63,12 @@ export const Gallery: FunctionComponent = () => {
             </div>
             <div className="flex w-full justify-center bg-blue-2">
               <div className="mt-20 flex gap-x-4 overflow-x-auto text-white lg:gap-x-6" onChange={handleGalleryFiltering}>
-                <Radio key="All" checked={getCapabilityFiltered(stateFilters) === 'All'} name="capability" value="All" label="All" />
+                <Radio key="All" checked={getCapabilityFiltered(stateFilters) === 'All'} name="capability" value="All" label="All" capitalize={true} />
                 {Object.values(Capability)
                   .filter((value) => typeof value === 'string')
-                  .map((value) => capitalize(value.toString()))
+                  .map((value) => value.toString().toLowerCase())
                   .map((value) => (
-                    <Radio key={value} checked={getCapabilityFiltered(stateFilters) === value} name="capability" value={value} label={`${value}`} />
+                    <Radio key={value} checked={getCapabilityFiltered(stateFilters) === value} name="capability" value={value} label={value} capitalize={true} />
                   ))}
               </div>
             </div>
