@@ -33,7 +33,7 @@ export const getGame: (type: number) => Promise<Game> = async (type: number) => 
   return {
     ...data,
     questions: data.questions.map((q) => ({
-      picture: q.question,
+      picture: process.env.GATSBY_API_URL + q.question,
       answers: q.propositions,
     })),
   };

@@ -7,6 +7,7 @@ import { Loading } from '../Loading/Loading';
 import { LeaderboardRow } from './LeaderboardRow';
 import { Message } from '../Message/Message';
 import { isProfileCompleted } from '../../services/profile';
+import { User } from '../../services/gallery';
 
 export interface LeaderboardUser {
   firstName: string;
@@ -33,7 +34,7 @@ const isItMe = (me: LeaderboardUser, player: LeaderboardUser) => {
 const useLeaderboard = (type: number) => {
   const { data } = useSWR(`/members/leaderboard?gameType=SERIES_${type}`, fetcher);
   return {
-    leaderboard: data,
+    leaderboard: data && data.map((user: User) => ({ ...user, picture: process.env.GATSBY_API_URL + user.picture })),
     isLoading: !data,
   };
 };

@@ -19,7 +19,7 @@ export enum Capability {
 
 export const getProfile: () => Promise<ProfileEntity> = async () => {
   const { data } = await axios.get<ProfileEntity>('/members/me');
-  return data;
+  return { ...data, picture: data.picture ? process.env.GATSBY_API_URL + data.picture : undefined };
 };
 
 export const setProfile: (isNewUser: boolean, profile: ProfileEntity) => Promise<AxiosResponse> = async (isNewUser: boolean, profile: ProfileEntity) =>
