@@ -28,9 +28,10 @@ export const Gallery: FunctionComponent = () => {
 
   useSWR(`/members`, fetcher, {
     onSuccess: (data) => {
-      setGallery(data);
-      setFilteredGallery(data);
-      setIsLoading(!data);
+      const users = data.map((user: User) => ({ ...user, picture: process.env.GATSBY_API_URL + user.picture }));
+      setGallery(users);
+      setFilteredGallery(users);
+      setIsLoading(!users);
     },
     revalidateOnFocus: false,
   });
