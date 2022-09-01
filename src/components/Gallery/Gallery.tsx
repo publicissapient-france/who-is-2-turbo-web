@@ -40,6 +40,10 @@ export const Gallery: FunctionComponent = () => {
     filterGallery();
   }, [stateFilters]);
 
+  const capabilities = process.env.GATSBY_CAPABILITIES ?
+      process.env.GATSBY_CAPABILITIES.split(';') :
+      Object.values(Capability);
+
   return (
     <main className="mb-4 lg:mb-12">
       <Metadata />
@@ -65,7 +69,7 @@ export const Gallery: FunctionComponent = () => {
             <div className="flex w-full justify-center bg-blue-2">
               <div className="mt-20 flex gap-x-4 overflow-x-auto text-white lg:gap-x-6" onChange={handleGalleryFiltering}>
                 <Radio key="All" checked={getCapabilityFiltered(stateFilters) === 'All'} name="capability" value="All" label="All" capitalize={true} />
-                {Object.values(Capability)
+                {capabilities
                   .filter((value) => typeof value === 'string')
                   .map((value) => value.toString().toLowerCase())
                   .map((value) => (
