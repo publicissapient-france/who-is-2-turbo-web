@@ -41,16 +41,26 @@ const IndexPage = () => {
     return false;
   };
 
+  const isGauth = process.env.GATSBY_GAUTH === 'true';
+
   const signIn = async (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
-    if (isEmailValid()) {
-      try {
-        await getFirebase(firebase).auth().sendSignInLinkToEmail(email, actionCodeSettings);
-        setEnteredEmail(email);
-        navigate('/wait-auth/');
-        return null;
-      } catch (e) {
-        console.error(e);
+    if (isGauth) {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      provider.setCustomParameters({
+        'login_hint': `*${process.env.GATSBY_ALLOWED_DOMAIN}`,
+      });
+      await getFirebase(firebase).auth().signInWithRedirect(provider);
+    } else {
+      if (isEmailValid()) {
+        try {
+          await getFirebase(firebase).auth().sendSignInLinkToEmail(email, actionCodeSettings);
+          setEnteredEmail(email);
+          navigate('/wait-auth/');
+          return null;
+        } catch (e) {
+          console.error(e);
+        }
       }
     }
   };
@@ -62,7 +72,7 @@ const IndexPage = () => {
       <img className="mb-8" src={Logo} alt="whois's logo" />
       {!logged && (
         <form className="mt-6 w-full">
-          <Input
+          {!isGauth && <Input
             label="Email"
             wide
             value={email}
@@ -73,7 +83,7 @@ const IndexPage = () => {
             autoFocus={true}
             error={!valid}
             errorMessage={`Only ${process.env.GATSBY_ALLOWED_DOMAIN} users are allowed to sign-in.`}
-          />
+          />}
           <div className="mt-4">
             <Button submit onClick={signIn} wide primary>
               Sign in

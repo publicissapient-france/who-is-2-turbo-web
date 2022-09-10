@@ -186,6 +186,10 @@ export const Profile = () => {
       year: parseInt(event.target.value, 10),
     });
 
+  const capabilities = process.env.GATSBY_CAPABILITIES ?
+      process.env.GATSBY_CAPABILITIES.split(';') :
+      Object.values(Capability);
+
   // noinspection SuspiciousTypeOfGuard
   return (
     <main className="mb-4 lg:mb-12">
@@ -251,8 +255,9 @@ export const Profile = () => {
                 error={uiProfile.lastNameError}
               />
               <div className="flex flex-col gap-y-4 text-white" onChange={onCapabilityChange}>
-                <span className="-mb-2 text-sm">Select your capability (SPEED)</span>
-                {Object.values(Capability)
+                <span className="-mb-2 text-sm">Select your capability</span>
+
+                {capabilities
                   .filter((value) => typeof value === 'string')
                   .map((value) => value.toString().toUpperCase())
                   .map((value) => (

@@ -17,7 +17,9 @@ const NotFoundPage = () => {
           Sign in
         </Button>
       </Link>
-      <p className="mx-4 text-yellow-3">💡 You have to open the received link in the same browser you entered your email.</p>
+        {process.env.GATSBY_GAUTH !== 'true' &&
+          <p className="mx-4 text-yellow-3">💡 You have to open the received link in the same browser you entered your email.</p>
+        }
     </main>
   );
 };
