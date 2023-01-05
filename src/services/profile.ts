@@ -15,6 +15,10 @@ export enum Capability {
   ENGINEERING,
   EXPERIENCE,
   DATA,
+  FINANCE,
+  MARKETING,
+  PEOPLE,
+  TRAINING
 }
 
 export const getProfile: () => Promise<ProfileEntity> = async () => {
