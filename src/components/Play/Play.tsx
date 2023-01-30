@@ -7,6 +7,7 @@ import { Metadata } from '../Metadata/Metadata';
 import { Toolbar } from '../Toolbar/Toolbar';
 import { Loading } from '../Loading/Loading';
 import { EndPath } from '../../pages/app';
+import { preloadImage } from '../../services/common';
 
 interface PlayPropTypes {
   location: Location;
@@ -24,6 +25,9 @@ export const Play: FunctionComponent<PlayPropTypes> = ({ location }) => {
     const loadGame = async () => {
       const { id, questions } = await getGame(gameType);
       setQuestions(questions);
+      questions.forEach(question => {
+        preloadImage(question.picture);
+      });
       setGameId(id);
       setLoading(false);
     };
