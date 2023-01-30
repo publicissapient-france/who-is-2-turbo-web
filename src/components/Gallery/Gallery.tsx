@@ -9,6 +9,7 @@ import useSWR from 'swr';
 import { Filter, getFilteredGallery, getSearchedValue, updateFilters, User, getCapabilityFiltered } from '../../services/gallery';
 import { Capability } from '../../services/profile';
 import { Radio } from '../Radio/Radio';
+import { preloadImage } from '../../services/common';
 
 export const Gallery: FunctionComponent = () => {
   const [gallery, setGallery] = useState<User[]>([]);
@@ -28,7 +29,10 @@ export const Gallery: FunctionComponent = () => {
 
   useSWR(`/members`, fetcher, {
     onSuccess: (data) => {
-      const users = data.map((user: User) => ({ ...user, picture: process.env.GATSBY_API_URL + user.picture }));
+      const users = data.map((user: User) => {
+        preloadImage(user.picture);
+        return { ...user, picture: process.env.GATSBY_API_URL + user.picture }
+      });
       setGallery(users);
       setFilteredGallery(users);
       setIsLoading(!users);
