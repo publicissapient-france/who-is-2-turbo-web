@@ -25,11 +25,13 @@ export const Play: FunctionComponent<PlayPropTypes> = ({ location }) => {
     const loadGame = async () => {
       const { id, questions } = await getGame(gameType);
       setQuestions(questions);
-      questions.forEach(question => {
-        preloadImage(question.picture);
+      questions.forEach((question, index) => {
+        return preloadImage(question.picture, questions, index, () => {
+          setQuestions(questions);
+          setGameId(id);
+          setLoading(false);
+        });
       });
-      setGameId(id);
-      setLoading(false);
     };
     loadGame();
   }, []);
