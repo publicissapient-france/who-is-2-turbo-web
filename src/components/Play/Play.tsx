@@ -24,14 +24,12 @@ export const Play: FunctionComponent<PlayPropTypes> = ({ location }) => {
   useEffect(() => {
     const loadGame = async () => {
       const { id, questions } = await getGame(gameType);
+      await Promise.all(questions.map(async (question) => {
+        preloadImage(question.picture);
+      }));
       setQuestions(questions);
-      questions.forEach((question, index) => {
-        return preloadImage(question.picture, questions, index, () => {
-          setQuestions(questions);
-          setGameId(id);
-          setLoading(false);
-        });
-      });
+      setGameId(id);
+      setLoading(false);
     };
     loadGame();
   }, []);

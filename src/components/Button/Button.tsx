@@ -29,6 +29,7 @@ type ButtonPropTypes = {
   wide?: boolean;
   capitalize?: boolean;
   disabled?: boolean;
+  count?: number;
 };
 
 const DisabledButton: FunctionComponent<ButtonPropTypes> = ({ capitalize, wide, icon, children }) => (
@@ -42,7 +43,7 @@ const DisabledButton: FunctionComponent<ButtonPropTypes> = ({ capitalize, wide, 
   </button>
 );
 
-export const Button: FunctionComponent<ButtonPropTypes> = ({ disabled, capitalize, wide, onClick, submit, primary, icon, children }) => {
+export const Button: FunctionComponent<ButtonPropTypes> = ({ disabled, capitalize, wide, onClick, submit, primary, icon, children, count }) => {
   if (disabled) {
     return (
       <DisabledButton capitalize={capitalize} wide={wide}>
@@ -52,7 +53,7 @@ export const Button: FunctionComponent<ButtonPropTypes> = ({ disabled, capitaliz
   }
 
   return (
-    <button type={submit ? 'submit' : 'button'} className={`group flex focus:outline-none ${wide ? 'w-full' : ''}`} onClick={onClick}>
+    <button data-testid={count !== undefined ? `button-${count}` : null} type={submit ? 'submit' : 'button'} className={`group flex focus:outline-none ${wide ? 'w-full' : ''}`} onClick={onClick}>
       <span className="block h-12 w-2 group-hover:hidden group-active:hidden" style={{ background: `url(${primary ? primaryButtonLeft : secondaryButtonLeft})` }} />
       <span className="hidden h-12 w-2 group-hover:block group-active:hidden" style={{ background: `url(${primary ? primaryButtonLeftHover : secondaryButtonLeftHover})` }} />
       <span className="hidden h-12 w-2 group-active:block" style={{ background: `url(${primary ? primaryButtonLeftActive : secondaryButtonLeftActive})` }} />

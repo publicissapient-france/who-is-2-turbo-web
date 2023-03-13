@@ -28,17 +28,16 @@ export const Gallery: FunctionComponent = () => {
   };
 
   useSWR(`/members`, fetcher, {
-    onSuccess: (data) => {
-      const users = data.map((user: User, index: number) => {
+    onSuccess: async (data) => {
+      const users = await Promise.all(data.map((user: User) => {
         const picture = process.env.GATSBY_API_URL + user.picture;
-        preloadImage(picture, data, index, () => {
-          setIsLoading(false);
-        });
+        preloadImage(picture);
         return { ...user, picture: picture }
-      });
+      }));
 
       setGallery(users);
       setFilteredGallery(users);
+      setIsLoading(false);
     },
     revalidateOnFocus: false,
   });

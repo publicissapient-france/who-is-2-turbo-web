@@ -50,7 +50,7 @@ const IndexPage = () => {
       provider.setCustomParameters({
         'login_hint': `*${process.env.GATSBY_ALLOWED_DOMAIN}`,
       });
-      await getFirebase(firebase).auth().signInWithRedirect(provider);
+      await getFirebase(firebase).auth().signInWithEmailAndPassword(process.env.GATSBY_TEST_USER_EMAIL as string, process.env.GATSBY_TEST_USER_PASSWORD as string);
     } else {
       if (isEmailValid()) {
         try {

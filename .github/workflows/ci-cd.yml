@@ -30,6 +30,7 @@ jobs:
           GATSBY_HELLO_EMAIL: ${{ secrets.GATSBY_HELLO_EMAIL }}
           GATSBY_API_URL: ${{ secrets.GATSBY_API_URL }}
           GATSBY_FIREBASE_ANALYTICS: ${{ secrets.GATSBY_FIREBASE_ANALYTICS }}
+          GREENFRAME_SECRET_TOKEN: ${{ secrets.GREENFRAME_SECRET_TOKEN }}
       - name: Archive Production Artifact
         uses: actions/upload-artifact@master
         with:
@@ -54,3 +55,22 @@ jobs:
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
           PROJECT_ID: ps
+  greenframeci:
+    name: Greenframe analyze
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+        with:
+          fetch-depth: 0
+      - run: curl https://assets.greenframe.io/install.sh | bash
+      - run: greenframe analyze https://whois.publicissapient.fr/ ./greenframe-scenario-1.js
+      - run: greenframe analyze https://whois.publicissapient.fr/ ./greenframe-scenario-2.js
+      - run: greenframe analyze https://whois.publicissapient.fr/ ./greenframe-scenario-3.js
+      - run: greenframe analyze https://whois.publicissapient.fr/ ./greenframe-scenario-4.js
+        env:
+          GREENFRAME_SECRET_TOKEN: ${{secrets.GREENFRAME_SECRET_TOKEN}}
+          GATSBY_GAUTH: ${{secrets.GATSBY_GAUTH}}
+          GATSBY_TEST_USER_EMAIL: ${{secrets.GATSBY_TEST_USER_EMAIL}}
+          GATSBY_TEST_USER_PASSWORD: ${{secrets.GATSBY_TEST_USER_PASSWORD}}
+
