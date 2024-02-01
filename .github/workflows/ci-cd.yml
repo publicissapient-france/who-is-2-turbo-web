@@ -37,6 +37,8 @@ jobs:
     name: Deploy
     needs: build
     runs-on: ubuntu-latest
+    if: success() && github.ref == 'refs/heads/main'
+
     steps:
       - name: Checkout Repo
         uses: actions/checkout@master
