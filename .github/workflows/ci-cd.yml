@@ -2,7 +2,7 @@ name: ci-cd
 on:
   push:
     branches:
-      - main
+      - test-arnaud
 jobs:
   build:
     name: Build
@@ -13,7 +13,7 @@ jobs:
       - name: Use Node
         uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: '20'
       - name: Download dependencies
         run: npm install
       - name: Build
@@ -53,4 +53,4 @@ jobs:
           args: deploy --only hosting
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-          PROJECT_ID: ps
+          PROJECT_ID: who-is-2-turbo
