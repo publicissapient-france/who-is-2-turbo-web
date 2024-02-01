@@ -19,7 +19,7 @@
     "@fontsource/press-start-2p": "^4.5.2",
     "@fontsource/roboto-mono": "^4.5.3",
     "autoprefixer": "^10.4.2",
-    "axios": "^0.26.0",
+    "axios": "^0.27.0",
     "firebase": "^8.8.0",
     "gatsby": "^4.9.2",
     "gatsby-plugin-google-gtag": "^4.9.0",
