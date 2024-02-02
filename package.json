@@ -20,7 +20,7 @@
     "@fontsource/roboto-mono": "^4.5.3",
     "autoprefixer": "^10.4.2",
     "axios": "^1.0.0",
-    "firebase": "^10.0.0",
+    "firebase": "^8.8.0",
     "gatsby": "^5.0.0",
     "gatsby-plugin-google-gtag": "^5.0.0",
     "gatsby-plugin-image": "^3.0.0",

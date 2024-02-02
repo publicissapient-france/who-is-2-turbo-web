@@ -23,7 +23,7 @@ export const GalleryPath = '/app/gallery';
 export const LeaderboardPath = '/app/leaderboard';
 export const ProfilePath = '/app/profile';
 export const EndPath = '/app/end';
-export const EndWithSummaryPath = '/app/end/summary';
+export const EndWithSummaryPath = '/app/end/summary/';
 
 const App: FunctionComponent<PageProps> = ({ location }) => (
   <>
