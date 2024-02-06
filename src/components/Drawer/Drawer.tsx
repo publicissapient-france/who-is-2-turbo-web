@@ -11,7 +11,7 @@ export const Drawer: FunctionComponent<DrawerPropTypes> = (props) => (
   <>
     {props.display ? (
       <div className="fixed z-20 h-screen w-screen">
-        <div onClick={props.onCloseClick} className="absolute h-screen w-screen bg-black opacity-50" />
+        <button onClick={props.onCloseClick} className="absolute h-screen w-screen bg-black opacity-50" />
         <div className="absolute right-0 mt-12 h-screen w-screen rounded-t-md bg-white opacity-100 md:mt-0 md:w-[540px] md:animate-drawer-right animate-drawer-bottom">
           <section className="relative mb-6 flex h-12 items-center justify-center">
             <p className="font-game text-blue-1">{props.title}</p>

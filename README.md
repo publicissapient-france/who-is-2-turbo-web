@@ -2,6 +2,14 @@
   Who Is 2 Turbo 🚀
 </h1>
 
+[![ci-cd](https://github.com/publicissapient-france/who-is-2-turbo-web/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/publicissapient-france/who-is-2-turbo-web/actions/workflows/ci-cd.yml)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=publicissapient-france_who-is-2-turbo-web&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=publicissapient-france_who-is-2-turbo-web)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=publicissapient-france_who-is-2-turbo-web&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=publicissapient-france_who-is-2-turbo-web)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=publicissapient-france_who-is-2-turbo-web&metric=bugs)](https://sonarcloud.io/summary/new_code?id=publicissapient-france_who-is-2-turbo-web)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=publicissapient-france_who-is-2-turbo-web&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=publicissapient-france_who-is-2-turbo-web)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=publicissapient-france_who-is-2-turbo-web&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=publicissapient-france_who-is-2-turbo-web)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=publicissapient-france_who-is-2-turbo-web&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=publicissapient-france_who-is-2-turbo-web)
+
 ## Contribute
 
 ```shell

@@ -67,8 +67,10 @@ export const End: FunctionComponent<EndPropTypes> = ({ location }) => {
                 </div>
                 <span style={{ backgroundImage: `url(${bgHintRight})` }} className="block h-[70px] w-[6px] bg-cover" />
               </div>
-              <div onClick={displayGameSummary} className="mt-4 flex-grow">
-                <Button wide>Game summary</Button>
+              <div className="mt-4 flex-grow">
+                <Button onClick={displayGameSummary} wide>
+                  Game summary
+                </Button>
               </div>
               <div className="mt-4 flex gap-x-4">
                 <Link to={`/app/play?series=${gameType}`} replace>
