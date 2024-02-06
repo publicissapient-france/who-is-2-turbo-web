@@ -19,7 +19,7 @@ export interface LeaderboardUser {
   };
 }
 
-const getCurrentUser = () => {
+const useCurrentUser = () => {
   const { data } = useSWR(`/members/me`, fetcher);
   return {
     me: data,
@@ -43,7 +43,7 @@ export const Leaderboard: FunctionComponent<{ location: { search: any; state?: a
   const query = new URLSearchParams(location.search);
   const gameType = parseInt(query.get('series') || '5', 10);
   const { leaderboard, isLoading } = useLeaderboard(gameType);
-  const { me, isUserLoading } = getCurrentUser();
+  const { me, isUserLoading } = useCurrentUser();
   return (
     <main>
       <Metadata />
