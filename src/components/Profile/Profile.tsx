@@ -10,6 +10,7 @@ import ProfileImageChange from '../../images/profile-image-change.png';
 import { Message } from '../Message/Message';
 import { Radio } from '../Radio/Radio';
 import { Select } from '../Select/Select';
+import { resetLeaderboard } from '../../services/game';
 
 interface UiProfile extends ProfileEntity {
   firstNameError?: boolean;
@@ -21,6 +22,7 @@ interface UiProfile extends ProfileEntity {
   capability?: string;
   month: number;
   year: number;
+  role?: string;
 }
 
 export const Profile = () => {
@@ -35,6 +37,8 @@ export const Profile = () => {
     month: now.getMonth(),
     year: now.getFullYear(),
   });
+
+  const [isResetLeaderboardModalOpen, setResetLeaderboardModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -71,6 +75,15 @@ export const Profile = () => {
     };
     fetchProfile();
   }, []);
+
+  const resetLeaderboardAction = async (event: React.MouseEvent<HTMLElement>) => {
+    event.preventDefault();
+    try {
+      await resetLeaderboard();
+    } catch (error) {
+      console.log('Erreur lors du reset des scores.');
+    }
+  };
 
   const updateProfile = async (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
@@ -186,9 +199,7 @@ export const Profile = () => {
       year: parseInt(event.target.value, 10),
     });
 
-  const capabilities = process.env.GATSBY_CAPABILITIES ?
-      process.env.GATSBY_CAPABILITIES.split(';') :
-      Object.values(Capability);
+  const capabilities = process.env.GATSBY_CAPABILITIES ? process.env.GATSBY_CAPABILITIES.split(';') : Object.values(Capability);
 
   // noinspection SuspiciousTypeOfGuard
   return (
@@ -276,7 +287,21 @@ export const Profile = () => {
                   Save profile
                 </Button>
               </div>
+
+              {uiProfile.role === 'admin' && (
+                <Button wide primary onClick={() => setResetLeaderboardModalOpen(true)}>
+                  Reset du classement
+                </Button>
+              )}
             </form>
+
+            <dialog open={isResetLeaderboardModalOpen} className="flew-col space-y-4">
+              <h3>Êtes-vous sûr de bien vouloir remettre à zéro les scores ?</h3>
+              <form method="dialog" className="flex-row space-x-4">
+                <button onClick={resetLeaderboardAction}>Valider</button>
+                <button onClick={() => setResetLeaderboardModalOpen(false)}>Annuler</button>
+              </form>
+            </dialog>
           </section>
         </>
       ) : (

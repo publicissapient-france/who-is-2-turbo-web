@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
 export interface Answer {
   readonly firstName: string;
@@ -77,3 +77,10 @@ export const getScore: (gameId: string, answers: number[]) => Promise<GameResult
     bestRank,
   };
 };
+
+export const resetLeaderboard: () => Promise<AxiosResponse> = async () =>
+  await axios({
+    method: 'post',
+    url: '/members/leaderboard/reset',
+    data: {},
+  });
