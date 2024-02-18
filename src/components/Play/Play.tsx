@@ -15,7 +15,7 @@ interface PlayPropTypes {
 
 export const Play: FunctionComponent<PlayPropTypes> = ({ location }) => {
   const query = new URLSearchParams(location.search);
-  const gameType = parseInt(query.get('series') || '5', 10);
+  const gameType = query.get('series') ?? '5';
   const [position, setPosition] = useState(0);
   const [questions, setQuestions] = useState<TQuestion[]>([]);
   const [gameId, setGameId] = useState<string>('');
@@ -44,7 +44,7 @@ export const Play: FunctionComponent<PlayPropTypes> = ({ location }) => {
       setLoading(true);
       const gameResult = await getScore(
         gameId,
-        questions.map((question) => question.answerId || 0)
+        questions.map((question) => question.answerId || 0),
       );
       navigate(EndPath, { replace: true, state: { questions, gameResult, gameType } });
     }

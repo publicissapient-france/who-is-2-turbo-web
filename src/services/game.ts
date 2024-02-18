@@ -26,9 +26,9 @@ export interface Game {
   readonly questions: TQuestion[];
 }
 
-export const getGame: (type: number) => Promise<Game> = async (type: number) => {
+export const getGame: (type: string) => Promise<Game> = async (type: string) => {
   const { data } = await axios.post<GameEntity>('/games', {
-    gameType: `SERIES_${type}`,
+    gameType: type,
   });
   return {
     ...data,

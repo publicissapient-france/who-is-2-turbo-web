@@ -42,7 +42,7 @@ export const End: FunctionComponent<EndPropTypes> = ({ location }) => {
             <div className="flex flex-col text-center">
               <h1 className="font-game text-tsm text-white">You scored</h1>
               <span className="text-shadow-3 mt-4 mb-6 font-game text-t8xl text-yellow-3">
-                {gameResult.score}/{gameType}
+                {gameResult.score}/{gameResult.solutions.length}
               </span>
               <div className="flex h-[70px]">
                 <span style={{ backgroundImage: `url(${bgHintLeft})` }} className="block h-[70px] w-[6px] bg-cover" />

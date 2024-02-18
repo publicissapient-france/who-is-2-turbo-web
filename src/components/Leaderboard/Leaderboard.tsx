@@ -31,8 +31,8 @@ const isItMe = (me: LeaderboardUser, player: LeaderboardUser) => {
   return me.firstName === player.firstName && me.lastName === player.lastName;
 };
 
-const useLeaderboard = (type: number) => {
-  const { data } = useSWR(`/members/leaderboard?gameType=SERIES_${type}`, fetcher);
+const useLeaderboard = (type: string) => {
+  const { data } = useSWR(`/members/leaderboard?gameType=${type}`, fetcher);
   return {
     leaderboard: data && data.map((user: User) => ({ ...user, picture: process.env.GATSBY_API_URL + user.picture })),
     isLoading: !data,
@@ -41,7 +41,7 @@ const useLeaderboard = (type: number) => {
 
 export const Leaderboard: FunctionComponent<{ location: { search: any; state?: any } }> = ({ location }) => {
   const query = new URLSearchParams(location.search);
-  const gameType = parseInt(query.get('series') || '5', 10);
+  const gameType = query.get('series') ?? '5';
   const { leaderboard, isLoading } = useLeaderboard(gameType);
   const { me, isUserLoading } = useCurrentUser();
   return (
