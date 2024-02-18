@@ -11,10 +11,10 @@ type BigButtonPropTypes = {
 };
 
 export const SeriesButton: FunctionComponent<BigButtonPropTypes> = ({ series }) => (
-  <div className="flex h-40">
+  <div className="flex h-40 max-w-64">
     <span style={{ backgroundImage: `url(${cardL})` }} className="block h-40 w-2 bg-cover" />
     <div className="flex flex-grow flex-col justify-center bg-blue-3 px-4 text-left">
-      <p className="text-shadow-3 font-game text-tlg text-yellow-3">Series {series}</p>
+      <p className="text-shadow-3 font-game text-tlg text-yellow-3">Series {getSeriesTitle(series)}</p>
       <p className="mt-1 text-sm text-white">{getTextToDisplay(series)}</p>
       <div className="mt-4 flex gap-x-4">
         <Link to={`/app/leaderboard?series=${series}`} state={{ from: '/app/play-choice' }}>
@@ -31,12 +31,25 @@ export const SeriesButton: FunctionComponent<BigButtonPropTypes> = ({ series }) 
   </div>
 );
 
-function getTextToDisplay(series: string) {
+function getSeriesTitle(series: string) {
   if (series === 'SERIES_5') {
-    return `Match 5 faces to their names`;
+    return `5`;
   } else if (series === 'SERIES_20') {
-    return `Match 20 faces to their names`;
+    return `20`;
   } else {
-    return `Match faces from ${series} capability to their names`;
+    return series;
+  }
+}
+
+function getTextToDisplay(series: string) {
+  switch (series) {
+    case 'SERIES_5':
+      return `Match 5 faces to their names`;
+    case 'SERIES_20':
+      return `Match 20 faces to their names`;
+    case 'ALL':
+      return `Match every face from Publicis Sapient to its name`;
+    default:
+      return `Match 5 faces from ${series} capability to their names`;
   }
 }

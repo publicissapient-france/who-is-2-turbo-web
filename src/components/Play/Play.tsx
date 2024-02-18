@@ -15,7 +15,7 @@ interface PlayPropTypes {
 
 export const Play: FunctionComponent<PlayPropTypes> = ({ location }) => {
   const query = new URLSearchParams(location.search);
-  const gameType = query.get('series') ?? '5';
+  const gameType = query.get('series') ?? 'SERIES_5';
   const [position, setPosition] = useState(0);
   const [questions, setQuestions] = useState<TQuestion[]>([]);
   const [gameId, setGameId] = useState<string>('');

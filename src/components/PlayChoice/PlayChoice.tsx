@@ -15,6 +15,8 @@ export const PlayChoice = () => (
       <section className="flex flex-row max-w-screen-xl flex-wrap gap-x-8 gap-y-4 md:justify-center">
         <SeriesButton series={'PRODUCT'} />
         <SeriesButton series={'ENGINEERING'} />
+      </section>
+      <section className="flex flex-row max-w-screen-xl flex-wrap gap-x-8 gap-y-4 md:justify-center">
         <SeriesButton series={'EXPERIENCE'} />
         <SeriesButton series={'DATA'} />
       </section>
