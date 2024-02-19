@@ -7,7 +7,7 @@
     "gatsby"
   ],
   "scripts": {
-    "dev": "gatsby develop",
+    "dev": "gatsby develop -o",
     "start": "GATSBY_ACTIVE_ENV=local gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
