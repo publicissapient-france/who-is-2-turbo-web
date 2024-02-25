@@ -23,8 +23,8 @@ export const Gallery: FunctionComponent = () => {
 
   const handleGalleryFiltering = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = event.target;
-    let updated_filters = updateFilters([...stateFilters], name, value);
-    setStateFilters(updated_filters);
+    const updatedFilters = updateFilters([...stateFilters], name, value);
+    setStateFilters(updatedFilters);
   };
 
   useSWR(`/members`, fetcher, {
@@ -34,7 +34,7 @@ export const Gallery: FunctionComponent = () => {
         preloadImage(picture, data, index, () => {
           setIsLoading(false);
         });
-        return { ...user, picture: picture }
+        return { ...user, picture };
       });
 
       setGallery(users);
@@ -47,9 +47,7 @@ export const Gallery: FunctionComponent = () => {
     filterGallery();
   }, [stateFilters]);
 
-  const capabilities = process.env.GATSBY_CAPABILITIES ?
-      process.env.GATSBY_CAPABILITIES.split(';') :
-      Object.values(Capability);
+  const capabilities = process.env.GATSBY_CAPABILITIES ? process.env.GATSBY_CAPABILITIES.split(';') : Object.values(Capability);
 
   return (
     <main className="mb-4 lg:mb-12">
@@ -76,6 +74,7 @@ export const Gallery: FunctionComponent = () => {
             <div className="flex w-full justify-center bg-blue-2">
               <div className="mt-20 flex gap-x-4 overflow-x-auto text-white lg:gap-x-6" onChange={handleGalleryFiltering}>
                 <Radio key="All" checked={getCapabilityFiltered(stateFilters) === 'All'} name="capability" value="All" label="All" capitalize={true} />
+                <Radio key="Newcomer" checked={getCapabilityFiltered(stateFilters) === 'Newcomer'} name="capability" value="Newcomer" label="Newcomer" capitalize={true} />
                 {capabilities
                   .filter((value) => typeof value === 'string')
                   .map((value) => value.toString().toLowerCase())

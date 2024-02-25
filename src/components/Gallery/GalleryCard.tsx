@@ -2,13 +2,12 @@ import React, { FunctionComponent } from 'react';
 import bgItemGallery from '../../images/bg-item-gallery.png';
 import bgItemGalleryDesktop from '../../images/bg-item-gallery-desktop.png';
 import newComerBadge from '../../images/new-comer-badge.svg';
-import { User } from '../../services/gallery';
+import { User, isNewComer } from '../../services/gallery';
 
 export const GalleryCard: FunctionComponent<User> = ({ firstName, lastName, picture, capability, arrivalDate }) => {
   const date = arrivalDate && new Date(arrivalDate);
   const month = date && new Intl.DateTimeFormat('en-US', { month: 'long' }).format(date);
   const year = date && date.getFullYear();
-  const isNewComer = date && Math.floor((new Date().getTime() - date.getTime()) / (1000 * 60 * 60 * 24)) < 90;
   return (
     <>
       <div className="relative mb-2 w-[328px] md:hidden">
@@ -21,7 +20,7 @@ export const GalleryCard: FunctionComponent<User> = ({ firstName, lastName, pict
           {capability && <span className="mb-2 block text-base text-blue-3">{capability}</span>}
           {date && (
             <span className="text-sm text-grey-2">
-              {month} {year} {isNewComer && <img className="-mt-1 inline" src={newComerBadge} />}
+              {month} {year} {isNewComer(date) && <img className="-mt-1 inline" src={newComerBadge} />}
             </span>
           )}
         </div>
@@ -36,7 +35,7 @@ export const GalleryCard: FunctionComponent<User> = ({ firstName, lastName, pict
           {capability && <span className="mb-2 block text-base text-blue-3">{capability}</span>}
           {date && (
             <span className="text-sm text-grey-2">
-              {month} {year} {isNewComer && <img className="-mt-1 inline" src={newComerBadge} />}
+              {month} {year} {isNewComer(date) && <img className="-mt-1 inline" src={newComerBadge} />}
             </span>
           )}
         </div>
