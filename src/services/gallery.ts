@@ -41,8 +41,15 @@ const isMatchingSearch = (member: User, criteria: string) => {
 
 const isMatchingCapability = (member: User, criteria: string) => {
   const normalizedCriteria = normalizeString(criteria);
+  if (criteria === 'Newcomer' && member.arrivalDate) {
+    return isNewComer(new Date(member.arrivalDate));
+  }
   return normalizedCriteria === 'all' || (member.capability !== undefined && normalizeString(member.capability) === normalizedCriteria);
 };
+
+export function isNewComer(arrivalDate: Date) {
+  return arrivalDate && Math.floor((new Date().getTime() - arrivalDate.getTime()) / (1000 * 60 * 60 * 24)) < 90;
+}
 
 export const updateFilters = (filters: Filter[], filter_name: string, value: string) => {
   let updated = false;

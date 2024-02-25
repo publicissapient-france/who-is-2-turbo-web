@@ -11,6 +11,8 @@ import { Message } from '../Message/Message';
 import { Radio } from '../Radio/Radio';
 import { Select } from '../Select/Select';
 import { resetLeaderboard } from '../../services/game';
+import IcWarning from '../../images/ic-warning.svg';
+import IcClose from '../../images/ic-close.svg';
 
 interface UiProfile extends ProfileEntity {
   firstNameError?: boolean;
@@ -295,12 +297,23 @@ export const Profile = () => {
               )}
             </form>
 
-            <dialog open={isResetLeaderboardModalOpen} className="flew-col space-y-4">
-              <h3>Êtes-vous sûr de bien vouloir remettre à zéro les scores ?</h3>
-              <form method="dialog" className="flex-row space-x-4">
-                <button onClick={resetLeaderboardAction}>Valider</button>
-                <button onClick={() => setResetLeaderboardModalOpen(false)}>Annuler</button>
-              </form>
+            <dialog open={isResetLeaderboardModalOpen}>
+              <div className="flex flex-col m-4 gap-4">
+                <div className="flex justify-between">
+                  <img src={IcWarning} height={24} width={24} alt="Warning" />
+                  <img className="cursor-pointer" onClick={() => setResetLeaderboardModalOpen(false)} src={IcClose} height={24} width={24} alt="Close" />
+                </div>
+                <div className="flex-col space-y-6">
+                  <h3 className="text-txl">Confirmation</h3>
+                  <p>Êtes-vous sûr de bien vouloir remettre à zéro les scores ?</p>
+                  <form method="dialog" className="flex flex-row justify-end space-x-4">
+                    <button onClick={() => setResetLeaderboardModalOpen(false)}>Annuler</button>
+                    <button className="text-red-3" onClick={resetLeaderboardAction}>
+                      Valider
+                    </button>
+                  </form>
+                </div>
+              </div>
             </dialog>
           </section>
         </>
