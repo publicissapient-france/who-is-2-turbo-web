@@ -39,6 +39,16 @@ const useLeaderboard = (type: string) => {
   };
 };
 
+function getSeriesTitle(series: string) {
+  if (series === 'SERIES_5') {
+    return `5`;
+  } else if (series === 'SERIES_20') {
+    return `20`;
+  } else {
+    return series;
+  }
+}
+
 export const Leaderboard: FunctionComponent<{ location: { search: any; state?: any } }> = ({ location }) => {
   const query = new URLSearchParams(location.search);
   const gameType = query.get('series') ?? 'SERIES_5';
@@ -56,7 +66,7 @@ export const Leaderboard: FunctionComponent<{ location: { search: any; state?: a
             </section>
           )}
           <section className="mx-auto mt-6 h-screen max-w-screen-sm font-game md:mt-8">
-            <h1 className="text-shadow mb-6 text-center font-game text-tsm text-yellow-3">Series {gameType}</h1>
+            <h1 className="text-shadow mb-6 text-center font-game text-tsm text-yellow-3">Series {getSeriesTitle(gameType)}</h1>
             {leaderboard.map((player: LeaderboardUser, rank: number) => (
               <LeaderboardRow key={rank} rank={rank} player={player} isCurrentUser={isItMe(me, player)} />
             ))}
